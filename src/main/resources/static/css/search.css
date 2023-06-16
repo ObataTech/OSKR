@@ -1,0 +1,12 @@
+
+h2,h5{
+    text-align: center;
+}
+ul{
+    list-style: none;
+}
+li{
+    display: flex;
+    float: left;
+    margin-right: 10px;
+}
