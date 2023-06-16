@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  </head>
+  <body class="pt-2 pt-md-5 mt-5">
+    <main>
+      <!-- ▼▼▼ 作品情報セクション ▼▼▼ -->
+      <section class="py-1 bg-white">
+        <!-- コンテナ -->
+        <div class="container-md">
+          <!-- 作品情報 コンテンツ行 -->
+          <div class="row">
+            <!-- ▼ 作品情報セクション左側 ▼ -->
+            <div class="col-4">
+              <!-- 作品サムネイル -->
+              <div>
+                <img class="img-fluid" src="images/thumb_001_kaibutsu.png" alt="作品画像" />
+              </div>
+            </div>
+            <!-- ▲ 作品情報セクション左側 ▲ -->
+            <!-- ▼ 作品情報セクション右側 ▼ -->
+            <div class="col-8">
+              <!-- 作品情報インナー -->
+              <div class="mb-1">
+                <!-- 作品タイトル -->
+                <h1 class="fw-bold text-center">怪物</h1>
+                <!-- あらすじ -->
+                <p class="mb-2">
+                  息子を愛するシングルマザーや生徒思いの教師、元気な子供たちなどが暮らす、大きな湖のある郊外の町。どこにでもあるような子供同士のけんかが、互いの主張の食い違いから周囲を巻き込み、メディアで取り上げられる。そしてある嵐の朝、子供たちが突然姿を消してしまう。
+                </p>
+                <!-- 作品情報グループ -->
+                <div class="card-group mb-1">
+                  <dl class="card p-0">
+                      <dt class="m-0 text-center">監督</dt>
+                      <dd class="m-0 text-center">是枝裕和</dd>
+                  </dl>
+                  <dl class="card p-0">
+                      <dt class="m-0 text-center">キャスト</dt>
+                      <dd class="m-0 text-center">安藤サクラ / 永山瑛太</dd>
+                  </dl>
+                </div>
+                <div class="card-group mb-1">
+                  <dl class="card p-0">
+                      <dt class="m-0 text-center">ジャンル</dt>
+                      <dd class="m-0 text-center">ドラマ・ミステリー</dd>
+                  </dl>
+                </div>
+                <div class="card-group mb-4">
+                  <dl class="card p-0">
+                      <dt class="m-0 text-center">公開日</dt>
+                      <dd class="m-0 text-center">2023年6月2日</dd>
+                  </dl>
+                  <dl class="card p-0">
+                      <dt class="m-0 text-center">レビュー</dt>
+                      <dd class="m-0 text-center">100</dd>
+                  </dl>
+                  <dl class="card p-0">
+                      <dt class="m-0 text-center">評価</dt>
+                      <dd class="m-0 text-center">4</dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+            <!-- ▲ 作品情報セクション右側 ▲ -->
+          </div>
+        </div>
+      </section>
+      <!-- ▲▲▲ 作品情報セクション ▲▲▲ -->
+      <!-- ▼▼▼ レビュー投稿セクション ▼▼▼ -->
+      <section class="py-4 bg-light border-top border-bottom">
+        <!-- レビュー コンテンツ行 -->
+        <div class="row">
+          <form class="col-10 offset-1">
+            <!-- 入力グループ -->
+            <div class="form-floating mb-3">
+              <textarea class="form-control" name="opinion" id="input_opinion" placeholder="" style="height: 180px"></textarea>
+              <label for="input_opinion">レビューをお書きください</label>
+            </div>
+            <div class="container-md">
+              <div class="row">
+                <div class="col-6 offset-6">
+                  <div class="card-group mb-4">
+                    <dl class="card p-2 border-0">
+                      <dt class="fw-bold text-center">評価</dt>
+                      <select class="form-select form-select-sm">
+                        <option value="black">5</option>
+                        <option value="black">4</option>
+                        <option value="black" selected>3</option>
+                        <option value="black">2</option>
+                        <option value="black">1</option>
+                      </select>
+                    </dl>
+                    <dl class="card p-2 border-0">
+                      <dt class="fw-bold text-center">ネタばれ</dt>
+                      <select class="form-select form-select-sm">
+                        <option value="black" selected>ネタばれ無し</option>
+                        <option value="black">ネタばれ有り</option>
+                      </select>
+                    </dl>
+                    <dl class="card p-2 border-0">
+<!--                       <button type="submit" class="btn btn-lg btn-primary d-block mx-auto px-5 fw-bold shadow">投稿</button> -->
+                      <button type="submit" class="btn btn-lg btn-primary d-block mx-auto shadow">投稿</button>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+      <!-- ▼▼▼ 作品レビューセクション ▼▼▼ -->
+      <section class="py-4 bg-light border-top border-bottom">
+        <!-- コンテナ -->
+        <div class="container-fluid">
+          <!-- 作品レビュー 見出し行 -->
+          <div class="row mb-1 mb-md-3">
+            <div class="col-12">
+              <h2 class="fw-bold text-center">
+                <span class="d-block mb-1 text-primary fs-5">REVIEW LIST</span>
+              </h2>
+            </div>
+          </div>
+          <!-- タブ部分 -->
+          <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button type="button" class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" role="tab" aria-controls="home-tab-pane" aria-selected="true">ネタばれ無し</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button type="button" class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" role="tab" aria-controls="profile-tab-pane" aria-selected="false">ネタばれ有り</button>
+            </li>
+          </ul>
+          <!-- パネル(タブの中身)部分 -->
+          <div id="myTabContent" class="tab-content">
+            <div class="tab-pane active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+              <!-- ネタばれ無しタブ 作品レビュー1件目 -->
+              <div class="py-2 border-bottom">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-2">
+                      <div class="">
+                        <span class="fw-bold">評価：</span>
+                        <span class="text-primary fw-bold">3</span>
+                      </div>
+                      <div class="">2023年6月11日</div>
+                      <div class="text-muted small">きかんしゃ・トーリマス</div>
+                    </div>
+                    <div class="col-7">
+                      <p>
+                        前半は良かったけど途中から思ってた展開とずれてきて自分の感情との齟齬が最後まで埋められなかったなぁ。種明かしシーンが長すぎて。
+                      </p>
+                    </div>
+                    <div class="col-3">
+                      <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modal_wrap1">リプライ</button>
+                      <div class="modal fade" id="modal_wrap1" tabindex="-1" data-bs-backdrop="static">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                     <h5 class="modal-title">怪物</h5>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="">
+                                    <span class="">2023年6月11日</span>
+                                    <span class="text-muted small">きかんしゃ・トーリマス</span>
+                                    <div class="text-end mb-2">
+                                      <span class="fw-bold">評価：</span>
+                                      <span class="text-primary fw-bold">3</span>
+                                    </div>
+                                  </div>
+                                    <p>前半は良かったけど途中から思ってた展開とずれてきて自分の感情との齟齬が最後まで埋められなかったなぁ。種明かしシーンが長すぎて。</p>
+                                  <div class="form-floating mb-3">
+                                    <textarea class="form-control" name="opinion" id="input_opinion" placeholder="" style="height: 50px"></textarea>
+                                    <label for="input_opinion">リプライをお書きください</label>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                                    <button type="button" class="btn btn-primary">投稿</button>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ネタばれ無しタブ 作品レビュー2件目 -->
+              <div class="py-2 border-bottom">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-2">
+                      <div class="">
+                        <span class="fw-bold">評価：</span>
+                        <span class="text-primary fw-bold">1</span>
+                      </div>
+                      <div class="">2023年6月11日</div>
+                      <div class="text-muted small">アシタカ・ラ・ホンキダス</div>
+                    </div>
+                    <div class="col-7">
+                      <p>
+                        終わった後、「どういうこと？」というのが正直な感想で、周りの席の人も「意味が分からん」と呟いていました。時間を無駄にした感覚でした。
+                      </p>
+                    </div>
+                    <div class="col-3">
+                      <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modal_wrap3">リプライ</button>
+                      <div class="modal fade" id="modal_wrap3" tabindex="-1" data-bs-backdrop="static">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                     <h5 class="modal-title">怪物</h5>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="">
+                                    <span class="">2023年6月11日</span>
+                                    <span class="text-muted small">アシタカ・ラ・ホンキダス</span>
+                                    <div class="text-end mb-2">
+                                      <span class="fw-bold">評価：</span>
+                                      <span class="text-primary fw-bold">1</span>
+                                    </div>
+                                  </div>
+                                    <p>終わった後、「どういうこと？」というのが正直な感想で、周りの席の人も「意味が分からん」と呟いていました。時間を無駄にした感覚でした。</p>
+                                  <div class="form-floating mb-3">
+                                    <textarea class="form-control" name="opinion" id="input_opinion" placeholder="" style="height: 50px"></textarea>
+                                    <label for="input_opinion">リプライをお書きください</label>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                                    <button type="button" class="btn btn-primary">投稿</button>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+              <!-- ネタばれ有りタブ 作品レビュー1件目 -->
+              <div class="py-2 border-bottom">
+                <div class="row">
+                  <div class="col-2">
+                    <div class="">
+                      <span class="fw-bold">評価：</span>
+                      <span class="text-primary fw-bold">5</span>
+                    </div>
+                    <div class="">2023年6月13日</div>
+                    <div class="text-muted small">きこんしゃ・トーマス</div>
+                  </div>
+                  <div class="col-7">
+                    <p>
+                      全員が怪物で、全員が怪物じゃなかった。自分の、親としての、人としての態度をあらためなくては、と思う映画でした。
+                    </p>
+                  </div>
+                  <div class="col-3">
+                      <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modal_wrap2">リプライ</button>
+                      <div class="modal fade" id="modal_wrap2" tabindex="-1" data-bs-backdrop="static">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                     <h5 class="modal-title">怪物</h5>
+<!--                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
+                                </div>
+                                <div class="modal-body">
+                                  <div class="">
+                                    <span class="">2023年6月13日</span>
+                                    <span class="text-muted small">きこんしゃ・トーマス</span>
+                                    <div class="text-end mb-2">
+                                      <span class="fw-bold">評価：</span>
+                                      <span class="text-primary fw-bold">5</span>
+                                    </div>
+                                  </div>
+                                    <p>全員が怪物で、全員が怪物じゃなかった。自分の、親としての、人としての態度をあらためなくては、と思う映画でした。</p>
+                                  <div class="form-floating mb-3">
+                                    <textarea class="form-control" name="opinion" id="input_opinion" placeholder="" style="height: 50px"></textarea>
+                                    <label for="input_opinion">リプライをお書きください</label>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                                    <button type="button" class="btn btn-primary">投稿</button>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ▲▲▲ 作品レビューセクション ▲▲▲ -->
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  </body>
+</html>
