@@ -27,16 +27,16 @@ public class Review {
 	private Integer rate;
 
 	@Column(name = "SPOILER", nullable = false)
-	private Long spoiler;
+	private Integer spoiler;
 
 	@Column(name = "POSTTIME", nullable = false)
 	private LocalDateTime posttime;
 
 	@Column(name = "USER_ID", nullable = false)
-	private Long user_id;
+	private Long userId;
 
 	@Column(name = "FILMWORK_ID", nullable = false)
-	private Long filmwork_id;
+	private Long filmworkId;
 
 	public Long getId() {
 		return id;
@@ -62,11 +62,11 @@ public class Review {
 		this.rate = rate;
 	}
 
-	public Long getSpoiler() {
+	public Integer getSpoiler() {
 		return spoiler;
 	}
 
-	public void setSpoiler(Long spoiler) {
+	public void setSpoiler(Integer spoiler) {
 		this.spoiler = spoiler;
 	}
 
@@ -78,19 +78,19 @@ public class Review {
 		this.posttime = posttime;
 	}
 
-	public Long getUser_id() {
-		return user_id;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(Long user_id) {
-		this.user_id = user_id;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
-	public Long getFilmwork_id() {
-		return filmwork_id;
+	public Long getFilmworkId() {
+		return filmworkId;
 	}
 
-	public void setFilmwork_id(Long filmwork_id) {
-		this.filmwork_id = filmwork_id;
+	public void setFilmworkId(Long filmworkId) {
+		this.filmworkId = filmworkId;
 	}
 }

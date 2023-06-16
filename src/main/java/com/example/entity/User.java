@@ -69,5 +69,4 @@ public class User {
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}
-
 }

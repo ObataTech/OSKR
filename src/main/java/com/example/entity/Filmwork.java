@@ -35,13 +35,13 @@ public class Filmwork {
 	private String director;
 
 	@Column(name = "CATEGORY1_ID", nullable = true)
-	private Long category1_id;
+	private Long category1Id;
 
 	@Column(name = "CATEGORY2_ID", nullable = true)
-	private Long category2_id;
+	private Long category2Id;
 
 	@Column(name = "CATEGORY3_ID", nullable = true)
-	private Long category3_id;
+	private Long category3Id;
 
 	public Long getId() {
 		return id;
@@ -91,27 +91,27 @@ public class Filmwork {
 		this.director = director;
 	}
 
-	public Long getCategory1_id() {
-		return category1_id;
+	public Long getCategory1Id() {
+		return category1Id;
 	}
 
-	public void setCategory1_id(Long category1_id) {
-		this.category1_id = category1_id;
+	public void setCategory1Id(Long category1Id) {
+		this.category1Id = category1Id;
 	}
 
-	public Long getCategory2_id() {
-		return category2_id;
+	public Long getCategory2Id() {
+		return category2Id;
 	}
 
-	public void setCategory2_id(Long category2_id) {
-		this.category2_id = category2_id;
+	public void setCategory2Id(Long category2Id) {
+		this.category2Id = category2Id;
 	}
 
-	public Long getCategory3_id() {
-		return category3_id;
+	public Long getCategory3Id() {
+		return category3Id;
 	}
 
-	public void setCategory3_id(Long category3_id) {
-		this.category3_id = category3_id;
+	public void setCategory3Id(Long category3Id) {
+		this.category3Id = category3Id;
 	}
 }

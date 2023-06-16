@@ -27,10 +27,10 @@ public class Reply {
 	private LocalDateTime posttime;
 
 	@Column(name = "REVIEW_ID", nullable = false)
-	private Long review_id;
+	private Long reviewId;
 
 	@Column(name = "USER_ID", nullable = false)
-	private Long user_id;
+	private Long userId;
 
 	public Long getId() {
 		return id;
@@ -56,19 +56,19 @@ public class Reply {
 		this.posttime = posttime;
 	}
 
-	public Long getReview_id() {
-		return review_id;
+	public Long getReviewId() {
+		return reviewId;
 	}
 
-	public void setReview_id(Long review_id) {
-		this.review_id = review_id;
+	public void setReviewId(Long reviewId) {
+		this.reviewId = reviewId;
 	}
 
-	public Long getUser_id() {
-		return user_id;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(Long user_id) {
-		this.user_id = user_id;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 }
