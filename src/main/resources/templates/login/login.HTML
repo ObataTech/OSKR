@@ -6,68 +6,63 @@
 
 </head>
 <body>
-  <div class="col-3 row justify-content-center">   
-    <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modal_wrap1">ログイン</button>
+  <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
+    <button type="button" class="btn btn-primary btn-lg mb-2" data-bs-toggle="modal" data-bs-target="#modal_wrap1">ログイン</button>
     <div class="modal fade" id="modal_wrap1" tabindex="-1" data-bs-backdrop="static">
       <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
-            <div class="modal-header">
+            <form>
+              <div class="modal-header">
                   <h5 class="modal-title">ログイン</h5>
-<!--                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
               </div>
-              <div class="modal-body">
-                <div class="">
+                <div class="modal-body">
+                    <p><font size="2.5">ユーザー名、パスワードを入力の上、認証ボタンを押してください。</font></p> 
+                    <div class="mb-3">
+                      <label for="" class="form-label">ユーザー名</label>
+                      <input type="" class="form-control" placeholder="ユーザー名">
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">パスワード</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="パスワード">
+                    </div>
                 </div>
-                  <p><font size="2.5">ユーザー名、パスワードを入力の上、認証ボタンを押してください。</font></p>
-                <div class="form-floating mb-3">
-                  <textarea class="form-control" name="opinion" id="input_opinion" placeholder="ID" style="height: 30px"></textarea>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                    <button type="button" class="btn btn-primary">認証</button>
+                  </div>
+            </form>
+      </div>
+    </div>
+  </div>
+    <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modal_wrap2">新規登録</button>
+    <div class="modal fade" id="modal_wrap2" tabindex="-1" data-bs-backdrop="static">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <from>
+              <div class="modal-header">
+                    <h5 class="modal-title">新規登録</h5>
+              </div>
+                  <div class="modal-body">
+                    <p><font size="2.5">ユーザー名、パスワードを入力の上、登録ボタンを押してください。</font></p> 
+                <div class="mb-3">
+                  <label for="" class="form-label">ユーザー名</label>
+                  <input type="" class="form-control" placeholder="ユーザー名">
                 </div>
-                <div class="form-floating mb-3">
-                  <textarea class="form-control" name="opinion" id="input_opinion" placeholder="パスワード" style="height: 30px"></textarea>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">パスワード</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="パスワード">
                 </div>
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-                  <button type="button" class="btn btn-primary">認証</button>
+                  <button type="button" class="btn btn-primary">登録</button>
               </div>
+            </form>
           </div>
       </div>
-    </div>
+  </div>
 
-
-    <div class="col-3 row justify-content-center">   
-      <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modal_wrap2">新規登録</button>
-      <div class="modal fade" id="modal_wrap2" tabindex="-1" data-bs-backdrop="static">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                     <h5 class="modal-title">新規登録</h5>
-  <!--                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
-                </div>
-                <div class="modal-body">
-                  <div class="">
-                    </div>
-                  </div>
-                    <p><font size="2.5">ユーザー名、パスワードを入力の上、登録ボタンを押してください。</font></p>
-                  <div class="form-floating mb-3">
-                    <textarea class="form-control" name="opinion" id="input_opinion" placeholder="ID" style="height: 30px"></textarea>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <textarea class="form-control" name="opinion" id="input_opinion" placeholder="パスワード" style="height: 30px"></textarea>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-                    <button type="button" class="btn btn-primary">登録</button>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
-
-
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
 </body>
 </html>
