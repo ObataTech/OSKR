@@ -6,12 +6,12 @@ import org.springframework.stereotype.Controller;
 public class SearchController {
 
 	//検索欄結果一覧表示
-	public String searchList() {
-		//キーワードで検索
-
-		//画面に返す
-		return search/seach;
-	}
+//	public String searchList() {
+//		//キーワードで検索
+//
+//		//画面に返す
+//		return search/seach;
+//	}
 
 	//製作年結果一覧表示
 
