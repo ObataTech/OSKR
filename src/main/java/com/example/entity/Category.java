@@ -42,10 +42,24 @@ public class Category {
 		this.name = name;
 	}
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Filmwork> filmworks;
+    @OneToMany(mappedBy = "category1", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Filmwork> filmworks1;
 
-    public List<Filmwork> getFilmworks() {
-        return this.filmworks;
+    public List<Filmwork> getFilmworks1() {
+        return this.filmworks1;
+    }
+
+    @OneToMany(mappedBy = "category2", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Filmwork> filmworks2;
+
+    public List<Filmwork> getFilmworks2() {
+        return this.filmworks2;
+    }
+
+    @OneToMany(mappedBy = "category3", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Filmwork> filmworks3;
+
+    public List<Filmwork> getFilmworks3() {
+        return this.filmworks3;
     }
 }
