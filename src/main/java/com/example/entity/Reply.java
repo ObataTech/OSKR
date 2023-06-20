@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -71,4 +73,12 @@ public class Reply {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+
+    @ManyToOne
+    @JoinColumn(name = "review_id", insertable = false, updatable = false)
+    private Review review;
+
+    public Review getReview() {
+        return this.review;
+    }
 }
