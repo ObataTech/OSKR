@@ -1,12 +1,18 @@
 package com.example.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -37,11 +43,35 @@ public class Filmwork {
 	@Column(name = "CATEGORY1_ID", nullable = true)
 	private Long category1Id;
 
+    @ManyToOne
+    @JoinColumn(name = "category1_id", insertable = false, updatable = false)
+    private Category category1;
+
+    public Category getCategory1() {
+        return this.category1;
+    }
+
 	@Column(name = "CATEGORY2_ID", nullable = true)
 	private Long category2Id;
 
+    @ManyToOne
+    @JoinColumn(name = "category2_id", insertable = false, updatable = false)
+    private Category category2;
+
+    public Category getCategory2() {
+        return this.category2;
+    }
+
 	@Column(name = "CATEGORY3_ID", nullable = true)
 	private Long category3Id;
+
+    @ManyToOne
+    @JoinColumn(name = "category3_id", insertable = false, updatable = false)
+    private Category category3;
+
+    public Category getCategory3() {
+        return this.category3;
+    }
 
 	public Long getId() {
 		return id;
@@ -114,4 +144,11 @@ public class Filmwork {
 	public void setCategory3Id(Long category3Id) {
 		this.category3Id = category3Id;
 	}
+
+    @OneToMany(mappedBy = "filmwork", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Review> reviews;
+
+    public List<Review> getReviews() {
+        return this.reviews;
+    }
 }

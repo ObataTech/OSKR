@@ -1,10 +1,15 @@
 package com.example.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -36,4 +41,25 @@ public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+    @OneToMany(mappedBy = "category1", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Filmwork> filmworks1;
+
+    public List<Filmwork> getFilmworks1() {
+        return this.filmworks1;
+    }
+
+    @OneToMany(mappedBy = "category2", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Filmwork> filmworks2;
+
+    public List<Filmwork> getFilmworks2() {
+        return this.filmworks2;
+    }
+
+    @OneToMany(mappedBy = "category3", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Filmwork> filmworks3;
+
+    public List<Filmwork> getFilmworks3() {
+        return this.filmworks3;
+    }
 }

@@ -1,12 +1,18 @@
 package com.example.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -37,6 +43,15 @@ public class Review {
 
 	@Column(name = "FILMWORK_ID", nullable = false)
 	private Long filmworkId;
+
+    @ManyToOne
+    @JoinColumn(name = "filmwork_id", insertable = false, updatable = false)
+    private Filmwork filmwork;
+
+    public Filmwork getFilmwork() {
+        return this.filmwork;
+    }
+
 
 	public Long getId() {
 		return id;
@@ -93,4 +108,11 @@ public class Review {
 	public void setFilmworkId(Long filmworkId) {
 		this.filmworkId = filmworkId;
 	}
+
+    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Reply> replies;
+
+    public List<Reply> getRiplies() {
+        return this.replies;
+    }
 }
