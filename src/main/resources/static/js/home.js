@@ -1,6 +1,6 @@
 document.getElementById("input").onkeyup = function() {
     let count = this.value.length;
-    if(count > 20){
+    if(count > 200){
         document.getElementById("count").style.color="red";
     }
     else{
