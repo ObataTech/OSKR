@@ -18,12 +18,12 @@
 	        <hr>
 	        <ul class="nav nav-pills flex-column">
 	            <li class="nav-item">
-	                <a href="#" class="nav-link active" aria-current="page">
+	                <a th:href="@{/home}" class="nav-link active" aria-current="page">
 	                    ホーム
 	                </a>
 	            </li>
 	            <li>
-	                <a href="#" class="nav-link text-white">
+	                <a th:href="@{/mypage}" class="nav-link text-white">
 	                    マイページ
 	                </a>
 	            </li>
@@ -33,105 +33,34 @@
 	    <!-- ▼メインコンテンツ -->
 
 	<!-- ラインナップ -->
-	<div class="m-5">
-	    <h2 class="text-center"><span>「xxxxxx」</span>ラインナップ</h2>
-	    <div class="row row-cols-1 g-4">
-	        <div class="col">
+	<div class="m-3 mx-auto">
+	    <h1 class="text-center text-bold">「<span th:text="${keyword}">xxxxxx</span>」ラインナップ</h1>
+	    <div class="row row-cols-1 g-4" th:each="filmwork:${filmworks}">
+	        <div class="col mb-1">
 	          <div class="card">
-	            <a href="">
-	                <img src="..." class="card-img-top" alt="...">
+	            <a th:href="@{/home/filmwork/{id}(id=${filmwok.id})}">
+	                <img th:src="@{${filmwork.thumbnail}}" class="card-img-top" alt="...">
 	            </a>
 	            <div class="card-body">
-	                <h5 class="card-title">スパイダーマン　アクロス・ザ・スパイダーバース</h5>
+	                <h5 class="card-title" th:text="${filmwork.title}">映画タイトル</h5>
 	                <ul class="d-flex flex-wrap gap-5 card-text list-unstyled">
 	                    <li class="  d-flex">
 	                        <label>公開日：</label>
-	                        <p>2023年6月16日</p>
+	                        <p th:text="${#dates.format(filmwork.releasedate,'yyyy年MM月dd日')}"></p>
 	                    </li>
-	                    <li class=" d-flex">
+	                    <li class=" d-flex" th:if="${filmwork.reviewSum != null}">
 	                        <label>レビュー：</label>
-	                        <p><span>403</span>件</p>
+	                        <p><span th:text="${filmwork.reviewSum}"></span>件</p>
 	                    </li>
-	                    <li class=" d-flex">
+	                    <li class=" d-flex" th:if="${filmwork.rateAve != null}">
 	                        <label>評価：</label>
-	                        <p>4.5</p>
+	                        <p th:text="${filmwork.rateAve}"></p>
 	                    </li>
 	                </ul>
 	            </div>
 	          </div>
 	        </div>
-	        <div class="col">
-	          <div class="card">
-	            <a href="">
-	                <img src="..." class="card-img-top" alt="...">
-	            </a>
-	            <div class="card-body">
-	                <h5 class="card-title">ザ・フラッシュ</h5>
-	                <ul class="d-flex flex-wrap gap-5 card-text list-unstyled">
-	                    <li class="d-flex">
-	                        <label>公開日：</label>
-	                        <p>2023年6月16日</p>
-	                    </li>
-	                    <li class="d-flex">
-	                        <label>レビュー：</label>
-	                        <p><span>403</span>件</p>
-	                    </li>
-	                    <li class="d-flex">
-	                        <label>評価：</label>
-	                        <p>4.0</p>
-	                    </li>
-	                </ul>
-	            </div>
-	          </div>
-	        </div>
-	        <div class="col">
-	          <div class="card">
-	            <a href="">
-	                <img src="..." class="card-img-top" alt="...">
-	            </a>
-	            <div class="card-body">
-	                <h5 class="card-title">忌怪島　きかいじま</h5>
-	                <ul class="d-flex flex-wrap gap-5 card-text list-unstyled">
-	                    <li class="d-flex">
-	                        <label>公開日：</label>
-	                        <p>2023年6月23日</p>
-	                    </li>
-	                    <li class="d-flex">
-	                        <label>レビュー：</label>
-	                        <p><span>403</span>件</p>
-	                    </li>
-	                    <li class="d-flex">
-	                        <label>評価：</label>
-	                        <p>3.8</p>
-	                    </li>
-	                </ul>
-	            </div>
-	          </div>
-	        </div>
-	        <div class="col">
-	            <div class="card">
-	              <a href="">
-	                  <img src="..." class="card-img-top" alt="...">
-	              </a>
-	              <div class="card-body">
-	                  <h5 class="card-title">プー　あくまのくまさん</h5>
-	                  <ul class="d-flex flex-wrap gap-5 card-text list-unstyled">
-	                      <li class="d-flex">
-	                          <label>公開日：</label>
-	                          <p>2023年6月23日</p>
-	                      </li>
-	                      <li class="d-flex">
-	                          <label>レビュー：</label>
-	                          <p><span>555</span>件</p>
-	                      </li>
-	                      <li class="d-flex">
-	                          <label>評価：</label>
-	                          <p>3.5</p>
-	                      </li>
-	                  </ul>
-	              </div>
-	            </div>
-	          </div>
+
 	      </div>
 	</div>
 	    <!-- ▲メインコンテンツ -->
