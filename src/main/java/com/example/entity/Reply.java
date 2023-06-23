@@ -13,12 +13,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "RIPLIES")
+@Table(name = "REPLIES")
 public class Reply {
 
 	@Id
-	@SequenceGenerator(name = "RIPLIES_ID_GENERATOR", sequenceName = "RIPLIES_ID_SEQ", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RIPLIES_ID_GENERATOR")
+	@SequenceGenerator(name = "REPLIES_ID_GENERATOR", sequenceName = "REPLIES_ID_SEQ", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REPLIES_ID_GENERATOR")
 	@Column(name = "ID")
 	private Long id;
 

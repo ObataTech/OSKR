@@ -18,12 +18,12 @@
         <hr>
         <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-                <a href="#" class="nav-link active" aria-current="page">
+                <a th:href="@{/home}" class="nav-link active" aria-current="page">
                     ホーム
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link text-white">
+                <a th:href="@{/mypage}" class="nav-link text-white">
                     マイページ
                 </a>
             </li>
@@ -34,8 +34,8 @@
     <div class="m-2 bg-light mx-md-auto">
         <!-- 検索ボックス -->
         <div class="m-2 p-2">
-            <form th:action="@{search/keyword}" method="get" class="d-flex">
-                <input class="form-control me-2" type="search" name="keyword" th:value="${keyword}"  placeholder="Search" aria-label="Search" required>
+            <form class="d-flex" th:action="@{/search/search(keyword=${keyword})}" method="get">
+                <input class="form-control me-2" name="keyword" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
@@ -44,29 +44,31 @@
             <h2>一言レビュー</h2>
             <div class="row p-2">
                 <!-- 作品情報 -->
-                <div class="col-4 m-2">
-                    <a href="#">
-                        <img class="img-thumbnail" src="..." alt="...">
+                <div class="col-4 m-2" th:object="${filmwork}">
+                    <a th:href="@{/filmwork/{id}(id=*{id})}">
+                        <img class="img-thumbnail" th:src="@{*{thumbnail}}" alt="...">
                     </a>
-                    <h5>ワイルドスピード ファイアーブースト</h5>
+                    <h5 th:text="*{title}"></h5>
                     <ul class="list-unstyled">
                         <li class="d-flex">
                             <label>レビュー：</label>
-                            <p><span>403</span>件</p>
+                            <p><span th:text="*{reviewSum}"></span>件</p>
                         </li>
                         <li class="d-flex">
-                            <label>評価：</label>
-                            <p>4.5</p>
+                            <div th:if="*{rateAve} != null">
+ 	                   			<label>評価：</label>
+                            	<p th:text="*{rateAve}"></p>
+                            </div>
                         </li>
                     </ul>
                 </div>
                 <!-- レビュー投稿 -->
                 <div class="col-6 m-1">
                     <h3>この映画で一番感動したシーンはどこですか？</h3>
-                    <form action="">
-                        <input type="hidden" value="">
+                    <form th:action="@{/home/save}" th:object="${postReview}" method="post">
+                        <input type="hidden" name="id" th:value="${filmwork.id}">
                         <div class="" id="count">文字数:0</div>
-                        <textarea name="" id="input"class=" w-100"></textarea>
+                        <textarea name="" id="input"class=" w-100" th:field="*{content}"></textarea>
                         <button class="col offset-10 btn btn-primary d-block shadow mb-2">投稿</button>
                     </form>
                     <!-- 小さく表示する -->
@@ -76,46 +78,18 @@
             <!-- レビュー一覧 -->
             <!-- scrollはスクロールバーを設置 -->
             <div class="col overflow-y-auto">
-                <div class="card my-2">
+                <div class="card my-2" th:each="review:${reviewList}">
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <div class="mr-auto">
-                                <h4 class="card-title">アベッチ</h4>
+                                <h4 class="card-title" th:text="${review.user.name}">アベッチ</h4>
                                 <span class="text-muted">投稿日</span>
-                                <span class="text-muted">2023年6月13日</span>
+                                <span class="text-muted" th:text="${#temporals.format(review.posttime,'yyyy年MM月dd日')} ">2023年6月13日</span>
                             </div>
                         </div>
                     </div>
                     <div class="cardbory">
-                        <p class="card-text">突然のアングル切り替え、この距離感。どんなきもちで続きを見た良いのか。。。（汗）</p>
-                    </div>
-                </div>
-                <div class="card my-2">
-                    <div class="card-header">
-                        <h4 class="card-title">オカ</h4>
-                        <div class="d-flex jusitfy-contetn-between">
-                            <div class="mr-auto">
-                                <span class="text-muted">投稿日</span>
-                                <span class="text-muted">2023年6月11日</pan>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cardbory">
-                        <p class="card-text">衝突するシーンが一番感動的だった</p>
-                    </div>
-                </div>
-                <div class="card my-2">
-                    <div class="card-header">
-                        <h4 class="card-title">ナイナイ</h4>
-                        <div class="d-flex jusitfy-contetn-between">
-                            <div class="mr-auto">
-                                <span class="text-muted">投稿日</span>
-                                <span class="text-muted">2023年6月10日</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cardbory">
-                        <p class="card-text">ダムから飛び出すシーンが一番好き</p>
+                        <p class="card-text" th:text="${review.content}">突然のアングル切り替え、この距離感。どんなきもちで続きを見た良いのか。。。（汗）</p>
                     </div>
                 </div>
             </div>
@@ -123,157 +97,61 @@
         <!-- 最新映画 -->
         <section class="mx-2">
             <h2 class="m-2 border-bottom">最新映画</h2>
-            <div class="row row-cols-3 row-cols-md-3 g-4">
-                <div class="col">
-                <div class="card">
-                    <a href="">
-                        <img src="..." class="card-img-top img-thumbnail" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">スパイダーマン　アクロス・ザ・スパイダーバース</h5>
-                        <ul class="card-text list-unstyled">
-                            <li class="d-flex">
-                                <label>公開日：</label>
-                                <p>2023年6月16日</p>
-                            </li>
-                            <li class="d-flex">
-                                <label>レビュー：</label>
-                                <p><span>403</span>件</p>
-                            </li>
-                            <li class="d-flex">
-                                <label>評価：</label>
-                                <p>4.5</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                </div>
-                <div class="col">
-                <div class="card">
-                    <a href="">
-                        <img   src="..." class="card-img-top img-thumbnail" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">ザ・フラッシュ</h5>
-                        <ul class="card-text list-unstyled">
-                            <li class="d-flex">
-                                <label>公開日：</label>
-                                <p>2023年6月16日</p>
-                            </li>
-                            <li class="d-flex">
-                                <label>レビュー：</label>
-                                <p><span>403</span>件</p>
-                            </li>
-                            <li class="d-flex">
-                                <label>評価：</label>
-                                <p>4.5</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                </div>
-                <div class="col">
-                <div class="card">
-                    <a href="">
-                        <img   src="..." class="card-img-top img-thumbnail" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">忌怪島　きかいじま</h5>
-                        <ul class="card-text list-unstyled">
-                            <li class="d-flex">
-                                <label>公開日：</label>
-                                <p>2023年6月16日</p>
-                            </li>
-                            <li class="d-flex">
-                                <label>レビュー：</label>
-                                <p><span>403</span>件</p>
-                            </li>
-                            <li class="d-flex">
-                                <label>評価：</label>
-                                <p>4.5</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                </div>
+            <div class="row row-cols-3 row-cols-md-3 g-4 ">
+	        <div class="col mb-1" th:each="latest:${latest}">
+	          <div class="card">
+	            <a th:href="@{/filmwork/{id}(id=${latest.id})}">
+	                <img th:src="@{${latest.thumbnail}}" class="card-img-top" alt="...">
+	            </a>
+	            <div class="card-body">
+	                <h5 class="card-title text-center" th:text="${latest.title}">映画タイトル</h5>
+	                <ul class="d-flex flex-wrap gap-5 card-text list-unstyled">
+	                    <li class="  d-flex">
+	                        <label>公開日：</label>
+	                        <p th:text="${#dates.format(latest.releasedate,'yyyy年MM月dd日')}"></p>
+	                    </li>
+	                    <li class=" d-flex" th:if="${latest.reviewSum != null}">
+	                        <label>レビュー：</label>
+	                        <p><span th:text="${latest.reviewSum}"></span>件</p>
+	                    </li>
+	                    <li class=" d-flex" th:if="${latest.rateAve != null}">
+	                        <label>評価：</label>
+	                        <p th:text="${latest.rateAve}"></p>
+	                    </li>
+	                </ul>
+	            </div>
+	          </div>
+	        </div>
             </div>
         </section>
         <!-- ラインナップ -->
         <section class=" border border-1 border-dark m-2 p-2 h-20">
             <h2 class="m-2 border-bottom">ラインナップ</h2>
-            <div class="row row-cols-1 row-cols-md-3 g-4 overflow-y-auto">
-                <div class="col">
-                <div class="card">
-                    <a href="">
-                        <img   src="..." class="card-img-top img-thumbnail" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">スパイダーマン　アクロス・ザ・スパイダーバース</h5>
-                        <ul class="card-text list-unstyled">
-                            <li class="d-flex">
-                                <label>公開日：</label>
-                                <p>2023年6月16日</p>
-                            </li>
-                            <li class="d-flex">
-                                <label>レビュー：</label>
-                                <p><span>403</span>件</p>
-                            </li>
-                            <li class="d-flex">
-                                <label>評価：</label>
-                                <p>4.5</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                </div>
-                <div class="col">
-                <div class="card">
-                    <a href="">
-                        <img   src="..." class="card-img-top img-thumbnail" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">ザ・フラッシュ</h5>
-                        <ul class="card-text list-unstyled">
-                            <li class="d-flex">
-                                <label>公開日：</label>
-                                <p>2023年6月16日</p>
-                            </li>
-                            <li class="d-flex">
-                                <label>レビュー：</label>
-                                <p><span>403</span>件</p>
-                            </li>
-                            <li class="d-flex">
-                                <label>評価：</label>
-                                <p>4.5</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                </div>
-                <div class="col">
-                <div class="card">
-                    <a href="">
-                        <img  src="..." class="card-img-top img-thumbnail" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">忌怪島　きかいじま</h5>
-                        <ul class="card-text list-unstyled">
-                            <li class="d-flex">
-                                <label>公開日：</label>
-                                <p>2023年6月16日</p>
-                            </li>
-                            <li class="d-flex">
-                                <label>レビュー：</label>
-                                <p><span>403</span>件</p>
-                            </li>
-                            <li class="d-flex">
-                                <label>評価：</label>
-                                <p>4.5</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                </div>
+            <div class="row row-cols-1 row-cols-md-3 g-4 overflow-y-auto" >
+		        <div class="col mb-1" th:each="lineup:${lineup}">
+		          <div class="card">
+		            <a th:href="@{/filmwork/{id}(id=${lineup.id})}">
+		                <img th:src="@{${lineup.thumbnail}}" class="card-img-top" alt="...">
+		            </a>
+		            <div class="card-body">
+		                <h5 class="card-title text-center" th:text="${lineup.title}">映画タイトル</h5>
+		                <ul class="d-flex flex-wrap gap-5 card-text list-unstyled">
+		                    <li class="  d-flex">
+		                        <label>公開日：</label>
+		                        <p th:text="${#dates.format(lineup.releasedate,'yyyy年MM月dd日')}"></p>
+		                    </li>
+		                    <li class=" d-flex" th:if="${lineup.reviewSum != null}">
+		                        <label>レビュー：</label>
+		                        <p><span th:text="${lineup.reviewSum}"></span>件</p>
+		                    </li>
+		                    <li class=" d-flex" th:if="${lineup.rateAve != null}">
+		                        <label>評価：</label>
+		                        <p th:text="${lineup.rateAve}"></p>
+		                    </li>
+		                </ul>
+		            </div>
+		          </div>
+		        </div>
             </div>
         </section>
         <!-- 製作年・ジャンルは「｜」で区切って表示する -->
@@ -282,31 +160,32 @@
             <h6 class="mx-2 border-bottom border-2 text-center ">製作年</h6>
             <ul class="list-unstyled d-flex" >
                 <li class="fw-bold me-1 ">2020年代 |</li>
-                <li class=" ms-1 text-secondary"><a href="">2020年</a>|</li>
-                <li class=" ms-1 text-secondary"><a href="">2021年</a>|</li>
-                <li class=" ms-1 text-secondary"><a href="">2022年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/20}">2020年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/21}">2021年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/22}">2022年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/23}">2023年</a>|</li>
             </ul>
             <ul class="list-unstyled d-flex">
                 <li class="fw-bold me-1">2010年代 |</li>
-                <li class=" ms-1 text-secondary"><a href="">2011年</a>|</li>
-                <li class=" ms-1 text-secondary"><a href="">2010年</a>|</li>
-                <li class=" ms-1 text-secondary"><a href="">2012年</a>|</li>
-                <li class=" ms-1 text-secondary"><a href="">2013年</a>|</li>
-                <li class=" ms-1 text-secondary"><a href="">2014年</a>|</li>
-                <li class=" ms-1 text-secondary"><a href="">2015年</a>|</li>
-                <li class=" ms-1 text-secondary"><a href="">2016年</a>|</li>
-                <li class=" ms-1 text-secondary"><a href="">2017年</a>|</li>
-                <li class=" ms-1 text-secondary"><a href="">2018年</a>|</li>
-                <li class="ms-1 text-secondary"><a href="">2019年</a></li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/10}">2010年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/11}">2011年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/12}">2012年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/13}">2013年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/14}">2014年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/15}">2015年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/16}">2016年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/17}">2017年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/18}">2018年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/19}">2019年</a></li>
             </ul>
         </section>
         <!-- ジャンル -->
         <section class="h-20 px-3">
             <h6 class="mx-2 border-bottom border-2 text-center">ジャンル</h6>
-            <ul class="list-unstyled d-flex">
-                <li class=" me-1 text-secondary"><a href="">ホラー</a>|</li>
-                <li class=" me-1 text-secondary"><a href="">戦争</a>|</li>
-                <li class=" me-1 text-secondary"><a href="">恋愛</a>|</li>
+            <ul class="list-unstyled d-flex align-content-around flex-wrap">
+                <li class=" me-1 text-secondary" th:each="category:${categories}">
+                <a th:href="@{/search/caetgory(category=${category.name})}">
+                <span th:text="${category.name}"></span></a>|</li>
             </ul>
         </section>
     </div>
