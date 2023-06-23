@@ -14,9 +14,10 @@ public interface HomeFilmworkRepository extends JpaRepository<Filmwork, Long> {
 
 //	@Query("SELECT f FROM Filmwok f WHERE f.id = ?1 ORDER BY f.releasedate DESC")
 //	public Optional<Filmwork> findAllById(Long id);
+
 	/**
-	 * ３件分取得
+	 * 公開日降順で取得
 	 */
 	@Query("SELECT f FROM Filmwork f ORDER BY f.releasedate DESC")
-	public List<Filmwork> getLatestThreetList();
+	public List<Filmwork> getLatestList();
 }
