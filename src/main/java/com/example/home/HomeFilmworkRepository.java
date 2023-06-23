@@ -12,8 +12,8 @@ import com.example.entity.Filmwork;
 @Repository
 public interface HomeFilmworkRepository extends JpaRepository<Filmwork, Long> {
 
-	@Query("SELECT f FROM Filmwok f WHERE f.id = ?1 ORDER BY f.releasedate DESC")
-	public Optional<Filmwork> findAllById(Long id);
+//	@Query("SELECT f FROM Filmwok f WHERE f.id = ?1 ORDER BY f.releasedate DESC")
+//	public Optional<Filmwork> findAllById(Long id);
 	/**
 	 * ３件分取得
 	 */

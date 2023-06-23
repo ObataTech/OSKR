@@ -31,7 +31,7 @@ public class HomeController {
 	@GetMapping
 	public String HomeList(Model model) {
 		//一言レビュー
-		FilmworkDetail filmework = this.homeService.getFilmworkById((long) 1);
+//		FilmworkDetail filmework = this.homeService.getFilmworkById((long) 1);
 		List<Review> reviewList = this.homeService.listAllReviews((long)1);
 		List<FilmworkDetail> latest = this.homeService.listLatest();
 		List<FilmworkDetail> lineup = this.homeService.listAllFilmworks();
@@ -39,7 +39,7 @@ public class HomeController {
 		List<Category> categories = this.homeService.listCategory();
 
 		//画面に渡す
-		model.addAttribute("filmework", filmework);
+//		model.addAttribute("filmework", filmework);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("latest", latest);
 		model.addAttribute("lineup", lineup);

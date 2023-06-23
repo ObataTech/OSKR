@@ -29,34 +29,34 @@ public class HomeService {
 	}
 
 
-	public FilmworkDetail getFilmworkById(Long id){
-		Optional<Filmwork> filmwork = this.homeFilmworkRepository.findAllById(id);
-
-		FilmworkDetail filmworkDetail = new FilmworkDetail();
-		//作品情報
-		filmworkDetail.setId(filmwork.get().getId());
-		filmworkDetail.setTitle(filmwork.get().getTitle());
-		filmworkDetail.setReleasedate(filmwork.get().getReleasedate());
-		filmworkDetail.setThumbnail("/images/"+filmwork.get().getThumbnail()+".png");
-		filmworkDetail.setSummary(filmwork.get().getSummary());
-		filmworkDetail.setCast(filmwork.get().getCast());
-		filmworkDetail.setCategory1Id(filmwork.get().getCategory1Id());
-		filmworkDetail.setCategory2Id(filmwork.get().getCategory2Id());
-		filmworkDetail.setCategory3Id(filmwork.get().getCategory3Id());
-
-		//レビュー数
-		Optional<Long> review=this.homeReviewRepository.countByFilmworkId(filmwork.get().getId());
-		if(review.isPresent()) {
-			filmworkDetail.setReviewSum(review.get());
-		}
-		//総合評価
-		Optional<Double> rate = this.homeReviewRepository.reviewAve(filmwork.get().getId());
-		if(rate.isPresent()) {
-			filmworkDetail.setRateAve(rate.get());
-		}
-
-		return filmworkDetail;
-	}
+//	public FilmworkDetail getFilmworkById(Long id){
+//		Optional<Filmwork> filmwork = this.homeFilmworkRepository.findAllById(id);
+//
+//		FilmworkDetail filmworkDetail = new FilmworkDetail();
+//		//作品情報
+//		filmworkDetail.setId(filmwork.get().getId());
+//		filmworkDetail.setTitle(filmwork.get().getTitle());
+//		filmworkDetail.setReleasedate(filmwork.get().getReleasedate());
+//		filmworkDetail.setThumbnail("/images/"+filmwork.get().getThumbnail()+".png");
+//		filmworkDetail.setSummary(filmwork.get().getSummary());
+//		filmworkDetail.setCast(filmwork.get().getCast());
+//		filmworkDetail.setCategory1Id(filmwork.get().getCategory1Id());
+//		filmworkDetail.setCategory2Id(filmwork.get().getCategory2Id());
+//		filmworkDetail.setCategory3Id(filmwork.get().getCategory3Id());
+//
+//		//レビュー数
+//		Optional<Long> review=this.homeReviewRepository.countByFilmworkId(filmwork.get().getId());
+//		if(review.isPresent()) {
+//			filmworkDetail.setReviewSum(review.get());
+//		}
+//		//総合評価
+//		Optional<Double> rate = this.homeReviewRepository.reviewAve(filmwork.get().getId());
+//		if(rate.isPresent()) {
+//			filmworkDetail.setRateAve(rate.get());
+//		}
+//
+//		return filmworkDetail;
+//	}
 	/**
 	 * レビューを取得
 	 */
