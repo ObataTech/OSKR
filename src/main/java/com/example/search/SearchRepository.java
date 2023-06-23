@@ -37,4 +37,5 @@ public interface SearchRepository extends JpaRepository<Filmwork, Long> {
 			+ "WHERE c1.name = ?1 OR c2.name = ?1 OR c3.name = ?1")
 	public List<Filmwork> searchCategory(String category);
 
+
 }
