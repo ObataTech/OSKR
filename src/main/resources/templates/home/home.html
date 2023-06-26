@@ -34,7 +34,7 @@
     <div class="m-2 bg-light mx-md-auto">
         <!-- 検索ボックス -->
         <div class="m-2 p-2">
-            <form class="d-flex" th:action="@{/search/search(keyword=${keyword})}" method="get">
+            <form class="d-flex" th:action="@{/search/keyword(keyword=${keyword})}" method="get">
                 <input class="form-control me-2" name="keyword" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
@@ -160,23 +160,23 @@
             <h6 class="mx-2 border-bottom border-2 text-center ">製作年</h6>
             <ul class="list-unstyled d-flex" >
                 <li class="fw-bold me-1 ">2020年代 |</li>
-                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/20}">2020年</a>|</li>
-                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/21}">2021年</a>|</li>
-                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/22}">2022年</a>|</li>
-                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/23}">2023年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year(year=20)}">2020年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year(year=21)}">2021年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year(year=22)}">2022年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year(year=23)}">2023年</a>|</li>
             </ul>
             <ul class="list-unstyled d-flex">
                 <li class="fw-bold me-1">2010年代 |</li>
-                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/10}">2010年</a>|</li>
-                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/11}">2011年</a>|</li>
-                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/12}">2012年</a>|</li>
-                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/13}">2013年</a>|</li>
-                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/14}">2014年</a>|</li>
-                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/15}">2015年</a>|</li>
-                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/16}">2016年</a>|</li>
-                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/17}">2017年</a>|</li>
-                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/18}">2018年</a>|</li>
-                <li class=" ms-1 text-secondary"><a th:href="@{/search/year/19}">2019年</a></li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year(year=10)}">2010年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year(year=11)}">2011年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year(year=12)}">2012年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year(year=13)}">2013年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year(year=14)}">2014年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year(year=15)}">2015年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year(year=16)}">2016年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year(year=17)}">2017年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year(year=18)}">2018年</a>|</li>
+                <li class=" ms-1 text-secondary"><a th:href="@{/search/year(year=19)}">2019年</a></li>
             </ul>
         </section>
         <!-- ジャンル -->
@@ -184,7 +184,7 @@
             <h6 class="mx-2 border-bottom border-2 text-center">ジャンル</h6>
             <ul class="list-unstyled d-flex align-content-around flex-wrap">
                 <li class=" me-1 text-secondary" th:each="category:${categories}">
-                <a th:href="@{/search/caetgory(category=${category.name})}">
+                <a th:href="@{/search/category(category=${category.name})}">
                 <span th:text="${category.name}"></span></a>|</li>
             </ul>
         </section>

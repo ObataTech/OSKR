@@ -38,7 +38,7 @@
 	    <div class="row row-cols-1 g-4" th:each="filmwork:${filmworks}">
 	        <div class="col mb-1">
 	          <div class="card">
-	            <a th:href="@{/home/filmwork/{id}(id=${filmwok.id})}">
+	            <a th:href="@{/home/filmwork/{id}(id=${filmwork.id})}">
 	                <img th:src="@{${filmwork.thumbnail}}" class="card-img-top" alt="...">
 	            </a>
 	            <div class="card-body">
