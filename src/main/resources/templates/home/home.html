@@ -89,7 +89,7 @@
                         </div>
                     </div>
                     <div class="cardbory">
-                        <p class="card-text" th:text="${review.content}">突然のアングル切り替え、この距離感。どんなきもちで続きを見た良いのか。。。（汗）</p>
+                        <p class="card-text" th:text="${review.content}"></p>
                     </div>
                 </div>
             </div>
@@ -97,7 +97,7 @@
         <!-- 最新映画 -->
         <section class="mx-2">
             <h2 class="m-2 border-bottom">最新映画</h2>
-            <div class="row row-cols-3 row-cols-md-3 g-4 ">
+            <div class="row row-cols-1 row-cols-md-3 g-4 ">
 	        <div class="col mb-1" th:each="latest:${latest}">
 	          <div class="card">
 	            <a th:href="@{/filmwork/{id}(id=${latest.id})}">

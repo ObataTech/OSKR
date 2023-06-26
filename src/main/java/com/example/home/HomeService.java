@@ -41,7 +41,6 @@ public class HomeService {
 		Random random = new Random();
 		//乱数を絶対値で取得し、作品数分に制限、0から始まるので＋１にする
 		Long number = Math.abs(random.nextLong())%cnt + 1;
-		System.out.println("*************************************"+number+"*******************************");
 		Optional<Filmwork> filmwork = this.homeFilmworkRepository.findById(number);
 
 		return detail(filmwork.get());
