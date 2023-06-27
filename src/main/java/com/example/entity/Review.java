@@ -134,4 +134,12 @@ public class Review {
     public List<Reply> getRiplies() {
         return this.replies;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
+    public User getUser() {
+        return this.user;
+    }
+
 }
