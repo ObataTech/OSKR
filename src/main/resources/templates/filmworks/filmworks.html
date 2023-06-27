@@ -38,54 +38,56 @@
 	        <!-- コンテナ -->
 	        <div class="container-md">
 	          <!-- 作品情報 コンテンツ行 -->
-	          <div class="row">
+	          <div class="row justify-content-center">
 	            <!-- ▼ 作品情報セクション左側 ▼ -->
-	            <div class="col-4">
+	            <div class="col-3">
 	              <!-- 作品サムネイル -->
 	              <div>
-	                <img class="img-fluid" th:src="@{/images/thumb_001_kaibutsu.png}" alt="作品画像" />
+	                <img class="img-fluid" th:src="@{${filmworkForm.thumbnail}}" alt="作品画像" />
+<!--	                <img class="img-fluid" th:src="@{/images/thumb_002_mermaid.png}" alt="作品画像" /> -->
 	              </div>
 	            </div>
 	            <!-- ▲ 作品情報セクション左側 ▲ -->
 	            <!-- ▼ 作品情報セクション右側 ▼ -->
-	            <div class="col-8">
+	            <div class="col-7">
 	              <!-- 作品情報インナー -->
 	              <div class="mb-1">
 	                <!-- 作品タイトル -->
-	                <h1 class="fw-bold text-center">怪物</h1>
+<!--	                <h1 class="fw-bold text-center">怪物</h1> -->
+  	                <h1 th:text="${filmworkForm.title}" class="fw-bold text-center"></h1>
 	                <!-- あらすじ -->
-	                <p class="mb-2">
-	                  息子を愛するシングルマザーや生徒思いの教師、元気な子供たちなどが暮らす、大きな湖のある郊外の町。どこにでもあるような子供同士のけんかが、互いの主張の食い違いから周囲を巻き込み、メディアで取り上げられる。そしてある嵐の朝、子供たちが突然姿を消してしまう。
+	                <p th:text="${filmworkForm.summary}" class="mb-2">
+<!--	                  息子を愛するシングルマザーや生徒思いの教師、元気な子供たちなどが暮らす、大きな湖のある郊外の町。どこにでもあるような子供同士のけんかが、互いの主張の食い違いから周囲を巻き込み、メディアで取り上げられる。そしてある嵐の朝、子供たちが突然姿を消してしまう。-->
 	                </p>
 	                <!-- 作品情報グループ -->
 	                <div class="card-group mb-1">
 	                  <dl class="card p-0">
 	                      <dt class="m-0 text-center">監督</dt>
-	                      <dd class="m-0 text-center">是枝裕和</dd>
+	                      <dd th:text="${filmworkForm.director}" class="m-0 text-center">是枝裕和</dd>
 	                  </dl>
 	                  <dl class="card p-0">
 	                      <dt class="m-0 text-center">キャスト</dt>
-	                      <dd class="m-0 text-center">安藤サクラ / 永山瑛太</dd>
+	                      <dd th:text="${filmworkForm.cast}" class="m-0 text-center">安藤サクラ / 永山瑛太</dd>
 	                  </dl>
 	                </div>
 	                <div class="card-group mb-1">
 	                  <dl class="card p-0">
 	                      <dt class="m-0 text-center">ジャンル</dt>
-	                      <dd class="m-0 text-center">ドラマ・ミステリー</dd>
+	                      <dd th:text="${filmworkForm.category}" class="m-0 text-center">ドラマ・ミステリー</dd>
 	                  </dl>
 	                </div>
 	                <div class="card-group mb-4">
 	                  <dl class="card p-0">
 	                      <dt class="m-0 text-center">公開日</dt>
-	                      <dd class="m-0 text-center">2023年6月2日</dd>
+	                      <dd th:text="${filmworkForm.releasedate}" class="m-0 text-center">2023年6月2日</dd>
 	                  </dl>
 	                  <dl class="card p-0">
 	                      <dt class="m-0 text-center">レビュー</dt>
-	                      <dd class="m-0 text-center">100</dd>
+	                      <dd th:text="${filmworkForm.reviewCnt}" class="m-0 text-center">100</dd>
 	                  </dl>
 	                  <dl class="card p-0">
 	                      <dt class="m-0 text-center">評価</dt>
-	                      <dd class="m-0 text-center">4</dd>
+	                      <dd th:text="${filmworkForm.rateAvg}" class="m-0 text-center">4</dd>
 	                  </dl>
 	                </div>
 	              </div>
@@ -99,11 +101,13 @@
 	      <section class="py-4 bg-light border-top border-bottom">
 	        <!-- レビュー コンテンツ行 -->
 	        <div class="row">
-	          <form class="col-10 offset-1">
+	          <form th:action="@{/filmwork/reviewtoroku/{id}(id=${id})}" th:object="${filmworkForm}" th:method="post" class="col-10 offset-1">
 	            <!-- 入力グループ -->
 	            <div class="form-floating mb-3">
-	              <textarea class="form-control" name="opinion" id="input_opinion" placeholder="" style="height: 180px"></textarea>
-	              <label for="input_opinion">レビューをお書きください</label>
+<!--	              <input type="text" th:field="*{reviewContent}" placeholder="商品名を入力してください"> -->
+	              <textarea class="form-control" name="opinion" id="input_opinion" th:field="*{reviewContent}" placeholder="レビューをお書きください" style="height: 180px"></textarea>
+<!--				  <input type="hidden" name="id" th:value="${id}"> -->
+<!--	              <label for="input_opinion">レビューをお書きください</label> -->
 	            </div>
 	            <div class="container-md">
 	              <div class="row">
@@ -111,24 +115,24 @@
 	                  <div class="card-group mb-4">
 	                    <dl class="card p-2 border-0">
 	                      <dt class="fw-bold text-center">評価</dt>
-	                      <select class="form-select form-select-sm">
-	                        <option value="black">5</option>
-	                        <option value="black">4</option>
-	                        <option value="black" selected>3</option>
-	                        <option value="black">2</option>
-	                        <option value="black">1</option>
+	                      <select class="form-select form-select-sm" th:field="*{rate}">
+	                        <option value="5">5</option>
+	                        <option value="4">4</option>
+	                        <option value="3" selected>3</option>
+	                        <option value="2">2</option>
+	                        <option value="1">1</option>
 	                      </select>
 	                    </dl>
 	                    <dl class="card p-2 border-0">
 	                      <dt class="fw-bold text-center">ネタばれ</dt>
-	                      <select class="form-select form-select-sm">
-	                        <option value="black" selected>ネタばれ無し</option>
-	                        <option value="black">ネタばれ有り</option>
+	                      <select class="form-select form-select-sm" th:field="*{spoiler}">
+	                        <option value=1 selected>ネタばれ無し</option>
+	                        <option value=0>ネタばれ有り</option>
 	                      </select>
 	                    </dl>
-	                    <dl class="card p-2 border-0">
+	                    <dl class="card p-2 border-0 mt-2">
 	<!--                       <button type="submit" class="btn btn-lg btn-primary d-block mx-auto px-5 fw-bold shadow">投稿</button> -->
-	                      <button type="submit" class="btn btn-lg btn-primary d-block mx-auto shadow">投稿</button>
+	                      <button type="submit" class="w-100 m-0 btn btn-lg btn-primary d-block mx-auto shadow">投稿</button>
 	                    </dl>
 	                  </div>
 	                </div>
@@ -145,11 +149,14 @@
 	          <div class="row mb-1 mb-md-3">
 	            <div class="col-12">
 	              <h2 class="fw-bold text-center">
-	                <span class="d-block mb-1 text-primary fs-5">REVIEW LIST</span>
+	                <span class="d-block mb-1 text-secondary fs-5">REVIEW LIST</span>
 	              </h2>
 	            </div>
 	          </div>
 	          <!-- タブ部分 -->
+	          <div class="container">
+	          <div class="row">
+	          <div class="col-10 offset-1">
 	          <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
 	            <li class="nav-item" role="presentation">
 	              <button type="button" class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" role="tab" aria-controls="home-tab-pane" aria-selected="true">ネタばれ無し</button>
@@ -158,180 +165,182 @@
 	              <button type="button" class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" role="tab" aria-controls="profile-tab-pane" aria-selected="false">ネタばれ有り</button>
 	            </li>
 	          </ul>
+	          </div>
+	          </div>
+	          </div>
 	          <!-- パネル(タブの中身)部分 -->
 	          <div id="myTabContent" class="tab-content">
 	            <div class="tab-pane active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-	              <!-- ネタばれ無しタブ 作品レビュー1件目 -->
-	              <div class="py-2 border-bottom">
+	              <!-- ネタばれ無しタブ 作品レビュー表示エリア -->
+	              <div th:each="review : ${filmworkForm.nospoilerreviews}" class="py-2 border-bottom">
+<!--	              <div th:each="review : ${filmworkForm.reviews}" class="py-2 border-bottom"> -->
 	                <div class="container">
-	                  <div class="row">
+	                  <div class="row justify-content-center">
+<!--	                    <div class="offset-1 col-2"> -->
 	                    <div class="col-2">
 	                      <div class="">
 	                        <span class="fw-bold">評価：</span>
-	                        <span class="text-primary fw-bold">3</span>
+	                        <span th:text="${review.rate}" class="text-secondary fw-bold">3</span>
 	                      </div>
-	                      <div class="">2023年6月11日</div>
-	                      <div class="text-muted small">きかんしゃ・トーリマス</div>
+	                      <div th:text="${#temporals.format(review.posttime,'yyyy年MM月dd日')}" class="">2023年6月11日</div>
+	                      <div th:text="${review.user.name}" class="text-muted small">きかんしゃ・トーリマス</div>
 	                    </div>
-	                    <div class="col-7">
-	                      <p>
+<!--	                    <div class="col-7"> -->
+	                    <div class="col-8">
+	                      <p th:text="${review.content}">
 	                        前半は良かったけど途中から思ってた展開とずれてきて自分の感情との齟齬が最後まで埋められなかったなぁ。種明かしシーンが長すぎて。
 	                      </p>
-	                      <!-- ネタばれ無しタブ リプライ 1件目 -->
-	                      <div class="border-top offset-1">
-	                        <span class="text-muted small">2023年6月14日</span>
-	                        <span class="text-muted small">きこんしゃ・トーマス</span>
+	                      <form th:action="@{/filmwork/replytoroku/{id}(id=${id})}" th:object="${filmworkForm}" method="post">
+	                     	<div class="mb-2">
+	                      		<textarea class="form-control" name="opinion" id="input_opinion" th:field="*{replyContent}" placeholder="リプライをお書きください"></textarea>
+	                      		<input type="hidden" th:value="${review.id}" name="reviewId"></input>
+	                      	</div>
+	                      	<div class="form-group text-center">
+                          		<div class="">
+	                            	<button type="submit" class="btn btn-primary">投稿</button>
+	                      		</div>
+	                      	</div>
+	                      </form>
+	                      <!-- ネタばれ無しタブ リプライ 表示エリア -->
+	                      <div class="mb-2"></div>
+	                      <div th:each="reply : ${review.replies}" class="border-top offset-1">
+	                        <span th:text="${#temporals.format(reply.posttime,'yyyy年MM月dd日')}" class="text-muted small">2023年6月14日</span>
+	                        <span th:text="${reply.user.name}" class="text-muted small">きこんしゃ・トーマス</span>
 	                        <div class="small">
-	                          <p>
+	                          <p th:text="${reply.content}">>
 	                            たしかにたしかに～、よく言った!!
 	                          </p>
 	                        </div>
 	                      </div>
-	                      <!-- ネタばれ無しタブ リプライ 2件目 -->
-	                      <div class="border-top offset-1">
-	                        <span class="text-muted small">2023年6月14日</span>
-	                        <span class="text-muted small">かなりえずき</span>
-	                        <div class="small">
-	                          <p>
-	                            せやなぁ、わかるわ、そないな気持ちなるわ。
-	                          </p>
+<!--                          <div class="collapse" id="collapseExample">
+                          表示しました。
+                            <div class="">
+	                        	<input th:field="*{replyContent}" class="form-control" name="opinion" id="input_opinion" placeholder="リプライをお書きください" style="height: 50px"></input>
 	                        </div>
-	                      </div>
-	                    </div>
-	                    <div class="col-3">
-	                      <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modal_wrap1">リプライ</button>
-	                      <div class="modal fade" id="modal_wrap1" tabindex="-1" data-bs-backdrop="static">
-	                        <div class="modal-dialog modal-dialog-centered">
-	                            <div class="modal-content">
-	                                <div class="modal-header">
-	                                     <h5 class="modal-title">怪物</h5>
-	                                </div>
-	                                <div class="modal-body">
-	                                  <div class="">
-	                                    <span class="">2023年6月11日</span>
-	                                    <span class="text-muted small">きかんしゃ・トーリマス</span>
-	                                    <div class="text-end mb-2">
-	                                      <span class="fw-bold">評価：</span>
-	                                      <span class="text-primary fw-bold">3</span>
-	                                    </div>
-	                                  </div>
-	                                    <p>前半は良かったけど途中から思ってた展開とずれてきて自分の感情との齟齬が最後まで埋められなかったなぁ。種明かしシーンが長すぎて。</p>
-	                                  <div class="form-floating mb-3">
-	                                    <textarea class="form-control" name="opinion" id="input_opinion" placeholder="" style="height: 50px"></textarea>
-	                                    <label for="input_opinion">リプライをお書きください</label>
-	                                  </div>
-	                                </div>
-	                                <div class="modal-footer">
-	                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-	                                    <button type="button" class="btn btn-primary">投稿</button>
-	                                </div>
-	                            </div>
+                            <div class="form-floating mb-3">
+	                      		<textarea th:field="*{replyContent}" class="form-control" name="opinion" id="input_opinion" placeholder="リプライをお書きください" style="height: 50px"></textarea>
 	                        </div>
-	                      </div>
-	                    </div>
-	                  </div>
-	                </div>
-	              </div>
-	              <!-- ネタばれ無しタブ 作品レビュー2件目 -->
-	              <div class="py-2 border-bottom">
-	                <div class="container">
-	                  <div class="row">
-	                    <div class="col-2">
-	                      <div class="">
-	                        <span class="fw-bold">評価：</span>
-	                        <span class="text-primary fw-bold">1</span>
-	                      </div>
-	                      <div class="">2023年6月11日</div>
-	                      <div class="text-muted small">アシタカ・ラ・ホンキダス</div>
-	                    </div>
-	                    <div class="col-7">
-	                      <p>
-	                        終わった後、「どういうこと？」というのが正直な感想で、周りの席の人も「意味が分からん」と呟いていました。時間を無駄にした感覚でした。
-	                      </p>
-	                    </div>
-	                    <div class="col-3">
-	                      <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modal_wrap3">リプライ</button>
-	                      <div class="modal fade" id="modal_wrap3" tabindex="-1" data-bs-backdrop="static">
-	                        <div class="modal-dialog modal-dialog-centered">
-	                            <div class="modal-content">
-	                                <div class="modal-header">
-	                                     <h5 class="modal-title">怪物</h5>
-	                                </div>
-	                                <div class="modal-body">
-	                                  <div class="">
-	                                    <span class="">2023年6月11日</span>
-	                                    <span class="text-muted small">アシタカ・ラ・ホンキダス</span>
-	                                    <div class="text-end mb-2">
-	                                      <span class="fw-bold">評価：</span>
-	                                      <span class="text-primary fw-bold">1</span>
-	                                    </div>
-	                                  </div>
-	                                    <p>終わった後、「どういうこと？」というのが正直な感想で、周りの席の人も「意味が分からん」と呟いていました。時間を無駄にした感覚でした。</p>
-	                                  <div class="form-floating mb-3">
-	                                    <textarea class="form-control" name="opinion" id="input_opinion" placeholder="" style="height: 50px"></textarea>
-	                                    <label for="input_opinion">リプライをお書きください</label>
-	                                  </div>
-	                                </div>
-	                                <div class="modal-footer">
-	                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-	                                    <button type="button" class="btn btn-primary">投稿</button>
-	                                </div>
-	                            </div>
+                            <div class="">
+	                        	<button type="button" class="btn btn-secondary">閉じる</button>
+	                            <button type="submit" class="btn btn-primary">投稿</button>
 	                        </div>
-	                      </div>
-	                    </div>
+                          </div> -->
+                        </div>
+	                    <!-- ネタばれ無しタブ リプライボタン 表示エリア -->
+<!--	                    <div class="col-2">
+	                      	<button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modal_wrap1">リプライ</button> -->
+<!--	                      	<button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">リプライ</button> -->
+	                      	<!-- ネタばれ無しタブ リプライ用モーダル 表示エリア -->
+<!--	                      	<form th:action="@{/filmwork/replytoroku/{id}(id=${id})}" th:object="${filmworkForm}" method="post">
+	                      		<div class="modal fade" id="modal_wrap1" tabindex="-1" data-bs-backdrop="static">
+	                        		<div class="modal-dialog modal-dialog-centered">
+	                            		<div class="modal-content">
+	                                		<div class="modal-header">
+	                                     		<h5 th:text="${filmworkForm.title}" class="modal-title">怪物</h5>
+	                                		</div>
+	                                		<div class="modal-body">
+	                                  			<div class="">
+	                                    			<span th:text="${#temporals.format(review.posttime,'yyyy年MM月dd日')}" class="">2023年6月11日</span>
+	                                    			<span th:text="${review.user.name}" class="text-muted small">きかんしゃ・トーリマス</span>
+	                                    			<div class="text-end mb-2">
+	                                      				<span class="fw-bold">評価：</span>
+	                                      				<span th:text="${review.rate}" class="text-secondary fw-bold">3</span>
+	                                    			</div>
+	                                  			</div>
+	                                    			<p th:text="${review.content}">
+	                                    			前半は良かったけど途中から思ってた展開とずれてきて自分の感情との齟齬が最後まで埋められなかったなぁ。種明かしシーンが長すぎて。</p>
+	                                  			<div class="form-floating mb-3">
+	                                    			<textarea th:field="*{replyContent}" class="form-control" name="opinion" id="input_opinion" placeholder="リプライをお書きください" style="height: 50px"></textarea>
+	                                  			</div>
+	                                		</div>
+	                                		<div class="modal-footer">
+	                                    		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+	                                    		<button type="submit" class="btn btn-primary" data-bs-dismiss="modal">投稿</button>
+	                               			</div>
+	                            		</div>
+	                        		</div>
+	                      		</div>
+	                      	</form> -->
+<!--	                    </div> -->
 	                  </div>
 	                </div>
 	              </div>
 	            </div>
 	            <div class="tab-pane" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
 	              <!-- ネタばれ有りタブ 作品レビュー1件目 -->
-	              <div class="py-2 border-bottom">
-	                <div class="row">
-	                  <div class="col-2">
-	                    <div class="">
-	                      <span class="fw-bold">評価：</span>
-	                      <span class="text-primary fw-bold">5</span>
+	              <div th:each="review : ${filmworkForm.reviews}" class="py-2 border-bottom">
+	                <div class="container">
+	                  <div class="row justify-content-center">
+	                  	<div class="col-2">
+<!--	                    <div class="offset-1 col-2"> -->
+	                      <div class="">
+	                        <span class="fw-bold">評価：</span>
+	                        <span th:text="${review.rate}" class="text-secondary fw-bold">3</span>
+	                      </div>
+	                      <div th:text="${#temporals.format(review.posttime,'yyyy年MM月dd日')}" class="">2023年6月11日</div>
+	                      <div th:text="${review.user.name}" class="text-muted small">きかんしゃ・トーリマス</div>
 	                    </div>
-	                    <div class="">2023年6月13日</div>
-	                    <div class="text-muted small">きこんしゃ・トーマス</div>
-	                  </div>
-	                  <div class="col-7">
-	                    <p>
-	                      全員が怪物で、全員が怪物じゃなかった。自分の、親としての、人としての態度をあらためなくては、と思う映画でした。
-	                    </p>
-	                  </div>
-	                  <div class="col-3">
-	                      <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modal_wrap2">リプライ</button>
-	                      <div class="modal fade" id="modal_wrap2" tabindex="-1" data-bs-backdrop="static">
-	                        <div class="modal-dialog modal-dialog-centered">
-	                            <div class="modal-content">
-	                                <div class="modal-header">
-	                                     <h5 class="modal-title">怪物</h5>
-	<!--                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
-	                                </div>
-	                                <div class="modal-body">
-	                                  <div class="">
-	                                    <span class="">2023年6月13日</span>
-	                                    <span class="text-muted small">きこんしゃ・トーマス</span>
-	                                    <div class="text-end mb-2">
-	                                      <span class="fw-bold">評価：</span>
-	                                      <span class="text-primary fw-bold">5</span>
-	                                    </div>
-	                                  </div>
-	                                    <p>全員が怪物で、全員が怪物じゃなかった。自分の、親としての、人としての態度をあらためなくては、と思う映画でした。</p>
-	                                  <div class="form-floating mb-3">
-	                                    <textarea class="form-control" name="opinion" id="input_opinion" placeholder="" style="height: 50px"></textarea>
-	                                    <label for="input_opinion">リプライをお書きください</label>
-	                                  </div>
-	                                </div>
-	                                <div class="modal-footer">
-	                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-	                                    <button type="button" class="btn btn-primary">投稿</button>
-	                                </div>
-	                            </div>
+<!--	                    <div class="col-7"> -->
+	                    <div class="col-8">
+	                      <p th:text="${review.content}">
+	                        前半は良かったけど途中から思ってた展開とずれてきて自分の感情との齟齬が最後まで埋められなかったなぁ。種明かしシーンが長すぎて。
+	                      </p>
+	                      <form th:action="@{/filmwork/replytoroku/{id}(id=${id})}" th:object="${filmworkForm}" method="post">
+	                     	<div class="mb-2">
+	                      		<textarea class="form-control" name="opinion" id="input_opinion" th:field="*{replyContent}" placeholder="リプライをお書きください"></textarea>
+	                      		<input type="hidden" th:value="${review.id}" name="reviewId"></input>
+	                      	</div>
+	                      	<div class="form-group text-center">
+                          		<div class="">
+	                            	<button type="submit" class="btn btn-primary">投稿</button>
+	                      		</div>
+	                      	</div>
+	                      </form>
+	                      <!-- ネタばれ有りタブ リプライ 表示エリア -->
+	                      <div class="mb-2"></div>
+	                      <div th:each="reply : ${review.replies}" class="border-top offset-1">
+	                        <span th:text="${#temporals.format(reply.posttime,'yyyy年MM月dd日')}" class="text-muted small">2023年6月14日</span>
+	                        <span th:text="${reply.user.name}" class="text-muted small">きこんしゃ・トーマス</span>
+	                        <div class="small">
+	                          <p th:text="${reply.content}">>
+	                            たしかにたしかに～、よく言った!!
+	                          </p>
 	                        </div>
 	                      </div>
+	                    </div>
+<!--	                    <div class="col-2">
+	                      	<button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modal_wrap2">リプライ</button> -->
+<!--	                      	<form th:action="@{/filmwork/replytoroku/{id}(id=${id})}" th:object="${filmworkForm}" method="post">
+	                      		<div class="modal fade" id="modal_wrap2" tabindex="-1" data-bs-backdrop="static">
+	                        		<div class="modal-dialog modal-dialog-centered">
+	                            		<div class="modal-content">
+	                                		<div class="modal-header">
+	                                     		<h5 th:text="${filmworkForm.title}" class="modal-title">怪物</h5>
+	                                		</div>
+	                                		<div class="modal-body">
+	                                  			<div class="">
+	                                    			<span th:text="${#temporals.format(review.posttime,'yyyy年MM月dd日')}" class="">2023年6月11日</span>
+	                                    			<span th:text="${review.user.name}" class="text-muted small">きかんしゃ・トーリマス</span>
+	                                    			<div class="text-end mb-2">
+	                                      				<span class="fw-bold">評価：</span>
+	                                      				<span th:text="${review.rate}" class="text-secondary fw-bold">3</span>
+	                                    			</div>
+	                                  			</div>
+	                                    			<p>前半は良かったけど途中から思ってた展開とずれてきて自分の感情との齟齬が最後まで埋められなかったなぁ。種明かしシーンが長すぎて。</p>
+	                                  			<div class="form-floating mb-3">
+	                                    			<textarea th:field="*{replyContent}" class="form-control" name="opinion" id="input_opinion" placeholder="" style="height: 50px"></textarea>
+	                                    			<label for="input_opinion">リプライをお書きください</label>
+	                                  			</div>
+	                                		</div>
+	                                		<div class="modal-footer">
+	                                    		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+	                                    		<button type="submit" class="btn btn-primary" data-bs-dismiss="modal">投稿</button>
+	                               			</div>
+	                            		</div>
+	                        		</div>
+	                      		</div>
+	                      	</form> -->
+<!--	                    </div> -->
 	                  </div>
 	                </div>
 	              </div>
