@@ -35,6 +35,13 @@ public class User {
 	@Column(name = "ICON", length = 45, nullable = false)
 	private String icon;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Review> reviews;
+
+    public List<Review> getReviews() {
+        return this.reviews;
+    }
+
 	public Long getId() {
 		return id;
 	}

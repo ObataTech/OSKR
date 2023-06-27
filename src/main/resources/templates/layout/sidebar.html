@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymelef.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <div th:fragment="side-bar" class="d-flex flex-column p-3 text-white bg-dark" style="width: 280px;">
+        <span class="fs-4">Sidebar</span>
+        <hr>
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+                <a th:href="@{/home}" class="nav-link active" aria-current="page">
+                    ホーム
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/mypage}" class="nav-link text-white">
+                    マイページ
+                </a>
+            </li>
+        </ul>
+        <hr>
+    </div>
+</body>
+</html>
