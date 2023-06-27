@@ -26,7 +26,9 @@ public class SearchController {
 //	作品一覧
 	@GetMapping
 	public String searchList(Model model) {
-		List<FilmworkDetail> filmworks = this.searchService.listAll();
+		//確認用
+//		List<FilmworkDetail> filmworks = this.searchService.listAll();
+		FilmworkDetail filmworks = null;
 		model.addAttribute("filmworks", filmworks);
 		return "search/search";
 	}

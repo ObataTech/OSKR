@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:fragment="layout(title, link, contents)">
+<head>
+<meta charset="UTF-8">
+<title th:replace="${title}">共通部品</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}" type="text/css">
+</head>
+<body>
+	<header th:replace="~{layout/header::header}"></header>
+
+	<div class="d-flex ">
+		<div  id="side-bar" th:replace="~{layout/sideBar::side-bar}"></div>
+		<div th:insert="${contents}"></div>
+	</div>
+
+	<script type="text/javascript" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+</body>
+</html>
