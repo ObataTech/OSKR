@@ -23,6 +23,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.batch:spring-batch-test'
 	implementation 'org.webjars:bootstrap:5.2.0'
+	// Hibernate Validator で Java Bean Validation を使用するためのスターター
+	 implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {
