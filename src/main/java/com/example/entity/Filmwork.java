@@ -25,6 +25,17 @@ public class Filmwork {
 	@Column(name = "ID")
 	private Long id;
 
+	@Column(name="TITLE", length = 45, nullable=false)
+	private String title;
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	@Column(name = "RELEASEDATE", nullable = false)
 	private Date releasedate;
 
