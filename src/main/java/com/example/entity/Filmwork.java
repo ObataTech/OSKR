@@ -25,6 +25,9 @@ public class Filmwork {
 	@Column(name = "ID")
 	private Long id;
 
+	@Column(name = "TITLE", length = 45, nullable = false)
+	private String title;
+
 	@Column(name = "RELEASEDATE", nullable = false)
 	private Date releasedate;
 
@@ -41,7 +44,7 @@ public class Filmwork {
 	private String director;
 
 	@Column(name = "CATEGORY1_ID", nullable = true)
-	private Long category1Id;
+	private Integer category1Id;
 
     @ManyToOne
     @JoinColumn(name = "category1_id", insertable = false, updatable = false)
@@ -52,7 +55,7 @@ public class Filmwork {
     }
 
 	@Column(name = "CATEGORY2_ID", nullable = true)
-	private Long category2Id;
+	private Integer category2Id;
 
     @ManyToOne
     @JoinColumn(name = "category2_id", insertable = false, updatable = false)
@@ -63,7 +66,7 @@ public class Filmwork {
     }
 
 	@Column(name = "CATEGORY3_ID", nullable = true)
-	private Long category3Id;
+	private Integer category3Id;
 
     @ManyToOne
     @JoinColumn(name = "category3_id", insertable = false, updatable = false)
@@ -121,27 +124,27 @@ public class Filmwork {
 		this.director = director;
 	}
 
-	public Long getCategory1Id() {
+	public Integer getCategory1Id() {
 		return category1Id;
 	}
 
-	public void setCategory1Id(Long category1Id) {
+	public void setCategory1Id(Integer category1Id) {
 		this.category1Id = category1Id;
 	}
 
-	public Long getCategory2Id() {
+	public Integer getCategory2Id() {
 		return category2Id;
 	}
 
-	public void setCategory2Id(Long category2Id) {
+	public void setCategory2Id(Integer category2Id) {
 		this.category2Id = category2Id;
 	}
 
-	public Long getCategory3Id() {
+	public Integer getCategory3Id() {
 		return category3Id;
 	}
 
-	public void setCategory3Id(Long category3Id) {
+	public void setCategory3Id(Integer category3Id) {
 		this.category3Id = category3Id;
 	}
 
@@ -151,4 +154,20 @@ public class Filmwork {
     public List<Review> getReviews() {
         return this.reviews;
     }
+
+    @OneToMany(mappedBy = "filmwork", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Review> nospoilerreviews;
+
+    public List<Review> getNoSpoilerReviews() {
+        return this.nospoilerreviews;
+    }
+
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 }

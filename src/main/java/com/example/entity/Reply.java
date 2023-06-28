@@ -13,12 +13,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "RIPLIES")
+@Table(name = "REPLIES")
 public class Reply {
 
 	@Id
-	@SequenceGenerator(name = "RIPLIES_ID_GENERATOR", sequenceName = "RIPLIES_ID_SEQ", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RIPLIES_ID_GENERATOR")
+	@SequenceGenerator(name = "REPLIES_ID_GENERATOR", sequenceName = "REPLIES_ID_SEQ", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REPLIES_ID_GENERATOR")
 	@Column(name = "ID")
 	private Long id;
 
@@ -45,6 +45,15 @@ public class Reply {
 	public String getContent() {
 		return content;
 	}
+
+	// 追加
+    @ManyToOne
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
+
+    public User getUser() {
+        return this.user;
+    }
 
 	public void setContent(String content) {
 		this.content = content;
