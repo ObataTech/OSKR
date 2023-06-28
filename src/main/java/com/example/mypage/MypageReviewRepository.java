@@ -1,4 +1,4 @@
-package com.example.repository;
+package com.example.mypage;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.example.entity.Review;
 
 @Repository
-public interface ReviewRepository extends JpaRepository<Review, Long> {
+public interface MypageReviewRepository extends JpaRepository<Review, Long> {
     // ユーザーIDと一致するレビューを取得する
 	@Query("SELECT r FROM Review r WHERE r.userId = ?1")
     public List<Review> listReview(Long id);
