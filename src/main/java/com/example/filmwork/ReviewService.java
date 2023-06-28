@@ -48,7 +48,12 @@ public class ReviewService {
         review.setSpoiler(filmworkForm.getSpoiler());
         LocalDateTime now = LocalDateTime.now();
         review.setPosttime(now);
-        review.setUserId(loginUser.getUser().getId());
+        if(loginUser.getUser() != null) {
+        	review.setUserId(loginUser.getUser().getId());
+        }
+        else {
+        	review.setUserId(1L);
+        }
         review.setFilmworkId(filmworkForm.getId());
 //        review.setFilmworkId(1L);
         // repository.saveメソッドを利用してデータの保存を行います

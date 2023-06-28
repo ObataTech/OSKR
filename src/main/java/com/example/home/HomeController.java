@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.entity.Category;
 import com.example.entity.Review;
+import com.example.login.LoginUser;
 import com.example.utility.FilmworkDetail;
 
 @Controller
@@ -64,7 +66,7 @@ public class HomeController {
 	 * @return　Home画面
 	 */
 	@PostMapping("/save")
-	public String reviewPost(@RequestParam("id") Long id,@Validated Review review, BindingResult result,Model model,RedirectAttributes ra) {
+	public String reviewPost(@RequestParam("id") Long id,@Validated Review review, BindingResult result,Model model,RedirectAttributes ra,@AuthenticationPrincipal LoginUser loginUser) {
 
 		if(result.hasErrors()) {
 			List<String> errorList = new ArrayList<String>();
@@ -74,7 +76,7 @@ public class HomeController {
 			ra.addFlashAttribute("validationError",errorList);
 			return "redirect:/home";
 		}
-		this.homeService.saveReview(id,review);
+		this.homeService.saveReview(id,review,loginUser);
 
 		return "redirect:/home";
 	}
