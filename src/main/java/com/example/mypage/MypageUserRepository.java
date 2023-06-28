@@ -1,4 +1,4 @@
-package com.example.repository;
+package com.example.mypage;
 
 import java.util.Optional;
 
@@ -9,7 +9,7 @@ import com.example.entity.User;
 
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface MypageUserRepository extends JpaRepository<User, Long> {
     // ユーザー名と一致するユーザを取得する
     public Optional<User> findById(Long id);
 }

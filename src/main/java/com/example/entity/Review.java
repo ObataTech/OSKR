@@ -53,13 +53,6 @@ public class Review {
 	@Column(name = "USER_ID", nullable = false)
 	private Long userId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private User user;
-    public User getUser() {
-        return this.user;
-    }
-
 	@Column(name = "FILMWORK_ID", nullable = false)
 	private Long filmworkId;
 

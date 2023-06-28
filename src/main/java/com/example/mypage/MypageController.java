@@ -14,20 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Review;
 import com.example.entity.User;
-import com.example.service.LoginUserService;
-import com.example.service.ReviewService;
 
 @Controller
 @RequestMapping("mypage")
 public class MypageController {
-private final LoginUserService loginUserService;
-private final ReviewService reviewService;
+private final MypageService mypageService;
 
 //コンストラクタインジェクション
 @Autowired
-public MypageController(LoginUserService loginUserService, ReviewService reviewService) {
-    this.loginUserService = loginUserService;
-    this.reviewService = reviewService;
+public MypageController(MypageService mypageService) {
+    this.mypageService = mypageService;
 }
 
 	@GetMapping
@@ -38,8 +34,8 @@ public MypageController(LoginUserService loginUserService, ReviewService reviewS
     // 一覧の表示
     @GetMapping("/{id}")
     public String index(@PathVariable("id")Long id ,Model Model) {
-    	Optional<User> user = this.loginUserService.loadUserByUsername(id);
-    	List<Review> review = this.reviewService.loadReviewByUser(id);
+    	Optional<User> user = this.mypageService.loadUserByUsername(id);
+    	List<Review> review = this.mypageService.loadReviewByUser(id);
     Model.addAttribute("reviewList", review);
     Model.addAttribute("user", user.get());
     	return "mypage/mypage";
@@ -50,7 +46,7 @@ public MypageController(LoginUserService loginUserService, ReviewService reviewS
     @PostMapping("/sakujo/{id}")
     public String sakujo(@PathVariable("id") Long id ,@RequestParam("userId") Long userId) {
         // 処理を追加
-    	reviewService.deleteReviewByUser (id);
+    	this.mypageService.deleteReviewByUser (id);
         return "redirect:/mypage/" + userId.toString();
     }
 

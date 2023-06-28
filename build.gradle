@@ -25,6 +25,11 @@ dependencies {
 	implementation 'org.webjars:bootstrap:5.2.0'
 	// Hibernate Validator で Java Bean Validation を使用するためのスターター
 	 implementation 'org.springframework.boot:spring-boot-starter-validation'
+	//Login
+	// Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	// Thymeleaf拡張ライブラリ
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 }
 
 tasks.named('test') {
