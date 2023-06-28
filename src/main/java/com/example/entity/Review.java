@@ -53,6 +53,15 @@ public class Review {
 	@Column(name = "USER_ID", nullable = false)
 	private Long userId;
 
+	// 追加
+    @ManyToOne
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
+
+    public User getUser() {
+        return this.user;
+    }
+
 	@Column(name = "FILMWORK_ID", nullable = false)
 	private Long filmworkId;
 
@@ -63,7 +72,6 @@ public class Review {
     public Filmwork getFilmwork() {
         return this.filmwork;
     }
-
 
 	public Long getId() {
 		return id;
@@ -124,7 +132,15 @@ public class Review {
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Reply> replies;
 
-    public List<Reply> getRiplies() {
+    public List<Reply> getReplies() {
+		return this.replies;
+	}
+
+	public void setReplies(List<Reply> replies) {
+		this.replies = replies;
+	}
+
+	public List<Reply> getRiplies() {
         return this.replies;
     }
 

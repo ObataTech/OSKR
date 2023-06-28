@@ -46,6 +46,15 @@ public class Reply {
 		return content;
 	}
 
+	// 追加
+    @ManyToOne
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
+
+    public User getUser() {
+        return this.user;
+    }
+
 	public void setContent(String content) {
 		this.content = content;
 	}
