@@ -25,7 +25,8 @@ public class Filmwork {
 	@Column(name = "ID")
 	private Long id;
 
-	@Column(name="TITLE", length = 45, nullable=false)
+	@Column(name = "TITLE", length = 45, nullable = false)
+
 	private String title;
 
 	@Column(name = "RELEASEDATE", nullable = false)
@@ -132,7 +133,9 @@ public class Filmwork {
 		this.director = director;
 	}
 
-    public Integer getCategory1Id() {
+
+	public Integer getCategory1Id() {
+
 		return category1Id;
 	}
 
@@ -162,4 +165,20 @@ public class Filmwork {
     public List<Review> getReviews() {
         return this.reviews;
     }
+
+    @OneToMany(mappedBy = "filmwork", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Review> nospoilerreviews;
+
+    public List<Review> getNoSpoilerReviews() {
+        return this.nospoilerreviews;
+    }
+
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 }
