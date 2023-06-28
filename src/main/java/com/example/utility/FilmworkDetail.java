@@ -19,9 +19,9 @@ public class FilmworkDetail {
 //	作品監督
 	private String director;
 //	作品カテゴリ
-	private Long category1Id;
-	private Long category2Id;
-	private Long category3Id;
+	private Integer category1Id;
+	private Integer category2Id;
+	private Integer category3Id;
 //	合計レビュー数
 	private Long reviewSum;
 //	総合評価
@@ -70,22 +70,23 @@ public class FilmworkDetail {
 	public void setDirector(String director) {
 		this.director = director;
 	}
-	public Long getCategory1Id() {
+
+	public Integer getCategory1Id() {
 		return category1Id;
 	}
-	public void setCategory1Id(Long category1Id) {
+	public void setCategory1Id(Integer category1Id) {
 		this.category1Id = category1Id;
 	}
-	public Long getCategory2Id() {
+	public Integer getCategory2Id() {
 		return category2Id;
 	}
-	public void setCategory2Id(Long category2Id) {
+	public void setCategory2Id(Integer category2Id) {
 		this.category2Id = category2Id;
 	}
-	public Long getCategory3Id() {
+	public Integer getCategory3Id() {
 		return category3Id;
 	}
-	public void setCategory3Id(Long category3Id) {
+	public void setCategory3Id(Integer category3Id) {
 		this.category3Id = category3Id;
 	}
 	public Long getReviewSum() {

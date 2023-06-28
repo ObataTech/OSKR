@@ -133,7 +133,9 @@ public class Filmwork {
 		this.director = director;
 	}
 
+
 	public Integer getCategory1Id() {
+
 		return category1Id;
 	}
 
@@ -157,7 +159,7 @@ public class Filmwork {
 		this.category3Id = category3Id;
 	}
 
-    @OneToMany(mappedBy = "filmwork", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "filmwork", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Review> reviews;
 
     public List<Review> getReviews() {
