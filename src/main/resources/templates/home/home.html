@@ -19,9 +19,72 @@
 				<button class="btn btn-outline-success" type="submit">Search</button>
 			</form>
 		</div>
+		<!-- 製作年 -->
+		<section class="h-25 px-3">
+			<h6 class="mx-2 border-bottom border-2 text-center ">製作年</h6>
+			<ul class="list-unstyled d-flex">
+				<li class="fw-bold me-1 ">2020年代 |</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=20)}"
+				>2020年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=21)}"
+				>2021年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=22)}"
+				>2022年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=23)}"
+				>2023年</a>|</li>
+			</ul>
+			<ul class="list-unstyled d-flex">
+				<li class="fw-bold me-1">2010年代 |</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=10)}"
+				>2010年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=11)}"
+				>2011年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=12)}"
+				>2012年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=13)}"
+				>2013年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=14)}"
+				>2014年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=15)}"
+				>2015年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=16)}"
+				>2016年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=17)}"
+				>2017年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=18)}"
+				>2018年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=19)}"
+				>2019年</a></li>
+			</ul>
+		</section>
+		<!-- ジャンル -->
+		<section class="h-25 px-3">
+			<h6 class="mx-2 border-bottom border-2 text-center">ジャンル</h6>
+			<ul class="list-unstyled d-flex align-content-around flex-wrap">
+				<li class=" me-1 text-secondary" th:each="category:${categories}">
+					<a th:href="@{/search/category(category=${category.name})}"> <span
+						th:text="${category.name}"
+					></span></a>|
+				</li>
+			</ul>
+		</section>
 		<!-- 一言レビュー -->
 		<section
-			class="justify-content-center align-items-center border border-1 border-dark  bg-success bg-opacity-25 m-2 mb-5 p-2 h-20"
+			class="justify-content-center align-items-center border border-1 border-dark  bg-success bg-opacity-25 m-2 mb-5 p-2 h-25"
 		>
 			<h2>一言レビュー</h2>
 			<div class="row p-2">
@@ -89,7 +152,7 @@
 		<section class="mx-2">
 			<h2 class="m-2 border-bottom">最新映画</h2>
 			<div class="row row-cols-1 row-cols-md-3 g-4 ">
-				<div class="col mb-1" th:each="latest:${latest}">
+				<div class="col-4 mb-1" th:each="latest:${latest}">
 					<div class="card">
 						<a th:href="@{/filmwork/{id}(id=${latest.id})}"> <img
 							th:src="@{${latest.thumbnail}}" class="card-img-top" alt="..."
@@ -114,10 +177,10 @@
 			</div>
 		</section>
 		<!-- ラインナップ -->
-		<section class=" border border-1 border-dark m-2 p-2 h-20">
+		<section class=" border border-1 border-dark m-2 p-2 h-25" style="height: 300px;">
 			<h2 class="m-2 border-bottom">ラインナップ</h2>
 			<div class="row row-cols-1 row-cols-md-3 g-4 overflow-y-auto">
-				<div class="col mb-1" th:each="lineup:${lineup}">
+				<div class="col-4 mb-1" th:each="lineup:${lineup}">
 					<div class="card">
 						<a th:href="@{/filmwork/{id}(id=${lineup.id})}"> <img
 							th:src="@{${lineup.thumbnail}}" class="card-img-top" alt="..."
@@ -140,70 +203,6 @@
 					</div>
 				</div>
 			</div>
-		</section>
-		<!-- 製作年・ジャンルは「｜」で区切って表示する -->
-		<!-- 製作年 -->
-		<section class="h-20 px-3">
-			<h6 class="mx-2 border-bottom border-2 text-center ">製作年</h6>
-			<ul class="list-unstyled d-flex">
-				<li class="fw-bold me-1 ">2020年代 |</li>
-				<li class=" ms-1 text-secondary"><a
-					th:href="@{/search/year(year=20)}"
-				>2020年</a>|</li>
-				<li class=" ms-1 text-secondary"><a
-					th:href="@{/search/year(year=21)}"
-				>2021年</a>|</li>
-				<li class=" ms-1 text-secondary"><a
-					th:href="@{/search/year(year=22)}"
-				>2022年</a>|</li>
-				<li class=" ms-1 text-secondary"><a
-					th:href="@{/search/year(year=23)}"
-				>2023年</a>|</li>
-			</ul>
-			<ul class="list-unstyled d-flex">
-				<li class="fw-bold me-1">2010年代 |</li>
-				<li class=" ms-1 text-secondary"><a
-					th:href="@{/search/year(year=10)}"
-				>2010年</a>|</li>
-				<li class=" ms-1 text-secondary"><a
-					th:href="@{/search/year(year=11)}"
-				>2011年</a>|</li>
-				<li class=" ms-1 text-secondary"><a
-					th:href="@{/search/year(year=12)}"
-				>2012年</a>|</li>
-				<li class=" ms-1 text-secondary"><a
-					th:href="@{/search/year(year=13)}"
-				>2013年</a>|</li>
-				<li class=" ms-1 text-secondary"><a
-					th:href="@{/search/year(year=14)}"
-				>2014年</a>|</li>
-				<li class=" ms-1 text-secondary"><a
-					th:href="@{/search/year(year=15)}"
-				>2015年</a>|</li>
-				<li class=" ms-1 text-secondary"><a
-					th:href="@{/search/year(year=16)}"
-				>2016年</a>|</li>
-				<li class=" ms-1 text-secondary"><a
-					th:href="@{/search/year(year=17)}"
-				>2017年</a>|</li>
-				<li class=" ms-1 text-secondary"><a
-					th:href="@{/search/year(year=18)}"
-				>2018年</a>|</li>
-				<li class=" ms-1 text-secondary"><a
-					th:href="@{/search/year(year=19)}"
-				>2019年</a></li>
-			</ul>
-		</section>
-		<!-- ジャンル -->
-		<section class="h-20 px-3">
-			<h6 class="mx-2 border-bottom border-2 text-center">ジャンル</h6>
-			<ul class="list-unstyled d-flex align-content-around flex-wrap">
-				<li class=" me-1 text-secondary" th:each="category:${categories}">
-					<a th:href="@{/search/category(category=${category.name})}"> <span
-						th:text="${category.name}"
-					></span></a>|
-				</li>
-			</ul>
 		</section>
 	</div>
 	<script type="text/javascript" th:src="@{/js/pages/home.js}"></script>
