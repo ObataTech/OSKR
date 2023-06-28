@@ -1,35 +1,12 @@
 <!DOCTYPE html>
-<html lang="ja"  xmlns:th="http://www.thymeleaf.org">
+<html lang="ja"  xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/base :: layout( ~{},~{::body/content()})}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}" type="text/css">
   </head>
   <body >
-	  <!-- ▼共通ヘッダー -->
-	<div class="bg-dark bg-gradient border-bottom border-2 mb-4">
-	    <img class="img-fluid img-40" th:src="@{/images/logo_oskr.svg}">
-	</div>
-	<!-- ▼コンテンツ -->
-	<div class="d-flex ">
-	    <!-- ▼共通サイドバー -->
-	    <div class="d-flex flex-column p-3 text-white bg-dark" style="width: 280px;">
-	        <span class="fs-4">Sidebar</span>
-	        <hr>
-	        <ul class="nav nav-pills flex-column">
-	            <li class="nav-item">
-	                <a href="#" class="nav-link active" aria-current="page">
-	                    ホーム
-	                </a>
-	            </li>
-	            <li>
-	                <a href="#" class="nav-link text-white">
-	                    マイページ
-	                </a>
-	            </li>
-	        </ul>
-	        <hr>
-	    </div>
+
 	    <!-- ▼メインコンテンツ -->
 
 	    <main class="pt-2 pt-md-5 mt-5">
@@ -352,6 +329,5 @@
 	    </main>
 	    <!-- ▲メインコンテンツ -->
 	</div>
-	<script type="text/javascript" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
   </body>
 </html>

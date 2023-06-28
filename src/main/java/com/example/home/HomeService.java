@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.example.entity.Category;
 import com.example.entity.Filmwork;
 import com.example.entity.Review;
+import com.example.login.LoginUser;
 import com.example.utility.FilmworkDetail;
 
 @Service
@@ -49,14 +50,19 @@ public class HomeService {
 	 * レビュー投稿保存
 	 * @param review
 	 */
-	public void saveReview(Long id,Review review) {
+	public void saveReview(Long id,Review review,LoginUser loginUser) {
 
 		//レビュー情報の補足
 		review.setFilmworkId(id);
 		review.setPosttime(LocalDateTime.now());
 		review.setRate(3);//評価は3固定
 		review.setSpoiler(1);//ネタバレあり固定
-		review.setUserId(1L);
+        if(loginUser.getUser() != null) {
+        	review.setUserId(loginUser.getUser().getId());
+        }
+        else {
+        	review.setUserId(1L);
+        }
 
 		this.homeReviewRepository.save(review);
 	}

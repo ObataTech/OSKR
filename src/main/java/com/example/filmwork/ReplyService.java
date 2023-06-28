@@ -33,7 +33,12 @@ public class ReplyService {
         reply.setPosttime(now);
 //        reply.setReviewId(1L);
         reply.setReviewId(filmworkForm.getReviewId());
-        reply.setUserId(loginUser.getUser().getId());
+        if(loginUser.getUser() != null) {
+        	reply.setUserId(loginUser.getUser().getId());
+        }
+        else {
+        	reply.setUserId(1L);
+        }
         // repository.saveメソッドを利用してデータの保存を行います
         return this.replyRepository.save(reply);
     }
