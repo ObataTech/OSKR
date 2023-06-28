@@ -15,29 +15,41 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "REVIEWS")
 public class Review {
 
+	@NotNull
 	@Id
 	@SequenceGenerator(name = "REVIEWS_ID_GENERATOR", sequenceName = "REVIEWS_ID_SEQ", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REVIEWS_ID_GENERATOR")
 	@Column(name = "ID")
 	private Long id;
 
+	@NotNull
+	@NotBlank(message="空白での投稿は許可されてません")
+	@Size(max=200,message="200文字以内で入力してください")
 	@Column(name = "CONTENT", length = 200, nullable = false)
 	private String content;
 
+	@NotNull
 	@Column(name = "RATE", nullable = false)
 	private Integer rate;
 
+	@NotNull
 	@Column(name = "SPOILER", nullable = false)
 	private Integer spoiler;
 
+	@NotNull
 	@Column(name = "POSTTIME", nullable = false)
 	private LocalDateTime posttime;
 
+	@NotNull
 	@Column(name = "USER_ID", nullable = false)
 	private Long userId;
 
@@ -131,4 +143,12 @@ public class Review {
 	public List<Reply> getRiplies() {
         return this.replies;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
+    public User getUser() {
+        return this.user;
+    }
+
 }

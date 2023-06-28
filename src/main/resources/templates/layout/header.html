@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymelef.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:fragment="header" class=" border-bottom border-2 mb-4">
+		<div class="bg-dark bg-gradient">
+		    <img class=" img-fluid img-40" th:src="@{/images/logo_oskr.svg}">
+        </div>
+   		<ul class=" col-2 offset-10 bg-light list-unstyled">
+          <li class="waves-effect waves-light pt-2">
+            <a id="logoutLink" href=""> ログイン/新規登録</a>
+          </li>
+          <li class="waves-effect waves-light pt-2">
+            <a id="logoutLink" href=""> ログアウト</a>
+          </li>
+        </ul>
+	</header>
+</body>
+</html>

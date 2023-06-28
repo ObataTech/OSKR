@@ -90,4 +90,11 @@ public class Reply {
     public Review getReview() {
         return this.review;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
+    public User getUser() {
+        return this.user;
+    }
 }
