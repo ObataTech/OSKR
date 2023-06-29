@@ -108,7 +108,12 @@ public class FilmworkController {
 
         // レビュー数をセットする
         Integer reviewCnt = this.reviewService.reviewCnt(id);
-        filmworkForm.setReviewCnt(reviewCnt);
+        if (reviewCnt != 0) {
+        	filmworkForm.setReviewCnt(reviewCnt.toString());
+        }
+        else {
+        	filmworkForm.setReviewCnt("レビューはまだありません");
+        }
 
         // 総合評価(平均)をセットする
         BigDecimal bd;
@@ -116,41 +121,27 @@ public class FilmworkController {
         if (rateAvg != null) {
         	bd = new BigDecimal(rateAvg);
         	bd = bd.setScale(1, RoundingMode.HALF_UP);
-        	filmworkForm.setRateAvg(bd);
+        	filmworkForm.setRateAvg(bd.toString());
         }
-//        filmworkForm.setRateAvg(rateAvg);
+        else {
+        	filmworkForm.setRateAvg("評価はまだありません");
+        }
 
         // レビューをセットする
- //       filmworkForm.setReviews(filmwork.getReviews());
         List<Review> reviews = this.reviewService.findReviews(id);
         filmworkForm.setReviews(reviews);
 
         List<Review> nospoilerreviews = this.reviewService.findNoSpoilerReviews(id, 1);
         filmworkForm.setNoSpoilerReviews(nospoilerreviews);
 
-        // レビュー者名をセットする
-//        List<User> listUser = new ArrayList<User>();
- //       for (Review review : filmwork.getReviews()) {
-//        	List<Reply> listReply = this.replyService.findReplies(review.getId());
-//        	filmworkForm.setReplies(listReply);
-//        	listUser.add(userService.findById(review.getUserId()));
- //       }
-
-        // リプライをセットする
-//        for (Review review : filmwork.getReviews()) {
-//        	List<Reply> listReply = this.replyService.findReplies(review.getId());
- //       	filmworkForm.setReplies(listReply);
-  //      }
-
         // idをセットする
         model.addAttribute("id", id);
-//        model.addAttribute("message",message);
 
-        // 作品ページを表示する
-//        URI location = builder.path("/filmwork/" + id.toString()).build().toUri();
+        // ネタばれ有無ラジオボタンの初期値設定
+        filmworkForm.setSpoiler(1);
 
-//        return location.toString();
- //       return "/filmwork/" + id.toString();
+        filmworkForm.setRate(3);
+
         return "filmworks/filmworks";
     }
 }
