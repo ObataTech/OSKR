@@ -13,8 +13,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/css/**", "/js/**");
+		web.ignoring().antMatchers("/css/**", "/js/**", "/images/**");
 	}
+
+//	@Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//
+ //       auth.inMemoryAuthentication()
+ //               .withUser("user").password("password").roles("USER");
+//
+//    }
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
@@ -35,9 +43,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.logoutUrl("/logout")
 			.logoutSuccessUrl("/loginForm");
 	}
-
-//	@Bean
-//	public PasswordEncoder passwordEncoder() {
-//		return new BCryptPasswordEncoder();
-//	}
 }
