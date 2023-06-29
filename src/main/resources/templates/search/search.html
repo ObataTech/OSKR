@@ -8,22 +8,23 @@
 </head>
 <body>
 	<!-- ▼メインコンテンツ -->
-	<div class="d-flex ">
+	<div class=" container-fluid  mx-auto justify-content-center align-items-center">
 		<!-- ラインナップ -->
-		<div class="m-3 mx-auto">
-			<h1 class="text-center text-bold">
+		<div class="m-3  ">
+			<h1 class="text-center text-bold border-bottom border-1 mb-3">
 				「<span th:text="${keyword}">xxxxxx</span>」ラインナップ
 			</h1>
-			<div class="row row-cols-1 g-4" th:each="filmwork:${filmworks}">
-				<div class="col mb-1">
+			<div th:if="${filmworks.size == 0}">該当の作品が見つかりません</div>
+			<div class="row row-cols-1 row-cols-md-2 mx-auto" >
+				<div class="col-5 mx-auto mb-2" th:each="filmwork:${filmworks}">
 					<div class="card">
-						<a th:href="@{/home/filmwork/{id}(id=${filmwork.id})}"> <img
-							th:src="@{${filmwork.thumbnail}}" class="card-img-top" alt="..."
+						<a th:href="@{/filmwork/{id}(id=${filmwork.id})}"> <img
+							th:src="@{${filmwork.thumbnail}}" class="card-img-top" th:alt="${filmwork.title}"
 						>
 						</a>
 						<div class="card-body">
 							<h5 class="card-title" th:text="${filmwork.title}">映画タイトル</h5>
-							<ul class="d-flex flex-wrap gap-5 card-text list-unstyled">
+							<ul class="d-inlineflex flex-wrap gap-5 card-text list-unstyled">
 								<li class="  d-flex"><label>公開日：</label>
 									<p
 										th:text="${#dates.format(filmwork.releasedate,'yyyy年MM月dd日')}"
@@ -36,6 +37,7 @@
 								</li>
 								<li class=" d-flex" th:if="${filmwork.rateAve != null}"><label>評価：</label>
 									<p th:text="${filmwork.rateAve}"></p></li>
+								<li class=" d-flex" th:unless="${filmwork.rateAve != null}"><label>評価されてません</label></li>
 							</ul>
 						</div>
 					</div>

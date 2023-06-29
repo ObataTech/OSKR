@@ -41,7 +41,7 @@ public class HomeController {
 	public String HomeList(Model model,@ModelAttribute("validationError") String validationError) {
 		//一言レビュー
 		FilmworkDetail filmwork = this.homeService.getFilmwork();
-		List<Review> reviewList = this.homeService.listAllReviews((long)1);
+		List<Review> reviewList = this.homeService.listAllReviews(filmwork.getId());
 		List<FilmworkDetail> latest = this.homeService.listLatest();
 		List<FilmworkDetail> lineup = this.homeService.listAllFilmworks();
 		//レビュー投稿

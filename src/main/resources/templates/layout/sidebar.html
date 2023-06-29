@@ -5,22 +5,29 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <div th:fragment="side-bar" class="d-flex flex-column p-3 text-white bg-dark" style="width: 280px;">
-        <span class="fs-4">Sidebar</span>
-        <hr>
-        <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-                <a th:href="@{/home}" class="nav-link active" aria-current="page">
-                    ホーム
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/mypage/1}" class="nav-link text-white">
-                    マイページ
-                </a>
-            </li>
-        </ul>
-        <hr>
+    <div th:fragment="side-bar" class=" text-white  m-0" >
+      	<nav class="row d-flex bnavbar navbar-dark bg-secondary ">
+	        <ul class="col-6 nav nav-pills ">
+	            <li class="nav-item">
+	                <a th:href="@{/home}" class="nav-link active" aria-current="page">
+	                    ホーム
+	                </a>
+	            </li>
+	            <li  class="nav-item">
+	                <a th:href="@{/mypage/1}" class="nav-link text-white">
+	                    マイページ
+	                </a>
+	            </li>
+	        </ul>
+	        <ul class="col-6 nav nav-pills me-auto flex-row-reverse">
+	          <li class="nav-item waves-effect waves-light   ">
+	            <a id="logoutLink" class="nav-link text-white link-dark" href=""> ログイン/新規登録</a>
+	          </li>
+	          <li class="nav-item waves-effect waves-light  link-dark ">
+	            <a id="logoutLink" class="nav-link text-white" href=""> ログアウト</a>
+	          </li>
+	        </ul>
+		</nav>
     </div>
 </body>
 </html>
