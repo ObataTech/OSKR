@@ -10,13 +10,13 @@
 	<div class="m-2  bg-light">
 		<!-- 検索ボックス -->
 		<div class="m-2 p-2 container">
-			<form class="d-flex"
+			<form class="d-flex mx-auto "
 				th:action="@{/search/keyword(keyword=${keyword})}" method="get"
 			>
-				<input class="form-control justify-content-center align-items-center me-2 w-50" name="keyword" type="search"
+				<input class="form-control w-70 border border-1 border-dark" name="keyword" type="search"
 					placeholder="作品タイトルをキーワードで検索できます" aria-label="Search"
 				>
-				<button class="btn btn-outline-success" type="submit">Search</button>
+				<button class="btn btn-outline-success ms-1" type="submit">Search</button>
 			</form>
 		</div>
 		<!-- 製作年 -->
