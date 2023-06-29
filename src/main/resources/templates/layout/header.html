@@ -5,18 +5,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<header th:fragment="header" class=" border-bottom border-2 mb-4">
+	<header th:fragment="header" class=" m-0">
 		<div class="bg-dark bg-gradient">
-		    <img class=" img-fluid img-40" th:src="@{/images/logo_oskr.svg}">
+		    <img class=" img-fluid img-40" th:src="@{/images/logo_oskr.svg}" style="height: 120px;">
         </div>
-   		<ul class=" col-2 offset-10 bg-light list-unstyled">
-          <li class="waves-effect waves-light pt-2">
-            <a id="logoutLink" href=""> ログイン/新規登録</a>
-          </li>
-          <li class="waves-effect waves-light pt-2">
-            <a id="logoutLink" href=""> ログアウト</a>
-          </li>
-        </ul>
 	</header>
 </body>
 </html>

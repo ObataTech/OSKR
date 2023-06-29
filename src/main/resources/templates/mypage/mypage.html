@@ -109,7 +109,7 @@
 			                <span class="fw-bold">評価：</span>
 			                <span class="fw-bold" th:text = "${review.rate}" >3</span>
 			              </div>
-			            <div class="" th:text = "${review.posttime}">2023年6月11日</div>
+			            <div class="" th:text = "${#temporals.format(review.posttime,'yyyy年MM月dd日')} ">2023年6月11日</div>
 			        </div>
 			            <div class="col-9">
 			              <p th:text = "${review.content}">
