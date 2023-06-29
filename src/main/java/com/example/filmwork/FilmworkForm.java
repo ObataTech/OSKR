@@ -1,6 +1,5 @@
 package com.example.filmwork;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -60,10 +59,14 @@ public class FilmworkForm {
 
     private Filmwork filmwork;
 
-    private Integer reviewCnt;
+//    private Integer reviewCnt;
+
+    private String reviewCnt;
 
 //    private Float rateAvg;
-    private BigDecimal rateAvg;
+//    private BigDecimal rateAvg;
+
+    private String rateAvg;
 
 	private String replyContent;
 
@@ -229,7 +232,11 @@ public class FilmworkForm {
 //		return rateAvg;
 //	}
 
-    public BigDecimal getRateAvg() {
+ //   public BigDecimal getRateAvg() {
+//		return rateAvg;
+//	}
+
+    public String getRateAvg() {
 		return rateAvg;
 	}
 
@@ -237,17 +244,29 @@ public class FilmworkForm {
 //		this.rateAvg = rateAvg;
 //	}
 
-	public void setRateAvg(BigDecimal rateAvg) {
+//	public void setRateAvg(BigDecimal rateAvg) {
+//		this.rateAvg = rateAvg;
+//	}
+
+	public void setRateAvg(String rateAvg) {
 		this.rateAvg = rateAvg;
 	}
 
-	public Integer getReviewCnt() {
+//	public Integer getReviewCnt() {
+//		return reviewCnt;
+//	}
+
+	public String getReviewCnt() {
 		return reviewCnt;
 	}
 
-	public void setReviewCnt(Integer reviewCnt) {
-		this.reviewCnt = reviewCnt;
-	}
+//	public void setReviewCnt(Integer reviewCnt) {
+//		this.reviewCnt = reviewCnt;
+//	}
+
+	public void setReviewCnt(String reviewCnt) {
+	this.reviewCnt = reviewCnt;
+}
 
 	public Filmwork getFilmwork() {
         return this.filmwork;
