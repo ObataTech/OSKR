@@ -6,25 +6,33 @@
 </head>
 <body>
     <div th:fragment="side-bar" class=" text-white  m-0" >
-      	<nav class="row d-flex bnavbar navbar-dark bg-secondary ">
+      	<nav class="row d-flex bnavbar navbar-dark bg-secondary px-1">
 	        <ul class="col-6 nav nav-pills ">
 	            <li class="nav-item">
-	                <a th:href="@{/home}" class="nav-link active" aria-current="page">
-	                    ホーム
+	                <a th:href="@{/home}" class="nav-link active " aria-current="page">
+	                    <button class="bg-transparent nav-link text-white">ホーム</button>
 	                </a>
 	            </li>
 	            <li  class="nav-item">
 	                <a th:href="@{/mypage/1}" class="nav-link text-white">
-	                    マイページ
+	                    <button class="bg-transparent nav-link text-white ">マイページ</button>
 	                </a>
 	            </li>
 	        </ul>
 	        <ul class="col-6 nav nav-pills me-auto flex-row-reverse">
 	          <li class="nav-item waves-effect waves-light   ">
-	            <a id="logoutLink" class="nav-link text-white link-dark" th:href="@{/loginForm}"> ログイン/新規登録</a>
+	            <a id="logoutLink" class="nav-link text-white link-dark" th:href="@{/loginForm}">
+                    <button class="nav-link text-white ">
+                        <i id="loginLink" >ログイン/新規登録</i>
+                    </button>
+                 </a>
 	          </li>
 	          <li class="nav-item waves-effect waves-light  link-dark ">
-	            <a id="logoutLink" class="nav-link text-white" th:href="@{/logout}"> ログアウト</a>
+	             <form class="nav-link text-white" th:action="@{/logout}" method="post">
+                    <button class="nav-link text-white ">
+                        <i id="logoutLink" >ログアウト</i>
+                    </button>
+                </form>
 	          </li>
 	        </ul>
 		</nav>
