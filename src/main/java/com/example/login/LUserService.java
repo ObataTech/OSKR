@@ -3,8 +3,6 @@ package com.example.login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.entity.User;
-
 @Service
 public class LUserService {
 
@@ -22,15 +20,17 @@ public class LUserService {
 //    }
 
     // ユーザー登録用のメソッドです
-    public User register(SignupForm signupForm) {
+//    public User register(SignupForm signupForm) {
         // Entityクラスのインスタンスを生成します
-        User user = new User();
+//        User user = new User();
         // フィールドのセットを行います
-        user.setName(signupForm.getName());
-        user.setPassword(signupForm.getPassword());
-        user.setProfile(" ");
-        user.setIcon(" ");
+//        user.setName(signupForm.getName());
+        // encode()メソッドの引数にハッシュ化したい文字列を渡すことでハッシュ化した値を返す
+//        user.setPassword(signupForm.getPassword());
+ //       user.setPassword(passwordEncoder.encode(signupForm.getPassword()));
+  //      user.setProfile(" ");
+   //     user.setIcon(" ");
         // repository.saveメソッドを利用してデータの保存を行います
-        return this.luserRepository.save(user);
-    }
+    //    return this.luserRepository.save(user);
+   // }
 }
