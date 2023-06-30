@@ -30,6 +30,6 @@ public class LoginController {
 
     	this.loginUserService.register(signupForm);
 
-    	return "login/loginForm";
+    	return "redirect:/login/loginForm";
     }
 }

@@ -1,173 +1,116 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/base :: layout( ~{},~{::body/content()})}"
+>
 <head>
-  <meta charset="UTF-8">
-<link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}" type="text/css">
+<meta charset="UTF-8">
 </head>
 <body>
-	<!-- ▼共通ヘッダー -->
-	<div class="bg-dark bg-gradient border-bottom border-2 mb-4">
-	    <img class="img-fluid img-40" th:src="@{/images/logo_oskr.svg}">
+	<!-- ▼メインコンテンツ -->
+	<div>
+		<div
+			class="position-absolute h-100 w-100 m-0 d-flex align-items-center justify-content-center"
+		>
+			<div class="btn-group-vertical">
+				<button type="button" class="mb-3 btn btn-primary btn-lg"
+					data-bs-toggle="modal" data-bs-target="#modal_wrap1"
+				>ログイン</button>
+				<form th:action="@{/login}" th:method="post">
+					<div class="modal fade" id="modal_wrap1" tabindex="-1"
+						data-bs-backdrop="static"
+					>
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-body">
+									<div class="modal-header mb-3">
+										<p>ユーザー名、パスワードを入力の上、認証ボタンを押してください。</p>
+									</div>
+									<div th:if="${param.error}" class="row">
+										<div class="col-md-10">
+											<p>ユーザ名またはパスワードが違います。</p>
+										</div>
+									</div>
+									<div class="row mb-2">
+										<div class="offset-2 col-md-8">
+											<div class="form-group">
+												<label>ユーザー名：</label> <input name="name" type="text"
+													placeholder="ユーザー名"
+												>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="offset-2 col-md-8 mb-1">
+											<div class="form-group">
+												<label>パスワード ：</label> <input name="password"
+													type="password" placeholder="パスワード"
+												>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal"
+									>閉じる</button>
+									<button type="submit" class="btn btn-primary"
+										data-bs-dismiss="modal"
+									>認証</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				<button type="button" class="btn btn-primary btn-lg"
+					data-bs-toggle="modal" data-bs-target="#modal_wrap2"
+				>新規登録</button>
+				<form method="post" th:action="@{/login/signup}"
+					th:object="${signupForm}"
+				>
+					<div class="modal fade" id="modal_wrap2" tabindex="-1"
+						data-bs-backdrop="static"
+					>
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-body">
+									<div class="modal-header mb-3">
+										<p>ユーザー名、パスワードを入力の上、登録ボタンを押してください。</p>
+									</div>
+									<div class="row mb-2">
+										<div class="offset-2 col-md-8">
+											<div class="form-group">
+												<label>ユーザー名：</label> <input type="text" id="name"
+													name="name" th:value="${signupForm.name}"
+												>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="offset-2 col-md-8 mb-1">
+											<div class="form-group">
+												<label>パスワード ：</label> <input type="password" id="password"
+													name="password" th:value="${signupForm.password}"
+												>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal"
+									>閉じる</button>
+									<button type="submit" class="btn btn-primary"
+										data-bs-dismiss="modal"
+									>登録</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
-	<!-- ▼コンテンツ -->
-	<div class="d-flex ">
-	    <!-- ▼共通サイドバー -->
-	    <div class="d-flex flex-column p-3 text-white bg-dark" style="width: 280px;">
-	        <span class="fs-4">Sidebar</span>
-	        <hr>
-	        <ul class="nav nav-pills flex-column">
-	            <li class="nav-item">
-	                <a href="#" class="nav-link active" aria-current="page">
-	                    ホーム
-	                </a>
-	            </li>
-	            <li>
-	                <a href="#" class="nav-link text-white">
-	                    マイページ
-	                </a>
-	            </li>
-	        </ul>
-	        <hr>
-	    </div>
-	    <!-- ▼メインコンテンツ -->
-	    <div>
-	    	<div class="position-absolute h-100 w-100 m-0 d-flex align-items-center justify-content-center">
-	    		<div class="btn-group-vertical">
-	        	<button type="button" class="mb-3 btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modal_wrap1">ログイン</button>
- 			        <form th:action="@{/login}" th:method="post">
-	                	<div class="modal fade" id="modal_wrap1" tabindex="-1" data-bs-backdrop="static">
-	                    	<div class="modal-dialog modal-dialog-centered">
-	                        	<div class="modal-content">
-	                                <div class="modal-body">
-	                                	<div class="modal-header mb-3">
-	                                		<p>ユーザー名、パスワードを入力の上、認証ボタンを押してください。</p>
-	                                	</div>
-			                        	<div th:if="${param.error}" class="row">
-		                                    <div class="col-md-10">
-		                                        <p>ユーザ名またはパスワードが違います。</p>
-		                                    </div>
-		                                </div>
-		                                <div class="row mb-2">
-		                                    <div class="offset-2 col-md-8">
-		                                        <div class="form-group">
-		                                        	<label>ユーザー名：</label>
-		                                            <input name="name" type="text" placeholder="ユーザー名">
-		                                        </div>
-		                                    </div>
-		                                </div>
-		                                <div class="row">
-		                                    <div class="offset-2 col-md-8 mb-1">
-		                                        <div class="form-group">
-		                                            <label>パスワード ：</label>
-		                                            <input name="password" type="password" placeholder="パスワード">
-		                                        </div>
-		                                    </div>
-		                                </div>
-	                               	</div>
-	                                <div class="modal-footer">
-	                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-	                                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">認証</button>
-	                               	</div>
-	                            </div>
-	                        </div>
-	                	</div>
-	            	</form>
-	        	<button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modal_wrap2">新規登録</button>
- 			        <form method="post" th:action="@{/login/signup}" th:object="${signupForm}">
-	                	<div class="modal fade" id="modal_wrap2" tabindex="-1" data-bs-backdrop="static">
-	                    	<div class="modal-dialog modal-dialog-centered">
-	                        	<div class="modal-content">
-	                                <div class="modal-body">
-	                                	<div class="modal-header mb-3">
-	                                		<p>ユーザー名、パスワードを入力の上、登録ボタンを押してください。</p>
-	                                   	</div>
-		                                <div class="row mb-2">
-		                                    <div class="offset-2 col-md-8">
-		                                        <div class="form-group">
-		                                        	<label>ユーザー名：</label>
-        											<input type="text" id="name" name="name" th:value="${signupForm.name}">
-		                                        </div>
-		                                    </div>
-		                                </div>
-		                                <div class="row">
-		                                    <div class="offset-2 col-md-8 mb-1">
-		                                        <div class="form-group">
-		                                            <label>パスワード ：</label>
-		                                            <input type="password" id="password" name="password" th:value="${signupForm.password}">
-		                                        </div>
-		                                    </div>
-		                                </div>
-	                               	</div>
-	                                <div class="modal-footer">
-	                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-	                                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">登録</button>
-	                               	</div>
-	                            </div>
-	                        </div>
-	                	</div>
-	            	</form>
-	            </div>
-	         </div>
-	      </div>
-<!--			  <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
-			    <button type="button" class="btn btn-primary btn-lg mb-2 col-4" data-bs-toggle="modal" data-bs-target="#modal_wrap1">ログイン</button>
-			    <div class="modal fade" id="modal_wrap1" tabindex="-1" data-bs-backdrop="static">
-			      <div class="modal-dialog modal-dialog-centered">
-			          <div class="modal-content">
-			            <form>
-			              <div class="modal-header">
-			                  <h5 class="modal-title">ログイン</h5>
-			              </div>
-			                <div class="modal-body">
-			                    <p><font size="2.5">ユーザー名、パスワードを入力の上、認証ボタンを押してください。</font></p>
-			                    <div class="mb-3">
-			                      <label for="" class="form-label">ユーザー名</label>
-			                      <input type="" class="form-control" placeholder="ユーザー名">
-			                    </div>
-			                    <div class="mb-3">
-			                      <label for="exampleInputPassword1" class="form-label">パスワード</label>
-			                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="パスワード">
-			                    </div>
-			                </div>
-			                  <div class="modal-footer">
-			                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-			                    <button type="button" class="btn btn-primary">認証</button>
-			                  </div>
-			            </form>
-			      </div>
-			    </div>
-			  </div>
-<!--			    <button type="button" class="btn btn-primary btn-lg col-4" data-bs-toggle="modal" data-bs-target="#modal_wrap2">新規登録</button>
-			    <div class="modal fade" id="modal_wrap2" tabindex="-1" data-bs-backdrop="static">
-			      <div class="modal-dialog modal-dialog-centered">
-			          <div class="modal-content">
-			            <form>
-			              <div class="modal-header">
-			                    <h5 class="modal-title">新規登録</h5>
-			              </div>
-			                  <div class="modal-body">
-			                    <p><font size="2.5">ユーザー名、パスワードを入力の上、登録ボタンを押してください。</font></p>
-			                <div class="mb-3">
-			                  <label for="" class="form-label">ユーザー名</label>
-			                  <input type="" class="form-control" placeholder="ユーザー名">
-			                </div>
-			                <div class="mb-3">
-			                  <label for="exampleInputPassword1" class="form-label">パスワード</label>
-			                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="パスワード">
-			                </div>
-			              </div>
-			              <div class="modal-footer">
-			                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-			                  <button type="button" class="btn btn-primary">登録</button>
-			              </div>
-			            </form>
-			          </div>
-			      </div>
-			  </div>
-		  </div> -->
-	    <!-- ▲メインコンテンツ -->
 	</div>
-	<script type="text/javascript" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
 
 </body>
 </html>
