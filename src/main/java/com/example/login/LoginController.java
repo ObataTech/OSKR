@@ -8,27 +8,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class LoginController {
 
-  private final LUserService luserService;
+  private final LoginUserService loginUserService;
 
   @Autowired
-  public LoginController(LUserService luserService) {
-     this.luserService = luserService;
+  public LoginController(LoginUserService loginUserService) {
+     this.loginUserService= loginUserService;
   }
 
 	@GetMapping("/loginForm")
 	public String getLogin(SignupForm signupForm) {
-		return "loginForm";
+		return "login/loginForm";
 	}
 
-    @GetMapping("/signup")
+//    @GetMapping("/signup/")
+//    public String NewSignup(SignupForm signupForm) {
+ //   	return "login/loginForm";
+ //   }
+
+    @PostMapping("login/signup")
     public String newSignup(SignupForm signupForm) {
-    	return "login/loginForm";
-    }
 
-    @PostMapping("/signup")
-    public String signup(SignupForm signupForm) {
-
-    	this.luserService.register(signupForm);
+    	this.loginUserService.register(signupForm);
 
     	return "login/loginForm";
     }

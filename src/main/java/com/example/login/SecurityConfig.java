@@ -1,13 +1,15 @@
 package com.example.login;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Profile("production") // TODO 一時的にSpringSecurityによる認証を無効化
+//@Profile("production") // TODO 一時的にSpringSecurityによる認証を無効化
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
@@ -29,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 http.authorizeRequests()
                     // TODO 後で下記は修正する
                     .antMatchers("/loginForm").permitAll()
+                    .antMatchers("/login/signup").permitAll()
                     .anyRequest().authenticated();
 
 		http.formLogin()
@@ -43,4 +46,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.logoutUrl("/logout")
 			.logoutSuccessUrl("/loginForm");
 	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
 }
