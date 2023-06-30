@@ -2,6 +2,7 @@ package com.example.home;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.entity.Category;
+import com.example.entity.Filmwork;
 import com.example.entity.Review;
 import com.example.login.LoginUser;
 import com.example.utility.FilmworkDetail;
@@ -38,25 +40,33 @@ public class HomeController {
 	 * @return 画面情報
 	 */
 	@GetMapping
-	public String HomeList(Model model,@ModelAttribute("validationError") String validationError) {
+	public String HomeList(Model model,@ModelAttribute("validationError") String validationError ,@RequestParam(value="filmworkId",required = false) Long filmworkId) {
 		//一言レビュー
-		FilmworkDetail filmwork = this.homeService.getFilmwork();
+		FilmworkDetail filmwork;
+		//バリデーション時
+		if(filmworkId != null) {
+			filmwork = this.homeService.getFilmworkValidation(filmworkId);
+		}else {
+			 filmwork = this.homeService.getFilmwork();
+		}
 		List<Review> reviewList = this.homeService.listAllReviews(filmwork.getId());
 		List<FilmworkDetail> latest = this.homeService.listLatest();
 		List<FilmworkDetail> lineup = this.homeService.listAllFilmworks();
-		//レビュー投稿
-		Review postReview = new Review();
+//		//レビュー投稿
+//		Review postReview = new Review();
 
 		//ジャンル
 		List<Category> categories = this.homeService.listCategory();
 
 		//画面に渡す
 		model.addAttribute("filmwork", filmwork);
-		model.addAttribute("postReview", postReview);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("latest", latest);
 		model.addAttribute("lineup", lineup);
 		model.addAttribute("categories", categories);
+		if(!model.containsAttribute("postReview")) {
+			model.addAttribute("postReview", new Review());
+		}
 		return "home/home";
 	}
 
@@ -74,7 +84,8 @@ public class HomeController {
 				errorList.add(error.getDefaultMessage());
 			}
 			ra.addFlashAttribute("validationError",errorList);
-			ra.addFlashAttribute("prepost", review);
+			ra.addFlashAttribute("postReview", review);
+			ra.addAttribute("filmworkId",id);
 			return "redirect:/home";
 		}
 		this.homeService.saveReview(id,review,loginUser);

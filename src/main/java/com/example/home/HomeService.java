@@ -46,6 +46,17 @@ public class HomeService {
 		return detail(filmwork.get());
 
 	}
+
+	/**
+	 * バリデーションエラー時の作品取得
+	 * @param id 作品ID
+	 * @return 作品情報
+	 */
+	public FilmworkDetail getFilmworkValidation(Long id) {
+		Optional<Filmwork> filmwork = this.homeFilmworkRepository.findById(id);
+
+		return detail(filmwork.get());
+	}
 	/**
 	 * レビュー投稿保存
 	 * @param review
