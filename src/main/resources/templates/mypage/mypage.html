@@ -8,7 +8,7 @@
 <body>
 	    <!-- ▼メインコンテンツ -->
 	    <div class="d-block offset-md-1">
-		    <section class="row bg-white border border-3 py-1 mt-3" th:each="user:${user}">
+		    <section class="row bg-white border border-3 py-1 mt-3" >
 		    	<p type = "hidden">
 		    	</p>
 		        <div class = "col-3">
@@ -31,7 +31,7 @@
 		                      <div class="modal fade" id="modal_wrap1" tabindex="-1" data-bs-backdrop="static">
 		                        <div class="modal-dialog modal-dialog-centered">
 		                            <div class="modal-content">
-		                              <form>
+		                              <form th:action="@{/mypage/edit/{id}(id=${user.id})}" th:object="${userForm}" method="post">
 		                                <div class="modal-header">
 		                                    <h5 class="modal-title">ユーザー名の変更</h5>
 		                                </div>
@@ -39,12 +39,13 @@
 		                                      <p><font size="2.5">ユーザー名を入力してください</font></p>
 		                                      <div class="mb-3">
 		                                        <label for="" class="form-label">ユーザー名</label>
-		                                        <input type="" class="form-control" placeholder="ユーザー名">
+		                                        <input class="form-control" th:field="*{name}" placeholder="ユーザー名">
+		                                        <input type = "hidden" name="profile" th:value="${user.profile}" >
 		                                      </div>
 		                                  </div>
 		                                    <div class="modal-footer">
 		                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-		                                      <button type="button" class="btn btn-primary">変更</button>
+		                                 	 <input type="submit" class="btn btn-primary" value="変更">
 		                                    </div>
 		                              </form>
 		                        </div>
@@ -60,19 +61,20 @@
 		                  <div class="modal fade" id="modal_wrap2" tabindex="-1" data-bs-backdrop="static">
 		                    <div class="modal-dialog modal-dialog-centered">
 		                        <div class="modal-content">
-		                          <form>
+		                          <form th:action="@{/mypage/edit/{id}(id=${user.id})}" th:object="${userForm}" method="post">
 		                            <div class="modal-header">
 		                                <h5 class="modal-title">自己紹介の編集</h5>
 		                            </div>
 		                              <div class="modal-body">
 		                                  <p><font size="2.5">自己紹介を入力してください</font></p>
 		                                    <div class="form-floating mb-3">
-		                                      <textarea class="form-control" name="opinion" id="input_opinion" placeholder="ID" style="height: 60px"></textarea>
+	                                        <input type="hidden" name="name" th:value="${user.name}">
+		                                      <textarea class="form-control"th:field="*{profile}" name="opinion" id="input_opinion" placeholder="ID" style="height: 60px" th:text="${user.profile}"></textarea>
 		                                    </div>
 		                              </div>
 		                                <div class="modal-footer">
 		                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-		                                  <button type="button" class="btn btn-primary">変更</button>
+		                                  <input type="submit" class="btn btn-primary" value="変更">
 		                                </div>
 		                          </form>
 		                    </div>
@@ -89,7 +91,7 @@
 		      <div class="row mb-1 mt-5 mb-md-3">
 		        <div class="col-12">
 		          <h2 class="fw-bold text-center">
-		            <span class="d-block mb-1 fs-5">投稿済レビュー</span>
+		            <span class="d-block mb-1 fs-5  text-secondary ">投稿済レビュー</span>
 		          </h2>
 		        </div>
 		      </div>
@@ -105,9 +107,9 @@
 		        <div class="container">
 			        <div class="row">
 			            <div class="col-3">
-			              <div class="">
-			                <span class="fw-bold">評価：</span>
-			                <span class="fw-bold" th:text = "${review.rate}" >3</span>
+			              <div class="  ">
+			                <span class="fw-bold ">評価：</span>
+			                <span class="fw-bold text-secondary" th:text = "${review.rate}" >3</span>
 			              </div>
 			            <div class="" th:text = "${#temporals.format(review.posttime,'yyyy年MM月dd日')} ">2023年6月11日</div>
 			        </div>

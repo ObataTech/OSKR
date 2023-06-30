@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.entity.Review;
 import com.example.entity.User;
+import com.example.form.UserForm;
 
 @Service
 public class MypageService {
@@ -42,9 +43,27 @@ public class MypageService {
     }
 
 
+    /**
+     * レビュー削除
+     * @param id レビューID
+     */
     public void deleteReviewByUser(Long id) {
     	  this.mypageReviewRepository.deleteById(id);
     }
 
+    /**
+     * ユーザ情報更新
+     * @param id ユーザID
+     * @param userform ユーザフォーム
+     */
+    public void editUser(Long id,UserForm userForm) {
+    	//ユーザ情報の取得
+        Optional<User> user = this.mypageUserRepository.findById(id);
+    	//ユーザ情報を取得したフォームの情報で更新
+        user.get().setName(userForm.getName());
+        user.get().setProfile(userForm.getProfile());
+
+        this.mypageUserRepository.save(user.get());
+    }
 
 }
