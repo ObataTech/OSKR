@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	th:replace="~{layout/base :: layout( ~{},~{::body/content()})}"
 >
 <head>
@@ -109,7 +110,8 @@
 					</ul>
 				</div>
 				<!-- レビュー投稿 -->
-				<div class="col-6 m-1">
+				<div class="col-6 m-1 text-secondary" th:unless="${#authentication.principal != null}">レビュー投稿するにはログインしてください</div>
+				<div class="col-6 m-1" th:if="${#authentication.principal != null}">
 					<h3>この映画で一番感動したシーンはどこですか？</h3>
 					<table>
 						<tr th:if="${validationError}" th:each="error:${validationError}">
@@ -133,7 +135,10 @@
 				</div>
 			</div>
 			<!-- レビュー一覧 -->
-			<!-- scrollはスクロールバーを設置 -->
+			<div class="col overflow-y-auto w-auto" th:unless="${reviewList.size() != 0}" >
+				 <h2 class="fw-bold text-center">
+					<span class="d-block mb-1 fs-5 text-secondary">この作品についてのレビューがありません。</span>
+	            </h2></div>
 			<div class="col overflow-y-auto w-auto" th:if="${reviewList.size() != 0}" style="height: 300px;">
 	              <h2 class="fw-bold text-center">
 	                <span class="d-block mb-1 fs-5">REVIEW LIST</span>
