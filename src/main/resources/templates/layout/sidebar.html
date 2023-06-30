@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymelef.org">
+<html xmlns:th="http://www.thymelef.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -14,9 +15,11 @@
 	                </a>
 	            </li>
 	            <li  class="nav-item">
-	                <a th:href="@{/mypage/1}" class="nav-link text-white">
-	                    <button class="bg-transparent nav-link text-white ">マイページ</button>
-	                </a>
+	            	<div th:if="${#authentication.principal != null}">
+		                <a th:href="@{/mypage}" class="nav-link text-white">
+		                    <button class="bg-transparent nav-link text-white ">マイページ</button>
+		                </a>
+	                </div>
 	            </li>
 	        </ul>
 	        <ul class="col-6 nav nav-pills me-auto flex-row-reverse">

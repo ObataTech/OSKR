@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.entity.Review;
 import com.example.entity.User;
 import com.example.form.UserForm;
+import com.example.login.LoginUser;
 
 @Controller
 @RequestMapping("mypage")
@@ -29,8 +31,8 @@ public class MypageController {
 	}
 
 	@GetMapping
-	public String Mypage() {
-		return "mypage/mypage";
+	public String Mypage(@AuthenticationPrincipal LoginUser loginUser) {
+		return "redirect:/mypage/"+loginUser.getUser().getId();
 	}
 
 	// 一覧の表示

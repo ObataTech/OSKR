@@ -60,9 +60,6 @@ public class HomeService {
         if(loginUser.getUser() != null) {
         	review.setUserId(loginUser.getUser().getId());
         }
-        else {
-        	review.setUserId(1L);
-        }
 
 		this.homeReviewRepository.save(review);
 	}
