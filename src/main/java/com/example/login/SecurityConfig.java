@@ -32,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                     // TODO 後で下記は修正する
                     .antMatchers("/loginForm").permitAll()
                     .antMatchers("/login/signup").permitAll()
+                    .antMatchers("/home").permitAll()
                     .anyRequest().authenticated();
 
 		http.formLogin()
