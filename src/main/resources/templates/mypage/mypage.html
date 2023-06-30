@@ -111,18 +111,18 @@
 			                <span class="fw-bold ">評価：</span>
 			                <span class="fw-bold text-secondary" th:text = "${review.rate}" >3</span>
 			              </div>
-			            <div class="" th:text = "${#temporals.format(review.posttime,'yyyy年MM月dd日')} ">2023年6月11日</div>
+			            <div class="" th:text = "${review.posttime}">2023年6月11日</div>
 			        </div>
 			            <div class="col-9">
 			              <p th:text = "${review.content}">
 			                前半は良かったけど途中から思ってた展開とずれてきて自分の感情との齟齬が最後まで埋められなかったなぁ。種明かしシーンが長すぎて。
 			              </p>
+
 			            </div>
 
-						<form th:action="@{/mypage/sakujo/{id}(id=${review.id})}"  method="post">
 							<div class="mt-1  d-grid gap-2 d-md-flex justify-content-md-end">
-			                	<button type="button" class="btn btn-danger btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#modal_wrap3">削除</button>
-			                     	<div class="modal fade" id="modal_wrap3" tabindex="-1" data-bs-backdrop="static">
+			                	<button type="button" class="btn btn-danger btn-sm mb-2" data-bs-toggle="modal" th:data-bs-target="'#modal_wrap3' + ${review.id}">削除</button>
+			                     	<div class="modal fade" th:id="'modal_wrap3' + ${review.id}" tabindex="-1" data-bs-backdrop="static">
 			                        	<div class="modal-dialog modal-dialog-centered">
 			                            	<div class="modal-content">
 			                                	<div class="modal-header">
@@ -134,15 +134,17 @@
 												<div class="modal-footer">
 												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
 													<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-														<input type = "hidden" name = "userId" th:value = "${review.userId}">
-														<input class="btn btn-danger" type="submit" value="削除">
+														<form th:action="@{/mypage/sakujo/{id}(id=${review.id})}" th:method="post">
+															<input type = "hidden" name = "userId" th:value = "${review.userId}">
+															<input class="btn btn-danger" type="submit" value="削除">
+														</form>
 													</div>
 												</div>
 			                        		</div>
 										</div>
 			                    	</div>
 								</div>
-						 	</form>
+
 						</div>
 					</div>
 				</div>
