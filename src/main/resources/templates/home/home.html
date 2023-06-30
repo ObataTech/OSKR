@@ -14,8 +14,9 @@
 			<form class="d-flex mx-auto "
 				th:action="@{/search/keyword(keyword=${keyword})}" method="get"
 			>
-				<input class="form-control w-70 border border-1 border-dark" name="keyword" type="search"
-					placeholder="作品タイトルをキーワードで検索できます" aria-label="Search"
+				<input class="form-control w-70 border border-1 border-dark"
+					name="keyword" type="search" placeholder="作品タイトルをキーワードで検索できます"
+					aria-label="Search"
 				>
 				<button class="btn btn-outline-success ms-1" type="submit">Search</button>
 			</form>
@@ -86,7 +87,8 @@
 		<!-- 一言レビュー -->
 		<section
 			class="justify-content-center align-items-center border border-1 border-dark  bg-gradient m-2 mb-5 p-2 h-25"
-		 			style="background:rgba(25,135,84,0.25);">
+			style="background: rgba(25, 135, 84, 0.25);"
+		>
 			<h2>一言レビュー</h2>
 			<div class="row p-2">
 				<!-- 作品情報 -->
@@ -110,12 +112,14 @@
 					</ul>
 				</div>
 				<!-- レビュー投稿 -->
-				<div class="col-6 m-1 text-secondary" sec:authorize="${!isAuthenticated()}">レビュー投稿するにはログインしてください</div>
+				<div class="col-6 m-1 text-secondary"
+					sec:authorize="${!isAuthenticated()}"
+				>レビュー投稿するにはログインしてください</div>
 				<div class="col-6 m-1" sec:authorize="${isAuthenticated()}">
 					<h3>この映画で一番感動したシーンはどこですか？</h3>
 					<table>
 						<tr th:if="${validationError}" th:each="error:${validationError}">
-						<td style="color:red" th:text="${error}"></td>
+							<td style="color: red" th:text="${error}"></td>
 						</tr>
 					</table>
 					<form th:action="@{/home/save}" th:object="${postReview}"
@@ -129,33 +133,36 @@
 					</form>
 					<!-- 小さく表示する -->
 					<ul class="text-sm alert alert-info list-unstyled">
-					<li>評価は３で登録されます。(他の評価の場合は作品ページで投稿してください)</li>
-					<li>作品は更新の度に変化します。</li>
+						<li>評価は３で登録されます。(他の評価の場合は作品ページで投稿してください)</li>
+						<li>作品は更新の度に変化します。</li>
 					</ul>
 				</div>
 			</div>
 			<!-- レビュー一覧 -->
-			<div class="col overflow-y-auto w-auto" th:unless="${reviewList.size() != 0}" >
-				 <h2 class="fw-bold text-center">
-					<span class="d-block mb-1 fs-5 text-secondary">この作品についてのレビューがありません。</span>
-	            </h2></div>
-			<div class="col overflow-y-auto w-auto" th:if="${reviewList.size() != 0}" style="height: 300px;">
-	              <h2 class="fw-bold text-center">
-	                <span class="d-block mb-1 fs-5">REVIEW LIST</span>
-	              </h2>
-				<div class="card my-2" th:each="review:${reviewList}">
-					<div class="card-header">
-						<div class="d-flex justify-content-between">
-							<div class="mr-auto">
-								<h4 class="card-title" th:text="${review.user.name}">アベッチ</h4>
-								<span class="text-muted">投稿日</span> <span class="text-muted"
-									th:text="${#temporals.format(review.posttime,'yyyy年MM月dd日')} "
-								>2023年6月13日</span>
+			<h2 class="fw-bold text-center" th:unless="${reviewList.size() != 0}">
+				<span class="d-block mb-1 fs-5 text-secondary">この作品についてのレビューがありません。</span>
+			</h2>
+			<h2 class="fw-bold text-center" th:if="${reviewList.size() != 0}">
+				<span class="d-block mb-1 fs-5 text-secondary">REVIEW LIST</span>
+			</h2>
+			<div class="col overflow-auto w-auto"
+				th:if="${reviewList.size() != 0}" style="height: 300px;"
+			>
+				<div>
+					<div class="card my-2" th:each="review:${reviewList}">
+						<div class="card-header">
+							<div class="d-flex justify-content-between">
+								<div class="mr-auto">
+									<h4 class="card-title" th:text="${review.user.name}">アベッチ</h4>
+									<span class="text-muted">投稿日</span> <span class="text-muted"
+										th:text="${#temporals.format(review.posttime,'yyyy年MM月dd日 hh:mm'')} "
+									>2023年6月13日</span>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="cardbory">
-						<p class="card-text" th:text="${review.content}"></p>
+						<div class="cardbory">
+							<p class="card-text" th:text="${review.content}"></p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -190,13 +197,17 @@
 			</div>
 		</section>
 		<!-- ラインナップ -->
-		<section class=" container border border-1 border-dark m-2 p-3" >
+		<section class=" container border border-1 border-dark m-2 p-3">
 			<h1 class="fs-1 m-2 pb-3 mb-2 border-bottom fw-bold">ラインナップ</h1>
-			<div class="row row-cols-1 row-cols-md-3 g-4 overflow-auto w-auto pt-2"style="height: 1000px;">
+			<div
+				class="row row-cols-1 row-cols-md-3 g-4 overflow-auto w-auto pt-2"
+				style="height: 1000px;"
+			>
 				<div class="col-4 mb-1 mt-2" th:each="lineup:${lineup}">
 					<div class="card">
 						<a th:href="@{/filmwork/{id}(id=${lineup.id})}"> <img
-							th:src="@{${lineup.thumbnail}}" class="card-img-top" th:alt="${lineup.title}"
+							th:src="@{${lineup.thumbnail}}" class="card-img-top"
+							th:alt="${lineup.title}"
 						>
 						</a>
 						<div class="card-body">

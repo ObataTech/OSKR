@@ -67,7 +67,7 @@ public class HomeService {
 		review.setFilmworkId(id);
 		review.setPosttime(LocalDateTime.now());
 		review.setRate(3);//評価は3固定
-		review.setSpoiler(1);//ネタバレあり固定
+		review.setSpoiler(0);//ネタバレあり固定
         if(loginUser.getUser() != null) {
         	review.setUserId(loginUser.getUser().getId());
         }
