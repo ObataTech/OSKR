@@ -74,6 +74,7 @@ public class HomeController {
 				errorList.add(error.getDefaultMessage());
 			}
 			ra.addFlashAttribute("validationError",errorList);
+			ra.addFlashAttribute("prepost", review);
 			return "redirect:/home";
 		}
 		this.homeService.saveReview(id,review,loginUser);
