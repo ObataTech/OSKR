@@ -23,14 +23,14 @@
 	            </li>
 	        </ul>
 	        <ul class="col-6 nav nav-pills me-auto flex-row-reverse">
-	          <li class="nav-item waves-effect waves-light   ">
+	          <li class="nav-item waves-effect waves-light   " sec:authorize="${!isAuthenticated()}">
 	            <a id="logoutLink" class="nav-link text-white link-dark" th:href="@{/loginForm}">
                     <button class="nav-link text-white ">
                         <i id="loginLink" >ログイン/新規登録</i>
                     </button>
                  </a>
 	          </li>
-	          <li class="nav-item waves-effect waves-light  link-dark ">
+	          <li class="nav-item waves-effect waves-light  link-dark " sec:authorize="${isAuthenticated()}">
 	             <form class="nav-link text-white" th:action="@{/logout}" method="post">
                     <button class="nav-link text-white ">
                         <i id="logoutLink" >ログアウト</i>

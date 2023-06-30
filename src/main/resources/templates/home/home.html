@@ -110,8 +110,8 @@
 					</ul>
 				</div>
 				<!-- レビュー投稿 -->
-				<div class="col-6 m-1 text-secondary" th:unless="${#authentication.principal != null}">レビュー投稿するにはログインしてください</div>
-				<div class="col-6 m-1" th:if="${#authentication.principal != null}">
+				<div class="col-6 m-1 text-secondary" sec:authorize="${!isAuthenticated()}">レビュー投稿するにはログインしてください</div>
+				<div class="col-6 m-1" sec:authorize="${isAuthenticated()}">
 					<h3>この映画で一番感動したシーンはどこですか？</h3>
 					<table>
 						<tr th:if="${validationError}" th:each="error:${validationError}">
