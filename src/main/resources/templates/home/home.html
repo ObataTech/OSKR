@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:replace="~{layout/base :: layout( ~{},~{::body/content()})}"
+>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<!-- ▼メインコンテンツ -->
+	<div class="m-2  bg-light">
+		<!-- 検索ボックス -->
+		<div class="m-2 p-2 container">
+			<form class="d-flex mx-auto "
+				th:action="@{/search/keyword(keyword=${keyword})}" method="get"
+			>
+				<input class="form-control w-70 border border-1 border-dark"
+					name="keyword" type="search" placeholder="作品タイトルをキーワードで検索できます"
+					aria-label="Search"
+				>
+				<button class="btn btn-outline-success ms-1" type="submit">Search</button>
+			</form>
+		</div>
+		<!-- 製作年 -->
+		<section class="h-25 px-3 conatainer">
+			<h6 class="mx-2 border-bottom border-2 text-center ">製作年</h6>
+			<ul class="list-unstyled d-flex">
+				<li class="fw-bold me-1 ">2020年代 |</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=20)}"
+				>2020年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=21)}"
+				>2021年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=22)}"
+				>2022年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=23)}"
+				>2023年</a>|</li>
+			</ul>
+			<ul class="list-unstyled d-flex">
+				<li class="fw-bold me-1">2010年代 |</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=10)}"
+				>2010年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=11)}"
+				>2011年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=12)}"
+				>2012年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=13)}"
+				>2013年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=14)}"
+				>2014年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=15)}"
+				>2015年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=16)}"
+				>2016年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=17)}"
+				>2017年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=18)}"
+				>2018年</a>|</li>
+				<li class=" ms-1 text-secondary"><a
+					th:href="@{/search/year(year=19)}"
+				>2019年</a></li>
+			</ul>
+		</section>
+		<!-- ジャンル -->
+		<section class="h-25 px-3 conatiner">
+			<h6 class="mx-2 border-bottom border-2 text-center">ジャンル</h6>
+			<ul class="list-unstyled d-flex align-content-around flex-wrap">
+				<li class=" me-1 text-secondary" th:each="category:${categories}">
+					<a th:href="@{/search/category(category=${category.name})}"> <span
+						th:text="${category.name}"
+					></span></a>|
+				</li>
+			</ul>
+		</section>
+		<!-- 一言レビュー -->
+		<section
+			class="justify-content-center align-items-center border border-1 border-dark  bg-gradient m-2 mb-5 p-2 h-25"
+			style="background: rgba(25, 135, 84, 0.25);"
+		>
+			<h2>一言レビュー</h2>
+			<div class="row p-2">
+				<!-- 作品情報 -->
+				<div class="col-4 m-2" th:object="${filmwork}">
+					<a th:href="@{/filmwork/{id}(id=*{id})}"> <img
+						class="img-thumbnail" th:src="@{*{thumbnail}}" alt="..."
+					>
+					</a>
+					<h5 th:text="*{title}"></h5>
+					<ul class="list-unstyled">
+						<li class="d-flex"><label>レビュー：</label>
+							<p>
+								<span th:text="*{reviewSum}"></span>件
+							</p></li>
+						<li class="d-flex">
+							<div th:if="*{rateAve} != null">
+								<label>評価：</label>
+								<p th:text="*{rateAve}"></p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<!-- レビュー投稿 -->
+				<div class="col-6 m-1 text-secondary"
+					sec:authorize="${!isAuthenticated()}"
+				>レビュー投稿するにはログインしてください</div>
+				<div class="col-6 m-1" sec:authorize="${isAuthenticated()}">
+					<h3>この映画で一番感動したシーンはどこですか？</h3>
+					<table>
+						<tr th:if="${validationError}" th:each="error:${validationError}">
+							<td style="color: red" th:text="${error}"></td>
+						</tr>
+					</table>
+					<form th:action="@{/home/save}" th:object="${postReview}"
+						method="post"
+					>
+						<input type="hidden" name="id" th:value="${filmwork.id}">
+						<div class="" id="count">文字数:0</div>
+						<i class="small">200文字以内で入力してください</i>
+						<textarea name="" id="input" class=" w-100" th:field="*{content}"></textarea>
+						<button class="col offset-10 btn btn-primary d-block shadow mb-2">投稿</button>
+					</form>
+					<!-- 小さく表示する -->
+					<ul class="text-sm alert alert-info list-unstyled">
+						<li>評価は３で登録されます。(他の評価の場合は作品ページで投稿してください)</li>
+						<li>作品は更新の度に変化します。</li>
+					</ul>
+				</div>
+			</div>
+			<!-- レビュー一覧 -->
+			<h2 class="fw-bold text-center" th:unless="${reviewList.size() != 0}">
+				<span class="d-block mb-1 fs-5 text-secondary">この作品についてのレビューがありません。</span>
+			</h2>
+			<h2 class="fw-bold text-center" th:if="${reviewList.size() != 0}">
+				<span class="d-block mb-1 fs-5 text-secondary">REVIEW LIST</span>
+			</h2>
+			<div class="col overflow-auto w-auto"
+				th:if="${reviewList.size() != 0}" style="height: 300px;"
+			>
+				<div>
+					<div class="card my-2" th:each="review:${reviewList}">
+						<div class="card-header">
+							<div class="d-flex justify-content-between">
+								<div class="mr-auto">
+									<h4 class="card-title" th:text="${review.user.name}">アベッチ</h4>
+									<span class="text-muted">投稿日</span> <span class="text-muted"
+										th:text="${#temporals.format(review.posttime,'yyyy年MM月dd日 HH:mm')} "
+									>2023年6月13日</span>
+								</div>
+							</div>
+						</div>
+						<div class="cardbory">
+							<p class="card-text" th:text="${review.content}"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- 最新映画 -->
+		<section class="mx-2">
+			<h1 class="fs-1 m-2 border-bottom fw-bold">最新映画</h1>
+			<div class="row row-cols-1 row-cols-md-3 g-4 ">
+				<div class="col-4 mb-1" th:each="latest:${latest}">
+					<div class="card">
+						<a th:href="@{/filmwork/{id}(id=${latest.id})}"> <img
+							th:src="@{${latest.thumbnail}}" class="card-img-top" alt="..."
+						>
+						</a>
+						<div class="card-body">
+							<h5 class="card-title text-center" th:text="${latest.title}">映画タイトル</h5>
+							<ul class="d-flex flex-wrap gap-5 card-text list-unstyled">
+								<li class="  d-flex"><label>公開日：</label>
+									<p th:text="${#dates.format(latest.releasedate,'yyyy年MM月dd日')}"></p>
+								</li>
+								<li class=" d-flex" th:if="${latest.reviewSum != null}"><label>レビュー：</label>
+									<p>
+										<span th:text="${latest.reviewSum}"></span>件
+									</p></li>
+								<li class=" d-flex" th:if="${latest.rateAve != null}"><label>評価：</label>
+									<p th:text="${latest.rateAve}"></p></li>
+								<li class=" d-flex" th:unless="${latest.rateAve != null}"><label>評価されてません</label></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- ラインナップ -->
+		<section class=" container border border-1 border-dark m-2 p-3">
+			<h1 class="fs-1 m-2 pb-3 mb-2 border-bottom fw-bold">ラインナップ</h1>
+			<div
+				class="row row-cols-1 row-cols-md-3 g-4 overflow-auto w-auto pt-2"
+				style="height: 1000px;"
+			>
+				<div class="col-4 mb-1 mt-2" th:each="lineup:${lineup}">
+					<div class="card">
+						<a th:href="@{/filmwork/{id}(id=${lineup.id})}"> <img
+							th:src="@{${lineup.thumbnail}}" class="card-img-top"
+							th:alt="${lineup.title}"
+						>
+						</a>
+						<div class="card-body">
+							<h5 class="card-title text-center" th:text="${lineup.title}">映画タイトル</h5>
+							<ul class="d-inlineflex flex-wrap gap-5 card-text list-unstyled">
+								<li class="  d-flex"><label>公開日：</label>
+									<p th:text="${#dates.format(lineup.releasedate,'yyyy年MM月dd日')}"></p>
+								</li>
+								<li class=" d-flex" th:if="${lineup.reviewSum != null}"><label>レビュー：</label>
+									<p>
+										<span th:text="${lineup.reviewSum}"></span>件
+									</p></li>
+								<li class=" d-flex" th:if="${lineup.rateAve != null}"><label>評価：</label>
+									<p th:text="${lineup.rateAve}"></p></li>
+								<li class=" d-flex" th:unless="${lineup.rateAve != null}"><label>評価されてません</label></li>
+
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<script type="text/javascript" th:src="@{/js/pages/home.js}"></script>
+</body>
+</html>

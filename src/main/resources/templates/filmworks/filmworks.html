@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja"  xmlns:th="http://www.thymeleaf.org"
+				 xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:replace="~{layout/base :: layout( ~{},~{::body/content()})}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body >
+
+	    <!-- ▼メインコンテンツ -->
+
+	    <main class="pt-0 pt-md-0 mt-2">
+	      <!-- ▼▼▼ 作品情報セクション ▼▼▼ -->
+	      <section class="py-1 bg-white">
+	        <!-- コンテナ -->
+	        <div class="container-md">
+	          <!-- 作品情報 コンテンツ行 -->
+	          <div class="row justify-content-center">
+	            <!-- ▼ 作品情報セクション左側 ▼ -->
+	            <div class="col-3 mt-2">
+	              <!-- 作品サムネイル -->
+	              <div>
+	                <img class="img-fluid" th:src="@{${filmworkForm.thumbnail}}" alt="作品画像" />
+	              </div>
+	            </div>
+	            <!-- ▲ 作品情報セクション左側 ▲ -->
+	            <!-- ▼ 作品情報セクション右側 ▼ -->
+	            <div class="col-7">
+	              <!-- 作品情報インナー -->
+	              <div class="mb-1">
+	                <!-- 作品タイトル -->
+  	                <h1 th:text="${filmworkForm.title}" class="fw-bold text-center"></h1>
+	                <!-- あらすじ -->
+	                <p th:text="${filmworkForm.summary}" class="mt-1 mb-3">
+	                </p>
+	                <!-- 作品情報グループ -->
+	                <div class="card-group mb-1">
+	                  <dl class="card p-0">
+	                      <dt class="m-0 text-center">監督</dt>
+	                      <dd th:text="${filmworkForm.director}" class="m-0 text-center">是枝裕和</dd>
+	                  </dl>
+	                  <dl class="card p-0">
+	                      <dt class="m-0 text-center">キャスト</dt>
+	                      <dd th:text="${filmworkForm.cast}" class="m-0 text-center">安藤サクラ / 永山瑛太</dd>
+	                  </dl>
+	                </div>
+	                <div class="card-group mb-1">
+	                  <dl class="card p-0">
+	                      <dt class="m-0 text-center">ジャンル</dt>
+	                      <dd th:text="${filmworkForm.category}" class="m-0 text-center">ドラマ・ミステリー</dd>
+	                  </dl>
+	                </div>
+	                <div class="card-group mb-4">
+	                  <dl class="card p-0">
+	                      <dt class="m-0 text-center">公開日</dt>
+	                      <dd th:text="${filmworkForm.releasedate}" class="m-0 text-center">2023年6月2日</dd>
+	                  </dl>
+	                  <dl class="card p-0">
+	                      <dt class="m-0 text-center">レビュー件数</dt>
+	                      <dd th:text="${filmworkForm.reviewCnt}" class="m-0 text-center">100</dd>
+	                  </dl>
+	                  <dl class="card p-0">
+	                      <dt class="m-0 text-center">評価</dt>
+	                      <dd th:text="${filmworkForm.rateAvg}" class="m-0 text-center">4</dd>
+	                  </dl>
+	                </div>
+	              </div>
+	            </div>
+	            <!-- ▲ 作品情報セクション右側 ▲ -->
+	          </div>
+	        </div>
+	      </section>
+	      <!-- ▲▲▲ 作品情報セクション ▲▲▲ -->
+	      <!-- ▼▼▼ レビュー投稿セクション ▼▼▼ -->
+	      <div sec:authorize="${isAuthenticated()}">
+	        <!-- レビュー コンテンツ行 -->
+	        <div class="col-12 mb-1">
+	        	<h2 class="fw-bold text-center">
+	        		<span class="d-block mb-1 text-secondary fs-5">POST REVIEW</span>
+	        	</h2>
+	        </div>
+	        <div class="row">
+	          <form th:action="@{/filmwork/reviewtoroku/{id}(id=${id})}" th:object="${filmworkForm}" th:method="post" class="col-10 offset-1">
+	            <!-- 入力グループ -->
+	            <div class="form-floating mb-1">
+<!--	              <input type="text" th:field="*{reviewContent}" placeholder="商品名を入力してください"> -->
+<!--	              <textarea class="form-control" name="opinion" id="input_opinion" th:field="*{reviewContent}" placeholder="レビューをお書きください" style="height: 180px"></textarea> -->
+	              <textarea class="container-fluid" name="opinion" id="input_opinion" th:field="*{reviewContent}" placeholder="レビューをお書きください <最大200文字>" style="height: 150px"></textarea>
+<!--				  <input type="hidden" name="id" th:value="${id}"> -->
+<!--	              <label for="input_opinion">レビューをお書きください</label> -->
+	            </div>
+	            <div class="container-md">
+	              <div class="row">
+	                <div class="col-6 offset-6">
+	                  <div class="card-group mb-0">
+	                    <dl class="card p-2 border-0 mt-2">
+	                      <dt class="fw-bold text-center">評価</dt>
+	                      <select class="form-select form-select-sm text-end" th:field="*{rate}">
+	                        <option value="5">5</option>
+	                        <option value="4">4</option>
+	                        <option value="3" selected>3</option>
+	                        <option value="2">2</option>
+	                        <option value="1">1</option>
+	                      </select>
+	                    </dl>
+	                    <dl class="card p-2 border-0 mt-0">
+	                  	<dt class="card p-2 border-0 mt-0 text-center">
+	                  		<span class="fw-bold text-center">ネタばれ</span>
+	                  		<div class="radio-inline">
+							<input type="radio" name="spoiler" th:field="*{spoiler}" id="radioA" value="1"/>
+							<label for="radioA">無し</label>
+							</div>
+							<div class="radio-inline">
+							<input type="radio" name="spoiler" th:field="*{spoiler}" id="radioB" value="0"/>
+							<label for="radioB">有り</label>
+							</div>
+	                    </dt>
+	                    </dl>
+	                    <dl class="card p-2 border-0 mt-2">
+	                      <button type="submit" class="w-100 m-0 btn btn-lg btn-primary d-block mx-auto shadow">投稿</button>
+	                    </dl>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+	          </form>
+	        </div>
+	      </div>
+	      <!-- ▼▼▼ 作品レビューセクション ▼▼▼ -->
+	      <section class="py-2 bg-light border-top border-bottom">
+	        <!-- コンテナ -->
+	        <div class="container-fluid">
+	          <!-- 作品レビュー 見出し行 -->
+	          <div class="row mb-1 mb-md-3">
+	            <div class="col-12">
+	              <h2 class="fw-bold text-center">
+	                <span class="d-block mb-1 text-secondary fs-5">REVIEW LIST</span>
+	              </h2>
+	            </div>
+	          </div>
+	          <!-- タブ部分 -->
+	          <div class="container">
+	          <div class="row">
+	          <div class="col-10 offset-1">
+	          <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+	            <li class="nav-item" role="presentation">
+	              <button type="button" class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" role="tab" aria-controls="home-tab-pane" aria-selected="true">ネタばれ無し</button>
+	            </li>
+	            <li class="nav-item" role="presentation">
+	              <button type="button" class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" role="tab" aria-controls="profile-tab-pane" aria-selected="false">ネタばれ有り</button>
+	            </li>
+	          </ul>
+	          </div>
+	          </div>
+	          </div>
+	          <!-- パネル(タブの中身)部分 -->
+	          <div id="myTabContent" class="tab-content">
+	            <div class="tab-pane active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+	              <!-- ネタばれ無しタブ 作品レビュー表示エリア -->
+	              <div th:each="review : ${filmworkForm.nospoilerreviews}" class="py-2 border-bottom">
+	                <div class="container">
+	                  <div class="row justify-content-center">
+	                    <div class="col-2">
+	                      <div class="">
+	                        <span class="fw-bold">評価：</span>
+	                        <span th:text="${review.rate}" class="text-secondary fw-bold">3</span>
+	                      </div>
+	                      <div th:text="${#temporals.format(review.posttime,'yyyy/MM/dd HH:mm')}" class="">2023年6月11日</div>
+	                      <div th:text="${review.user.name}" class="text-muted small">きかんしゃ・トーリマス</div>
+	                    </div>
+	                    <div class="col-8">
+	                      	<p  class="text-break"　th:text="${review.content}">
+	                        	前半は良かったけど途中から思ってた展開とずれてきて自分の感情との齟齬が最後まで埋められなかったなぁ。種明かしシーンが長すぎて。
+	                      	</p>
+							<div sec:authorize="${isAuthenticated()}">
+	                      		<div class="mb-1 mt-2">
+	        						<div class="fw-bold text-center">
+	        							<span class="d-block text-secondary text-muted middle">POST REPLY</span>
+	        						</div>
+	        			  		</div>
+	                      		<form th:action="@{/filmwork/replytoroku/{id}(id=${id})}" th:object="${filmworkForm}" method="post">
+	                     			<div class="mb-2">
+	                      				<textarea class="form-control" name="opinion" id="input_opinion" th:field="*{replyContent}" placeholder="リプライをお書きください <最大45文字>"></textarea>
+	                      				<input type="hidden" th:value="${review.id}" name="reviewId"></input>
+	                      			</div>
+	                      			<div class="form-group">
+                          				<div class="mb-0 text-end">
+	                            			<button type="submit" class="btn btn-primary">投稿</button>
+	                      				</div>
+	                      			</div>
+	                      		</form>
+							</div>
+	                      <!-- ネタばれ無しタブ リプライ 表示エリア -->
+	                      <div class="mb-2"></div>
+	                      <div class="mb-1 mt-0">
+	        				<div class="fw-bold text-center">
+	        					<span class="d-block text-secondary text-muted middle">REPLY LIST</span>
+	        				</div>
+	        			  </div>
+	                      <div th:each="reply : ${review.replies}" class="border-top offset-0">
+	                        <span th:text="${#temporals.format(reply.posttime,'yyyy/MM/dd HH:mm')}" class="text-muted small">2023年6月14日</span>
+	                        <span th:text="${reply.user.name}" class="text-muted small">きこんしゃ・トーマス</span>
+	                        <div class="small">
+	                          <p  class="text-break" th:text="${reply.content}">>
+	                            たしかにたしかに～、よく言った!!
+	                          </p>
+	                        </div>
+	                      </div>
+                        </div>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+	            <div class="tab-pane" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+	              <!-- ネタばれ有りタブ 作品レビュー1件目 -->
+	              <div th:each="review : ${filmworkForm.reviews}" class="py-2 border-bottom">
+	                <div class="container">
+	                  <div class="row justify-content-center">
+	                  	<div class="col-2">
+	                      <div class="">
+	                        <span class="fw-bold">評価：</span>
+	                        <span th:text="${review.rate}" class="text-secondary fw-bold">3</span>
+	                      </div>
+	                      <div th:text="${#temporals.format(review.posttime,'yyyy/MM/dd HH:mm')}" class="">2023年6月11日</div>
+	                      <div th:text="${review.user.name}" class="text-muted small">きかんしゃ・トーリマス</div>
+	                    </div>
+	                    <div class="col-8">
+	                      <p  class="text-break" th:text="${review.content}">
+	                        前半は良かったけど途中から思ってた展開とずれてきて自分の感情との齟齬が最後まで埋められなかったなぁ。種明かしシーンが長すぎて。
+	                      	</p>
+	                   		<div sec:authorize="${isAuthenticated()}">
+	                      		<div class="mb-1 mt-2">
+	        						<div class="fw-bold text-center">
+	        							<span class="d-block text-secondary text-muted middle">POST REPLY</span>
+	        						</div>
+	        			  		</div>
+	                      		<form th:action="@{/filmwork/replytoroku/{id}(id=${id})}" th:object="${filmworkForm}" method="post">
+	                     			<div class="mb-2">
+	                      				<textarea class="form-control" name="opinion" id="input_opinion" th:field="*{replyContent}" placeholder="リプライをお書きください <最大45文字>"></textarea>
+	                      				<input type="hidden" th:value="${review.id}" name="reviewId"></input>
+	                      			</div>
+	                      			<div class="form-group">
+                          				<div class="mb-0 text-end">
+	                            			<button type="submit" class="btn btn-primary">投稿</button>
+	                      				</div>
+	                      			</div>
+	                      		</form>
+							</div>
+	                      <!-- ネタばれ有りタブ リプライ 表示エリア -->
+	                      <div class="mb-2"></div>
+	                      <div class="mb-1 mt-0">
+	        				<div class="fw-bold text-center">
+	        					<span class="d-block text-secondary text-muted middle">REPLY LIST</span>
+	        				</div>
+	        			  </div>
+	                      <div th:each="reply : ${review.replies}" class="border-top offset-0">
+	                        <span th:text="${#temporals.format(reply.posttime,'yyyy/MM/dd HH:mm')}" class="text-muted small">2023年6月14日</span>
+	                        <span th:text="${reply.user.name}" class="text-muted small">きこんしゃ・トーマス</span>
+	                        <div class="small">
+	                          <p  class="text-break" th:text="${reply.content}">>
+	                            たしかにたしかに～、よく言った!!
+	                          </p>
+	                        </div>
+	                      </div>
+	                    </div>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	      </section>
+	      <!-- ▲▲▲ 作品レビューセクション ▲▲▲ -->
+	    </main>
+	    <!-- ▲メインコンテンツ -->
+  </body>
+</html>
