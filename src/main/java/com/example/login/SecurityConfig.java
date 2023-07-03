@@ -33,6 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                     .antMatchers("/loginForm").permitAll()
                     .antMatchers("/login/signup").permitAll()
                     .antMatchers("/home").permitAll()
+                    .antMatchers("/search/**").permitAll()
+                    .antMatchers("/filmwork/**").permitAll()
                     .anyRequest().authenticated();
 
 		http.formLogin()
@@ -40,12 +42,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.loginPage("/loginForm")
 			.passwordParameter("password")
 			.usernameParameter("name")
-			.defaultSuccessUrl("/home", true)
+			.defaultSuccessUrl("/mypage", true)
 			.failureUrl("/loginForm?error");
 
 		http.logout()
 			.logoutUrl("/logout")
-			.logoutSuccessUrl("/loginForm");
+			.logoutSuccessUrl("/home");
 	}
 
 	@Bean

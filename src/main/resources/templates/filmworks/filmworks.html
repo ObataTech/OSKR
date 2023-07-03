@@ -10,7 +10,7 @@
 
 	    <!-- ▼メインコンテンツ -->
 
-	    <main class="pt-0 pt-md-0 mt-0">
+	    <main class="pt-0 pt-md-0 mt-2">
 	      <!-- ▼▼▼ 作品情報セクション ▼▼▼ -->
 	      <section class="py-1 bg-white">
 	        <!-- コンテナ -->
@@ -22,7 +22,6 @@
 	              <!-- 作品サムネイル -->
 	              <div>
 	                <img class="img-fluid" th:src="@{${filmworkForm.thumbnail}}" alt="作品画像" />
-<!--	                <img class="img-fluid" th:src="@{/images/thumb_002_mermaid.png}" alt="作品画像" /> -->
 	              </div>
 	            </div>
 	            <!-- ▲ 作品情報セクション左側 ▲ -->
@@ -31,11 +30,9 @@
 	              <!-- 作品情報インナー -->
 	              <div class="mb-1">
 	                <!-- 作品タイトル -->
-<!--	                <h1 class="fw-bold text-center">怪物</h1> -->
   	                <h1 th:text="${filmworkForm.title}" class="fw-bold text-center"></h1>
 	                <!-- あらすじ -->
 	                <p th:text="${filmworkForm.summary}" class="mt-1 mb-3">
-<!--	                  息子を愛するシングルマザーや生徒思いの教師、元気な子供たちなどが暮らす、大きな湖のある郊外の町。どこにでもあるような子供同士のけんかが、互いの主張の食い違いから周囲を巻き込み、メディアで取り上げられる。そしてある嵐の朝、子供たちが突然姿を消してしまう。-->
 	                </p>
 	                <!-- 作品情報グループ -->
 	                <div class="card-group mb-1">
@@ -76,9 +73,7 @@
 	      </section>
 	      <!-- ▲▲▲ 作品情報セクション ▲▲▲ -->
 	      <!-- ▼▼▼ レビュー投稿セクション ▼▼▼ -->
-	      <p class="text-center">ユーザ名：<span sec:authentication="principal.user.name"></span></p>
-	      <section class="py-4 bg-light border-top border-bottom">
-<!--	      <th:section th:if="${sec:authentication != null}"> -->
+	      <div sec:authorize="${isAuthenticated()}">
 	        <!-- レビュー コンテンツ行 -->
 	        <div class="col-12 mb-1">
 	        	<h2 class="fw-bold text-center">
@@ -131,8 +126,7 @@
 	            </div>
 	          </form>
 	        </div>
-	        </section>
-<!--	      </th:section> -->
+	      </div>
 	      <!-- ▼▼▼ 作品レビューセクション ▼▼▼ -->
 	      <section class="py-2 bg-light border-top border-bottom">
 	        <!-- コンテナ -->
@@ -165,10 +159,8 @@
 	            <div class="tab-pane active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
 	              <!-- ネタばれ無しタブ 作品レビュー表示エリア -->
 	              <div th:each="review : ${filmworkForm.nospoilerreviews}" class="py-2 border-bottom">
-<!--	              <div th:each="review : ${filmworkForm.reviews}" class="py-2 border-bottom"> -->
 	                <div class="container">
 	                  <div class="row justify-content-center">
-<!--	                    <div class="offset-1 col-2"> -->
 	                    <div class="col-2">
 	                      <div class="">
 	                        <span class="fw-bold">評価：</span>
@@ -177,29 +169,28 @@
 	                      <div th:text="${#temporals.format(review.posttime,'yyyy年MM月dd日')}" class="">2023年6月11日</div>
 	                      <div th:text="${review.user.name}" class="text-muted small">きかんしゃ・トーリマス</div>
 	                    </div>
-<!--	                    <div class="col-7"> -->
 	                    <div class="col-8">
-	                      <p th:text="${review.content}">
-	                        前半は良かったけど途中から思ってた展開とずれてきて自分の感情との齟齬が最後まで埋められなかったなぁ。種明かしシーンが長すぎて。
-	                      </p>
-<!--	                      <th:block th:if="${sec:authentication != null}"> -->
-	                      <div class="mb-1 mt-2">
-	        				<div class="fw-bold text-center">
-	        					<span class="d-block text-secondary text-muted middle">POST REPLY</span>
-	        				</div>
-	        			  </div>
-	                      <form th:action="@{/filmwork/replytoroku/{id}(id=${id})}" th:object="${filmworkForm}" method="post">
-	                     	<div class="mb-2">
-	                      		<textarea class="form-control" name="opinion" id="input_opinion" th:field="*{replyContent}" placeholder="リプライをお書きください <最大45文字>"></textarea>
-	                      		<input type="hidden" th:value="${review.id}" name="reviewId"></input>
-	                      	</div>
-	                      	<div class="form-group">
-                          		<div class="mb-0 text-end">
-	                            	<button type="submit" class="btn btn-primary">投稿</button>
-	                      		</div>
-	                      	</div>
-	                      </form>
-<!--	                      </th:block> -->
+	                      	<p th:text="${review.content}">
+	                        	前半は良かったけど途中から思ってた展開とずれてきて自分の感情との齟齬が最後まで埋められなかったなぁ。種明かしシーンが長すぎて。
+	                      	</p>
+							<div sec:authorize="${isAuthenticated()}">
+	                      		<div class="mb-1 mt-2">
+	        						<div class="fw-bold text-center">
+	        							<span class="d-block text-secondary text-muted middle">POST REPLY</span>
+	        						</div>
+	        			  		</div>
+	                      		<form th:action="@{/filmwork/replytoroku/{id}(id=${id})}" th:object="${filmworkForm}" method="post">
+	                     			<div class="mb-2">
+	                      				<textarea class="form-control" name="opinion" id="input_opinion" th:field="*{replyContent}" placeholder="リプライをお書きください <最大45文字>"></textarea>
+	                      				<input type="hidden" th:value="${review.id}" name="reviewId"></input>
+	                      			</div>
+	                      			<div class="form-group">
+                          				<div class="mb-0 text-end">
+	                            			<button type="submit" class="btn btn-primary">投稿</button>
+	                      				</div>
+	                      			</div>
+	                      		</form>
+							</div>
 	                      <!-- ネタばれ無しタブ リプライ 表示エリア -->
 	                      <div class="mb-2"></div>
 	                      <div class="mb-1 mt-0">
@@ -216,19 +207,6 @@
 	                          </p>
 	                        </div>
 	                      </div>
-<!--                          <div class="collapse" id="collapseExample">
-                          表示しました。
-                            <div class="">
-	                        	<input th:field="*{replyContent}" class="form-control" name="opinion" id="input_opinion" placeholder="リプライをお書きください" style="height: 50px"></input>
-	                        </div>
-                            <div class="form-floating mb-3">
-	                      		<textarea th:field="*{replyContent}" class="form-control" name="opinion" id="input_opinion" placeholder="リプライをお書きください" style="height: 50px"></textarea>
-	                        </div>
-                            <div class="">
-	                        	<button type="button" class="btn btn-secondary">閉じる</button>
-	                            <button type="submit" class="btn btn-primary">投稿</button>
-	                        </div>
-                          </div> -->
                         </div>
 	                    <!-- ネタばれ無しタブ リプライボタン 表示エリア -->
 <!--	                    <div class="col-2">
@@ -276,7 +254,6 @@
 	                <div class="container">
 	                  <div class="row justify-content-center">
 	                  	<div class="col-2">
-<!--	                    <div class="offset-1 col-2"> -->
 	                      <div class="">
 	                        <span class="fw-bold">評価：</span>
 	                        <span th:text="${review.rate}" class="text-secondary fw-bold">3</span>
@@ -284,27 +261,28 @@
 	                      <div th:text="${#temporals.format(review.posttime,'yyyy年MM月dd日')}" class="">2023年6月11日</div>
 	                      <div th:text="${review.user.name}" class="text-muted small">きかんしゃ・トーリマス</div>
 	                    </div>
-<!--	                    <div class="col-7"> -->
 	                    <div class="col-8">
-	                      <p th:text="${review.content}">
+	                      	<p th:text="${review.content}">
 	                        前半は良かったけど途中から思ってた展開とずれてきて自分の感情との齟齬が最後まで埋められなかったなぁ。種明かしシーンが長すぎて。
-	                      </p>
-	                      <div class="mb-1 mt-2">
-	        				<div class="fw-bold text-center">
-	        					<span class="d-block text-secondary text-muted middle">POST REPLY</span>
-	        				</div>
-	        			  </div>
-	                      <form th:action="@{/filmwork/replytoroku/{id}(id=${id})}" th:object="${filmworkForm}" method="post">
-	                     	<div class="mb-2">
-	                      		<textarea class="form-control" name="opinion" id="input_opinion" th:field="*{replyContent}" placeholder="リプライをお書きください <最大45文字>"></textarea>
-	                      		<input type="hidden" th:value="${review.id}" name="reviewId"></input>
-	                      	</div>
-	                      	<div class="form-group">
-                          		<div class="mb-0 text-end">
-	                            	<button type="submit" class="btn btn-primary">投稿</button>
-	                      		</div>
-	                      	</div>
-	                      </form>
+	                      	</p>
+	                   		<div sec:authorize="${isAuthenticated()}">
+	                      		<div class="mb-1 mt-2">
+	        						<div class="fw-bold text-center">
+	        							<span class="d-block text-secondary text-muted middle">POST REPLY</span>
+	        						</div>
+	        			  		</div>
+	                      		<form th:action="@{/filmwork/replytoroku/{id}(id=${id})}" th:object="${filmworkForm}" method="post">
+	                     			<div class="mb-2">
+	                      				<textarea class="form-control" name="opinion" id="input_opinion" th:field="*{replyContent}" placeholder="リプライをお書きください <最大45文字>"></textarea>
+	                      				<input type="hidden" th:value="${review.id}" name="reviewId"></input>
+	                      			</div>
+	                      			<div class="form-group">
+                          				<div class="mb-0 text-end">
+	                            			<button type="submit" class="btn btn-primary">投稿</button>
+	                      				</div>
+	                      			</div>
+	                      		</form>
+							</div>
 	                      <!-- ネタばれ有りタブ リプライ 表示エリア -->
 	                      <div class="mb-2"></div>
 	                      <div class="mb-1 mt-0">
@@ -365,6 +343,5 @@
 	      <!-- ▲▲▲ 作品レビューセクション ▲▲▲ -->
 	    </main>
 	    <!-- ▲メインコンテンツ -->
-	</div>
   </body>
 </html>
