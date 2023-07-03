@@ -7,8 +7,12 @@
 <body>
 	<header th:fragment="header" class=" m-0">
 		<div class="bg-dark bg-gradient">
-		    <img class=" img-fluid img-40" th:src="@{/images/logo_oskr.svg}" style="height: 120px;">
-        </div>
+			<a th:href="@{/home}">
+				<img class=" img-fluid img-40" th:src="@{/images/logo_oskr.svg}"
+				style="height: 120px;"
+			>
+			</a>
+		</div>
 	</header>
 </body>
 </html>

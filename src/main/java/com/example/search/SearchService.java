@@ -1,5 +1,7 @@
 package com.example.search;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -88,7 +90,9 @@ public class SearchService {
 			//総合評価
 			Optional<Double> rate = this.searchReviewRepository.reviewAve(filmwork.getId());
 			if(rate.isPresent()) {
-				filmworkDetail.setRateAve(rate.get());
+				BigDecimal bd = new BigDecimal(rate.get());
+				bd = bd.setScale(1,RoundingMode.HALF_UP);
+				filmworkDetail.setRateAve(bd.doubleValue());
 			}
 
 			//リストに追加
