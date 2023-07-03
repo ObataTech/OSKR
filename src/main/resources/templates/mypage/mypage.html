@@ -1,150 +1,193 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layout/base :: layout(~{},~{::body/content()})}">
+	th:replace="~{layout/base :: layout(~{},~{::body/content()})}"
+>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-	    <!-- ▼メインコンテンツ -->
-	    <div class="d-block offset-md-1">
-		    <section class="row bg-white border border-3 py-1 mt-3" th:each="user:${user}">
-		    	<p type = "hidden">
-		    	</p>
-		        <div class = "col-3">
-		            <div>
-		                <img class= "img-fluid mx-auto d-block" th:src="@{/images/defaulticon.png}" alt="プロフィールアイコン" />
-		            </div>
-		        </div>
+	<!-- ▼メインコンテンツ -->
+	<div class="d-block offset-md-1">
+		<section class="row bg-white border border-3 py-1 mt-3">
+			<p type="hidden"></p>
+			<div class="col-3">
+				<div>
+					<img class="img-fluid mx-auto d-block"
+						th:src="@{/images/defaulticon.png}" alt="プロフィールアイコン"
+					/>
+				</div>
+			</div>
 
-		        <div class="col-8">
-		            <div class="mb-1">
-		              <div class ="row">
-		                <h1 class="fw-bold text-left mt-1 h3">ユーザー名：
-		                <span th:text = "${user.name}">
-		                Name
-		              </span></h1>
-		                  <!--以下、ユーザー名変更ボタン-->
+			<div class="col-8">
+				<div class="mb-1">
+					<div class="row">
+						<h1 class="fw-bold text-left mt-1 h3">
+							ユーザー名： <span th:text="${user.name}"> Name </span>
+						</h1>
+						<!--以下、ユーザー名変更ボタン-->
 
-		                    <div class="mt-1 col-3">
-		                      <button type="button" class="btn btn-outline-secondary btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#modal_wrap1">ユーザー名変更</button>
-		                      <div class="modal fade" id="modal_wrap1" tabindex="-1" data-bs-backdrop="static">
-		                        <div class="modal-dialog modal-dialog-centered">
-		                            <div class="modal-content">
-		                              <form>
-		                                <div class="modal-header">
-		                                    <h5 class="modal-title">ユーザー名の変更</h5>
-		                                </div>
-		                                  <div class="modal-body">
-		                                      <p><font size="2.5">ユーザー名を入力してください</font></p>
-		                                      <div class="mb-3">
-		                                        <label for="" class="form-label">ユーザー名</label>
-		                                        <input type="" class="form-control" placeholder="ユーザー名">
-		                                      </div>
-		                                  </div>
-		                                    <div class="modal-footer">
-		                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-		                                      <button type="button" class="btn btn-primary">変更</button>
-		                                    </div>
-		                              </form>
-		                        </div>
-		                      </div>
-		                    </div>
-		                  </div>
-		                  </div>
-		                  </div>
-		                  <!--以上、ユーザー名変更ボタン-->
-		                <!--以下、自己紹介編集ボタン-->
-		                <div class=" mt-3">
-		                  <button type="button" class="btn btn-outline-secondary btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#modal_wrap2">自己紹介の編集</button>
-		                  <div class="modal fade" id="modal_wrap2" tabindex="-1" data-bs-backdrop="static">
-		                    <div class="modal-dialog modal-dialog-centered">
-		                        <div class="modal-content">
-		                          <form>
-		                            <div class="modal-header">
-		                                <h5 class="modal-title">自己紹介の編集</h5>
-		                            </div>
-		                              <div class="modal-body">
-		                                  <p><font size="2.5">自己紹介を入力してください</font></p>
-		                                    <div class="form-floating mb-3">
-		                                      <textarea class="form-control" name="opinion" id="input_opinion" placeholder="ID" style="height: 60px"></textarea>
-		                                    </div>
-		                              </div>
-		                                <div class="modal-footer">
-		                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-		                                  <button type="button" class="btn btn-primary">変更</button>
-		                                </div>
-		                          </form>
-		                    </div>
-		                  </div>
-		                </div>
-		                <!--以上、自己紹介編集ボタン-->
-		                <p class="mb-2 col-8">
-		                 <p class =""  th:text = "${user.profile}">
-		                自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介
-		              </p>
-		            </div>
-		        </div>
-		    </section>
-		      <div class="row mb-1 mt-5 mb-md-3">
-		        <div class="col-12">
-		          <h2 class="fw-bold text-center">
-		            <span class="d-block mb-1 fs-5">投稿済レビュー</span>
-		          </h2>
-		        </div>
-		      </div>
-
-		    <div class="py-2 border-bottom"th:each = "review:${reviewList}" >
-		    	<div>
-		    	</div>
-		    	<!-- 映画タイトル -->
-		        <div class="h4 ms-5">
-		            <p class="fw-bold " th:text = "${review.filmwork.title}" >
-		            </p>
-		        </div>
-		        <div class="container">
-			        <div class="row">
-			            <div class="col-3">
-			              <div class="">
-			                <span class="fw-bold">評価：</span>
-			                <span class="fw-bold" th:text = "${review.rate}" >3</span>
-			              </div>
-			            <div class="" th:text = "${#temporals.format(review.posttime,'yyyy年MM月dd日')} ">2023年6月11日</div>
-			        </div>
-			            <div class="col-9">
-			              <p th:text = "${review.content}">
-			                前半は良かったけど途中から思ってた展開とずれてきて自分の感情との齟齬が最後まで埋められなかったなぁ。種明かしシーンが長すぎて。
-			              </p>
-			            </div>
-
-						<form th:action="@{/mypage/sakujo/{id}(id=${review.id})}"  method="post">
-							<div class="mt-1  d-grid gap-2 d-md-flex justify-content-md-end">
-			                	<button type="button" class="btn btn-danger btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#modal_wrap3">削除</button>
-			                     	<div class="modal fade" id="modal_wrap3" tabindex="-1" data-bs-backdrop="static">
-			                        	<div class="modal-dialog modal-dialog-centered">
-			                            	<div class="modal-content">
-			                                	<div class="modal-header">
-			                                    	<h5 class="modal-title">削除</h5>
-			                                	</div>
-												<div class="modal-body">
-													<p><font size="3">投稿を削除しますか？</font></p>
+						<div class="mt-1 col-3">
+							<button type="button"
+								class="btn btn-outline-secondary btn-sm mb-2"
+								data-bs-toggle="modal" data-bs-target="#modal_wrap1"
+							>ユーザー名変更</button>
+							<div class="modal fade" id="modal_wrap1" tabindex="-1"
+								data-bs-backdrop="static"
+							>
+								<div class="modal-dialog modal-dialog-centered">
+									<div class="modal-content">
+										<form th:action="@{/mypage/edit/{id}(id=${user.id})}"
+											th:object="${userForm}" method="post"
+										>
+											<div class="modal-header">
+												<h5 class="modal-title">ユーザー名の変更</h5>
+											</div>
+											<div class="modal-body">
+												<p>
+													<font size="2.5">ユーザー名を入力してください</font>
+												</p>
+												<div class="mb-3">
+													<label for="" class="form-label">ユーザー名</label> <input
+														class="form-control" th:field="*{name}"
+														placeholder="ユーザー名"
+													> <input type="hidden" name="profile"
+														th:value="${user.profile}"
+													>
 												</div>
-												<div class="modal-footer">
-												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-													<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-														<input type = "hidden" name = "userId" th:value = "${review.userId}">
-														<input class="btn btn-danger" type="submit" value="削除">
-													</div>
-												</div>
-			                        		</div>
-										</div>
-			                    	</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal"
+												>閉じる</button>
+												<input type="submit" class="btn btn-primary" value="変更">
+											</div>
+										</form>
+									</div>
 								</div>
-						 	</form>
+							</div>
 						</div>
 					</div>
 				</div>
-	    <!-- ▲メインコンテンツ -->
+				<!--以上、ユーザー名変更ボタン-->
+				<!--以下、自己紹介編集ボタン-->
+				<div class=" mt-3">
+					<button type="button" class="btn btn-outline-secondary btn-sm mb-2"
+						data-bs-toggle="modal" data-bs-target="#modal_wrap2"
+					>自己紹介の編集</button>
+					<div class="modal fade" id="modal_wrap2" tabindex="-1"
+						data-bs-backdrop="static"
+					>
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<form th:action="@{/mypage/edit/{id}(id=${user.id})}"
+									th:object="${userForm}" method="post"
+								>
+									<div class="modal-header">
+										<h5 class="modal-title">自己紹介の編集</h5>
+									</div>
+									<div class="modal-body">
+										<p>
+											<font size="2.5">自己紹介を入力してください</font>
+										</p>
+										<div class="form-floating mb-3">
+											<input type="hidden" name="name" th:value="${user.name}">
+											<textarea class="form-control" th:field="*{profile}"
+												name="opinion" id="input_opinion" placeholder="ID"
+												style="height: 60px" th:text="${user.profile}"
+											></textarea>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-bs-dismiss="modal"
+										>閉じる</button>
+										<input type="submit" class="btn btn-primary" value="変更">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!--以上、自己紹介編集ボタン-->
+					<p class="mb-2 col-8">
+					<p class="" th:text="${user.profile}">
+						自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介自己紹介</p>
+				</div>
+			</div>
+		</section>
+		<div class="row mb-1 mt-5 mb-md-3">
+			<div class="col-12">
+				<h2 class="fw-bold text-center">
+					<span class="d-block mb-1 fs-5  text-secondary ">投稿済レビュー</span>
+				</h2>
+			</div>
+		</div>
+
+		<div class="py-2 border-bottom" th:each="review:${reviewList}">
+			<div></div>
+			<!-- 映画タイトル -->
+			<div class="h4 ms-5">
+				<p class="fw-bold " th:text="${review.filmwork.title}"></p>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-3">
+						<div class="  ">
+							<span class="fw-bold ">評価：</span> <span
+								class="fw-bold text-secondary" th:text="${review.rate}"
+							>3</span>
+						</div>
+						<div class=""
+							th:text="${#temporals.format(review.posttime,'yyyy年MM月dd日 HH:mm')}"
+						>2023年6月11日</div>
+					</div>
+					<div class="col-9 m-auto">
+						<p class="text-break" style="white-space: normal;" th:text="${review.content}">
+							前半は良かったけど途中から思ってた展開とずれてきて自分の感情との齟齬が最後まで埋められなかったなぁ。種明かしシーンが長すぎて。</p>
+
+					</div>
+
+					<div class="mt-1  d-grid gap-2 d-md-flex justify-content-md-end">
+						<button type="button" class="btn btn-danger btn-sm mb-2"
+							data-bs-toggle="modal"
+							th:data-bs-target="'#modal_wrap3' + ${review.id}"
+						>削除</button>
+						<div class="modal fade" th:id="'modal_wrap3' + ${review.id}"
+							tabindex="-1" data-bs-backdrop="static"
+						>
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">削除</h5>
+									</div>
+									<div class="modal-body">
+										<p>
+											<font size="3">投稿を削除しますか？</font>
+										</p>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-bs-dismiss="modal"
+										>閉じる</button>
+										<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+											<form th:action="@{/mypage/sakujo/{id}(id=${review.id})}"
+												th:method="post"
+											>
+												<input type="hidden" name="userId"
+													th:value="${review.userId}"
+												> <input class="btn btn-danger" type="submit" value="削除">
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- ▲メインコンテンツ -->
 	</div>
 </body>
 </html>

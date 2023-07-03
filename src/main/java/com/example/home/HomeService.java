@@ -46,6 +46,17 @@ public class HomeService {
 		return detail(filmwork.get());
 
 	}
+
+	/**
+	 * バリデーションエラー時の作品取得
+	 * @param id 作品ID
+	 * @return 作品情報
+	 */
+	public FilmworkDetail getFilmworkValidation(Long id) {
+		Optional<Filmwork> filmwork = this.homeFilmworkRepository.findById(id);
+
+		return detail(filmwork.get());
+	}
 	/**
 	 * レビュー投稿保存
 	 * @param review
@@ -56,12 +67,9 @@ public class HomeService {
 		review.setFilmworkId(id);
 		review.setPosttime(LocalDateTime.now());
 		review.setRate(3);//評価は3固定
-		review.setSpoiler(1);//ネタバレあり固定
+		review.setSpoiler(0);//ネタバレあり固定
         if(loginUser.getUser() != null) {
         	review.setUserId(loginUser.getUser().getId());
-        }
-        else {
-        	review.setUserId(1L);
         }
 
 		this.homeReviewRepository.save(review);
