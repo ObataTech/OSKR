@@ -1,5 +1,7 @@
 package com.example.home;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -137,10 +139,13 @@ public class HomeService {
 		if (review.isPresent()) {
 			filmworkDetail.setReviewSum(review.get());
 		}
+
 		//総合評価
 		Optional<Double> rate = this.homeReviewRepository.reviewAve(filmwork.getId());
 		if (rate.isPresent()) {
-			filmworkDetail.setRateAve(rate.get());
+			BigDecimal bd = new BigDecimal(rate.get());
+			bd = bd.setScale(1,RoundingMode.HALF_UP);
+			filmworkDetail.setRateAve(bd.doubleValue());
 		}
 
 		return filmworkDetail;
