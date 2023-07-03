@@ -12,6 +12,16 @@
 			class="position-absolute h-100 w-100 m-0 d-flex align-items-center justify-content-center"
 		>
 			<div class="btn-group-vertical">
+				<div class="text-center">
+					<p class="text-white"></p>
+				</div>
+				<div th:if="${param.error}" class="row">
+					<div class="text-center">
+						<p class="text-danger">
+							ユーザ名またはパスワードが違います。<br>再ログインして下さい。
+						</p>
+					</div>
+				</div>
 				<button type="button" class="mb-3 btn btn-primary btn-lg"
 					data-bs-toggle="modal" data-bs-target="#modal_wrap1"
 				>ログイン</button>
@@ -24,11 +34,6 @@
 								<div class="modal-body">
 									<div class="modal-header mb-3">
 										<p>ユーザー名、パスワードを入力の上、認証ボタンを押してください。</p>
-									</div>
-									<div th:if="${param.error}" class="row">
-										<div class="col-md-10">
-											<p>ユーザ名またはパスワードが違います。</p>
-										</div>
 									</div>
 									<div class="row mb-2">
 										<div class="offset-2 col-md-8">
@@ -109,8 +114,11 @@
 				</form>
 			</div>
 		</div>
+		<!-- ▲メインコンテンツ -->
 	</div>
-	</div>
+	<script type="text/javascript"
+		th:src="@{/js/bootstrap/bootstrap.min.js}"
+	></script>
 
 </body>
 </html>
