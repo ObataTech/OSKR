@@ -166,7 +166,7 @@
 	                        <span class="fw-bold">評価：</span>
 	                        <span th:text="${review.rate}" class="text-secondary fw-bold">3</span>
 	                      </div>
-	                      <div th:text="${#temporals.format(review.posttime,'yyyy年MM月dd日')}" class="">2023年6月11日</div>
+	                      <div th:text="${#temporals.format(review.posttime,'yyyy/MM/dd HH:mm')}" class="">2023年6月11日</div>
 	                      <div th:text="${review.user.name}" class="text-muted small">きかんしゃ・トーリマス</div>
 	                    </div>
 	                    <div class="col-8">
@@ -199,7 +199,7 @@
 	        				</div>
 	        			  </div>
 	                      <div th:each="reply : ${review.replies}" class="border-top offset-0">
-	                        <span th:text="${#temporals.format(reply.posttime,'yyyy年MM月dd日')}" class="text-muted small">2023年6月14日</span>
+	                        <span th:text="${#temporals.format(reply.posttime,'yyyy/MM/dd HH:mm')}" class="text-muted small">2023年6月14日</span>
 	                        <span th:text="${reply.user.name}" class="text-muted small">きこんしゃ・トーマス</span>
 	                        <div class="small">
 	                          <p  class="text-break" th:text="${reply.content}">>
@@ -222,7 +222,7 @@
 	                        <span class="fw-bold">評価：</span>
 	                        <span th:text="${review.rate}" class="text-secondary fw-bold">3</span>
 	                      </div>
-	                      <div th:text="${#temporals.format(review.posttime,'yyyy年MM月dd日')}" class="">2023年6月11日</div>
+	                      <div th:text="${#temporals.format(review.posttime,'yyyy/MM/dd HH:mm')}" class="">2023年6月11日</div>
 	                      <div th:text="${review.user.name}" class="text-muted small">きかんしゃ・トーリマス</div>
 	                    </div>
 	                    <div class="col-8">
@@ -255,7 +255,7 @@
 	        				</div>
 	        			  </div>
 	                      <div th:each="reply : ${review.replies}" class="border-top offset-0">
-	                        <span th:text="${#temporals.format(reply.posttime,'yyyy年MM月dd日')}" class="text-muted small">2023年6月14日</span>
+	                        <span th:text="${#temporals.format(reply.posttime,'yyyy/MM/dd HH:mm')}" class="text-muted small">2023年6月14日</span>
 	                        <span th:text="${reply.user.name}" class="text-muted small">きこんしゃ・トーマス</span>
 	                        <div class="small">
 	                          <p  class="text-break" th:text="${reply.content}">>
