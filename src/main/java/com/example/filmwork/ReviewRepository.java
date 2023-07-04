@@ -13,15 +13,15 @@ import com.example.entity.Review;
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
 //    @Query("SELECT COUNT(*) FROM REVIEW r WHERE r.id = id")
-    @Query("SELECT COUNT(*) FROM Review r WHERE r.filmworkId = ?1")
+    @Query("SELECT COUNT(*) FROM Review r WHERE r.filmworkId = ?1 AND deletedDate = null")
     public Integer reviewCnt(Long id);
 
-    @Query("SELECT AVG(r.rate) FROM Review r WHERE r.filmworkId = ?1")
+    @Query("SELECT AVG(r.rate) FROM Review r WHERE r.filmworkId = ?1 AND deletedDate = null")
     public Float rateAvg(Long id);
 
-    @Query("SELECT r FROM Review r WHERE r.filmworkId = ?1 AND r.spoiler = ?2 ORDER BY r.posttime DESC")
+    @Query("SELECT r FROM Review r WHERE r.filmworkId = ?1 AND r.spoiler = ?2 AND DELETED_DATE = null ORDER BY r.posttime DESC")
     public List<Review> findNoSpoilerReviews(Long id, Integer spoiler);
 
-    @Query("SELECT r FROM Review r WHERE r.filmworkId = ?1 ORDER BY r.posttime DESC")
+    @Query("SELECT r FROM Review r WHERE r.filmworkId = ?1 AND deletedDate = null ORDER BY r.posttime DESC")
     public List<Review> findReviews(Long id);
 }

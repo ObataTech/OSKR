@@ -32,8 +32,8 @@ public class Review {
 	private Long id;
 
 	@NotNull
-	@NotBlank(message="空白での投稿は許可されてません")
-	@Size(max=200,message="200文字以内で入力してください")
+	@NotBlank(message = "空白での投稿は許可されてません")
+	@Size(max = 200, message = "200文字以内で入力してください")
 	@Column(name = "CONTENT", length = 200, nullable = false)
 	private String content;
 
@@ -53,25 +53,38 @@ public class Review {
 	@Column(name = "USER_ID", nullable = false)
 	private Long userId;
 
-	// 追加
-    @ManyToOne
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private User user;
+	//v0.2：追加
+	//論理削除に変更
+	@Column(name="DELETED_DATE")
+	private LocalDateTime deletedDate;
 
-    public User getUser() {
-        return this.user;
-    }
+	public LocalDateTime getDeletedDate() {
+		return deletedDate;
+	}
+
+	public void setDeletedDate(LocalDateTime deletedDate) {
+		this.deletedDate = deletedDate;
+	}
+
+	// 追加
+	@ManyToOne
+	@JoinColumn(name = "user_id", insertable = false, updatable = false)
+	private User user;
+
+	public User getUser() {
+		return this.user;
+	}
 
 	@Column(name = "FILMWORK_ID", nullable = false)
 	private Long filmworkId;
 
-    @ManyToOne
-    @JoinColumn(name = "filmwork_id", insertable = false, updatable = false)
-    private Filmwork filmwork;
+	@ManyToOne
+	@JoinColumn(name = "filmwork_id", insertable = false, updatable = false)
+	private Filmwork filmwork;
 
-    public Filmwork getFilmwork() {
-        return this.filmwork;
-    }
+	public Filmwork getFilmwork() {
+		return this.filmwork;
+	}
 
 	public Long getId() {
 		return id;
@@ -129,10 +142,10 @@ public class Review {
 		this.filmworkId = filmworkId;
 	}
 
-    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Reply> replies;
+	@OneToMany(mappedBy = "review", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Reply> replies;
 
-    public List<Reply> getReplies() {
+	public List<Reply> getReplies() {
 		return this.replies;
 	}
 
@@ -141,8 +154,7 @@ public class Review {
 	}
 
 	public List<Reply> getRiplies() {
-        return this.replies;
-    }
-
+		return this.replies;
+	}
 
 }

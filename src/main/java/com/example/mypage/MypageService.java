@@ -1,5 +1,6 @@
 package com.example.mypage;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,7 +49,10 @@ public class MypageService {
      * @param id レビューID
      */
     public void deleteReviewByUser(Long id) {
-    	  this.mypageReviewRepository.deleteById(id);
+    	Optional<Review> review = this.mypageReviewRepository.findById(id);
+    	review.get().setDeletedDate(LocalDateTime.now());
+    	this.mypageReviewRepository.save(review.get());
+//    	  this.mypageReviewRepository.deleteById(id);
     }
 
     /**

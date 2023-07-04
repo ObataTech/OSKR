@@ -15,7 +15,7 @@ public interface HomeReviewRepository extends JpaRepository<Review, Long> {
 	 * @param filmworkId　作品ID
 	 * @return　作品のレビューリスト
 	 */
-	@Query("SELECT r FROM Review r WHERE r.filmworkId = ?1 AND r.spoiler = 1 ORDER BY r.posttime DESC")
+	@Query("SELECT r FROM Review r WHERE r.filmworkId = ?1 AND r.spoiler = 1 AND deletedDate = null ORDER BY r.posttime DESC")
 	public List<Review> getFindAllById(Long filmworkId);
 
 	/**
@@ -30,6 +30,6 @@ public interface HomeReviewRepository extends JpaRepository<Review, Long> {
 	 * @param id 作品ID
 	 * @return レビューの平均値
 	 */
-	@Query("SELECT avg(r.rate) FROM Review r WHERE r.filmworkId =?1 ")
+	@Query("SELECT avg(r.rate) FROM Review r WHERE r.filmworkId =?1 AND DELETED_DATE = null ")
 	public Optional<Double> reviewAve(Long id);
 }
